@@ -928,3 +928,17 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* АНИМАЦИЯ ВРАЩЕНИЯ ДЛЯ СИНХРОНИЗАЦИИ */
+.spin-animation {
+  animation: spin-kf 1.2s linear infinite;
+}
+
+@keyframes spin-kf {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

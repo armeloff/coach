@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { dbService } from '../dbService';
-import { initFirebase, disconnectFirebase } from '../firebase';
-import { Client, WeeklyReport, MonthlyReport, FirebaseConfig, CoachingFocus } from '../types';
+import { dbService, syncLocalDataWithCloud } from '../dbService';
+import { Client, WeeklyReport, MonthlyReport, CoachingFocus } from '../types';
 import { HABIT_CATEGORIES } from '../constants/habits';
 import { 
   ResponsiveContainer, 
@@ -19,13 +18,9 @@ import {
   Activity, 
   Check, 
   Copy,
-  Database, 
-  Download, 
   Plus, 
-  Settings, 
   Trash2, 
   X, 
-  AlertTriangle,
   Brain,
   Droplet,
   Compass,
@@ -35,7 +30,9 @@ import {
   Info,
   ChevronDown,
   ChevronUp,
-  Tag
+  Tag,
+  RefreshCw,
+  Settings
 } from 'lucide-react';
 
 export default function CoachDashboard() {
@@ -45,9 +42,12 @@ export default function CoachDashboard() {
   const [monthlyReports, setMonthlyReports] = useState<MonthlyReport[]>([]);
   
   // Modals / Drawers State
-  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isNewClientOpen, setIsNewClientOpen] = useState<boolean>(false);
   const [isEditClientOpen, setIsEditClientOpen] = useState<boolean>(false);
+
+  // Sync State
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
+  const [syncSuccess, setSyncSuccess] = useState<boolean>(false);
 
   // New Client Form State
   const [newClientName, setNewClientName] = useState<string>('');
@@ -100,89 +100,25 @@ export default function CoachDashboard() {
     setTimeout(() => setCopiedClientId(''), 2000);
   };
 
-  // Backend Selector & Config States
-  const [selectedBackend, setSelectedBackend] = useState<'cloudflare' | 'firebase' | 'local'>('local');
-  const [cfApiUrl, setCfApiUrl] = useState<string>('');
-  const [fbConfig, setFbConfig] = useState<FirebaseConfig>({
-    apiKey: '',
-    authDomain: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: '',
-    appId: ''
-  });
-  const [isFbConfigSaved, setIsFbConfigSaved] = useState<boolean>(false);
-  const [fbConnectionError, setFbConnectionError] = useState<string>('');
-  const [isCloud, setIsCloud] = useState<boolean>(false);
-
   useEffect(() => {
-    const activeType = dbService.getBackendType() as 'cloudflare' | 'firebase' | 'local';
-    setSelectedBackend(activeType);
-
-    const savedCfApi = localStorage.getItem('coach_tracker_cloudflare_api') || import.meta.env.VITE_CLOUDFLARE_API || 'https://api.nnutrition.ru';
-    setCfApiUrl(savedCfApi);
-
-    if (activeType === 'firebase') {
-      const savedConfig = localStorage.getItem('coach_tracker_firebase_config_v1');
-      if (savedConfig) {
-        try {
-          const parsed = JSON.parse(savedConfig) as FirebaseConfig;
-          setFbConfig(parsed);
-          const success = initFirebase(parsed);
-          if (success) {
-            setIsCloud(true);
-            setIsFbConfigSaved(true);
-          }
-        } catch (e) {
-          console.error('Ошибка инициализации Firebase:', e);
-        }
-      } else {
-        const envApiKey = import.meta.env.VITE_FIREBASE_API_KEY;
-        const envProjectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
-        const envAppId = import.meta.env.VITE_FIREBASE_APP_ID;
-        if (envApiKey && envProjectId && envAppId) {
-          const envCfg = {
-            apiKey: envApiKey,
-            authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || '',
-            projectId: envProjectId,
-            storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || '',
-            messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '',
-            appId: envAppId
-          };
-          setFbConfig(envCfg);
-          const success = initFirebase(envCfg);
-          if (success) {
-            setIsCloud(true);
-            setIsFbConfigSaved(true);
-          }
-        }
-      }
-    } else if (activeType === 'cloudflare') {
-      setIsCloud(true);
-    } else {
-      setIsCloud(false);
-    }
-
-    loadInitialData();
-  }, [isCloud]);
-
-  const handleSwitchBackend = (type: 'cloudflare' | 'firebase' | 'local') => {
-    dbService.setBackendType(type);
-    setSelectedBackend(type);
-    setIsCloud(type !== 'local');
-    setTimeout(() => {
-      loadInitialData();
-    }, 100);
-  };
-
-  const handleSaveCloudflareConfig = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!cfApiUrl.trim()) return;
-    localStorage.setItem('coach_tracker_cloudflare_api', cfApiUrl.trim());
+    // Принудительно устанавливаем облачный бэкенд по умолчанию
     dbService.setBackendType('cloudflare');
-    setIsCloud(true);
-    alert('Настройки Cloudflare API успешно сохранены!');
     loadInitialData();
+  }, []);
+
+  const handleManualSync = async () => {
+    setIsSyncing(true);
+    try {
+      await syncLocalDataWithCloud();
+      await loadInitialData();
+      setSyncSuccess(true);
+      setTimeout(() => setSyncSuccess(false), 2000);
+    } catch (e) {
+      console.error('Ошибка синхронизации:', e);
+      alert('Ошибка при синхронизации. Проверьте интернет-соединение.');
+    } finally {
+      setIsSyncing(false);
+    }
   };
 
   const loadInitialData = async () => {
@@ -402,55 +338,7 @@ export default function CoachDashboard() {
 
 
 
-  const handleSaveFirebaseConfig = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFbConnectionError('');
-
-    if (!fbConfig.apiKey || !fbConfig.projectId || !fbConfig.appId) {
-      setFbConnectionError('Заполните API Key, Project ID и App ID.');
-      return;
-    }
-
-    const isConnected = initFirebase(fbConfig);
-    if (isConnected) {
-      localStorage.setItem('coach_tracker_firebase_config_v1', JSON.stringify(fbConfig));
-      setIsFbConfigSaved(true);
-      setIsCloud(true);
-      loadInitialData();
-    } else {
-      setFbConnectionError('Ошибка при подключении Firebase SDK.');
-    }
-  };
-
-  const handleDisconnectFirebase = () => {
-    disconnectFirebase();
-    localStorage.removeItem('coach_tracker_firebase_config_v1');
-    setIsFbConfigSaved(false);
-    setIsCloud(false);
-    setFbConfig({
-      apiKey: '',
-      authDomain: '',
-      projectId: '',
-      storageBucket: '',
-      messagingSenderId: '',
-      appId: ''
-    });
-    loadInitialData();
-  };
-
-  const handleUploadDemoToCloud = async () => {
-    if (!isCloud) return;
-    const ok = window.confirm('Загрузить демонстрационные данные 3 клиентов с историей анкет в облако Firestore?');
-    if (!ok) return;
-
-    const success = await dbService.uploadDemoDataToCloud();
-    if (success) {
-      alert('Данные успешно скопированы в облако!');
-      loadInitialData();
-    } else {
-      alert('Ошибка при импорте. Проверьте права Rules в Firestore.');
-    }
-  };
+  
 
   const getMetricsSummary = () => {
     if (weeklyReports.length === 0) {
@@ -576,11 +464,55 @@ export default function CoachDashboard() {
             </div>
 
             <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '10px', borderTop: '1px solid var(--border-hairline-normal)', paddingTop: '16px' }}>
-              <button className="btn-premium btn-premium-secondary" onClick={() => setIsSettingsOpen(true)} style={{ width: '100%' }}>
-                <span>Настройки базы данных</span>
-                <span className="btn-icon-wrapper">
-                  <Settings size={12} strokeWidth={1.5} />
+              <button 
+                className="btn-premium" 
+                onClick={handleManualSync} 
+                disabled={isSyncing}
+                style={{ 
+                  width: '100%', 
+                  background: syncSuccess ? 'var(--color-nutri)' : undefined, 
+                  borderColor: syncSuccess ? 'rgba(16, 185, 129, 0.2)' : undefined 
+                }}
+              >
+                <span>
+                  {isSyncing ? 'Синхронизация...' : syncSuccess ? 'Готово!' : 'Синхронизировать'}
                 </span>
+                <span className="btn-icon-wrapper">
+                  <RefreshCw size={12} strokeWidth={1.5} className={isSyncing ? 'spin-animation' : ''} />
+                </span>
+              </button>
+              <button
+                onClick={async () => {
+                  const ok = window.confirm('Внимание! Вы собираетесь загрузить демонстрационные данные 3 клиентов с историей анкет в облачную базу данных. Продолжить?');
+                  if (!ok) return;
+                  setIsSyncing(true);
+                  try {
+                    const success = await dbService.uploadDemoDataToCloud();
+                    if (success) {
+                      alert('Демо-данные успешно загружены!');
+                      await loadInitialData();
+                    } else {
+                      alert('Ошибка при загрузке демо-данных.');
+                    }
+                  } catch (e) {
+                    console.error(e);
+                  } finally {
+                    setIsSyncing(false);
+                  }
+                }}
+                disabled={isSyncing}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  fontSize: '11px',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  textDecoration: 'underline',
+                  padding: '4px'
+                }}
+              >
+                Загрузить демо-данные
               </button>
             </div>
           </div>
@@ -1124,216 +1056,6 @@ export default function CoachDashboard() {
 
 
 
-      {/* НАСТРОЙКИ БАЗЫ ДАННЫХ DRAWER */}
-      <div className={`settings-overlay ${isSettingsOpen ? 'open' : ''}`} onClick={() => setIsSettingsOpen(false)}></div>
-      <div className={`settings-drawer ${isSettingsOpen ? 'open' : ''}`} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-hairline-normal)', paddingBottom: '12px', marginBottom: '16px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Database size={20} strokeWidth={1.5} style={{ color: 'var(--color-neuro)' }} />
-            База данных проекта
-          </h3>
-          <button onClick={() => setIsSettingsOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-            <X size={20} strokeWidth={1.5} />
-          </button>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
-          <label className="form-label" style={{ fontWeight: 700, fontSize: '13px' }}>Тип базы данных:</label>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer', padding: '10px', border: '1px solid var(--border-hairline-normal)', borderRadius: '10px', background: selectedBackend === 'cloudflare' ? 'rgba(99, 102, 241, 0.08)' : 'transparent', borderColor: selectedBackend === 'cloudflare' ? 'var(--color-neuro)' : 'var(--border-hairline-normal)' }}>
-              <input 
-                type="radio" 
-                name="backend-type" 
-                checked={selectedBackend === 'cloudflare'} 
-                onChange={() => handleSwitchBackend('cloudflare')}
-              />
-              <div>
-                <strong style={{ display: 'block' }}>Cloudflare Workers KV (Облако)</strong>
-                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Быстро, надежно, работает везде без VPN</span>
-              </div>
-            </label>
-
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer', padding: '10px', border: '1px solid var(--border-hairline-normal)', borderRadius: '10px', background: selectedBackend === 'firebase' ? 'rgba(99, 102, 241, 0.08)' : 'transparent', borderColor: selectedBackend === 'firebase' ? 'var(--color-neuro)' : 'var(--border-hairline-normal)' }}>
-              <input 
-                type="radio" 
-                name="backend-type" 
-                checked={selectedBackend === 'firebase'} 
-                onChange={() => handleSwitchBackend('firebase')}
-              />
-              <div>
-                <strong style={{ display: 'block' }}>Google Firebase Firestore</strong>
-                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Сложная настройка, может блокироваться в РФ</span>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <div style={{ flex: 1, overflowY: 'auto', paddingRight: '4px' }}>
-
-          {selectedBackend === 'cloudflare' && (
-            <form onSubmit={handleSaveCloudflareConfig} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }} htmlFor="cf-url">URL API Cloudflare Worker:</label>
-                <input 
-                  id="cf-url" 
-                  type="url" 
-                  className="form-control" 
-                  value={cfApiUrl} 
-                  onChange={(e) => setCfApiUrl(e.target.value)} 
-                  placeholder="https://coach-tracker-api.<username>.workers.dev" 
-                  required
-                />
-              </div>
-
-              <button type="submit" className="btn-premium" style={{ width: '100%' }}>
-                <span>Сохранить настройки Cloudflare</span>
-                <span className="btn-icon-wrapper">
-                  <Check size={12} strokeWidth={1.5} />
-                </span>
-              </button>
-
-              {cfApiUrl && (
-                <button 
-                  type="button" 
-                  className="btn-premium btn-premium-secondary" 
-                  onClick={handleUploadDemoToCloud}
-                  style={{ width: '100%', marginTop: '8px' }}
-                >
-                  <span>Загрузить демо-данные в Cloudflare KV</span>
-                  <span className="btn-icon-wrapper">
-                    <Download size={12} strokeWidth={1.5} />
-                  </span>
-                </button>
-              )}
-            </form>
-          )}
-
-          {selectedBackend === 'firebase' && (
-            <form onSubmit={handleSaveFirebaseConfig} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }} htmlFor="fb-apikey">API Key:</label>
-                <input 
-                  id="fb-apikey" 
-                  type="text" 
-                  className="form-control" 
-                  value={fbConfig.apiKey} 
-                  onChange={(e) => setFbConfig({...fbConfig, apiKey: e.target.value})} 
-                  placeholder="AIzaSyA1..." 
-                  required
-                />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }} htmlFor="fb-projectid">Project ID:</label>
-                <input 
-                  id="fb-projectid" 
-                  type="text" 
-                  className="form-control" 
-                  value={fbConfig.projectId} 
-                  onChange={(e) => setFbConfig({...fbConfig, projectId: e.target.value})} 
-                  placeholder="my-coach-app" 
-                  required
-                />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }} htmlFor="fb-appid">App ID:</label>
-                <input 
-                  id="fb-appid" 
-                  type="text" 
-                  className="form-control" 
-                  value={fbConfig.appId} 
-                  onChange={(e) => setFbConfig({...fbConfig, appId: e.target.value})} 
-                  placeholder="1:1234567:web:abcd..." 
-                  required
-                />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label className="form-label" style={{ margin: 0 }} htmlFor="fb-authdomain">Auth Domain:</label>
-                <input 
-                  id="fb-authdomain" 
-                  type="text" 
-                  className="form-control" 
-                  value={fbConfig.authDomain} 
-                  onChange={(e) => setFbConfig({...fbConfig, authDomain: e.target.value})} 
-                  placeholder="my-coach-app.firebaseapp.com" 
-                />
-              </div>
-
-              {fbConnectionError && (
-                <div className="alert-banner alert-banner-warning">
-                  <AlertTriangle size={16} strokeWidth={1.5} />
-                  <span>{fbConnectionError}</span>
-                </div>
-              )}
-
-              {isFbConfigSaved ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '8px' }}>
-                  <div className="alert-banner alert-banner-success" style={{ margin: 0 }}>
-                    <Check size={18} strokeWidth={1.5} />
-                    <span>Firebase подключен!</span>
-                  </div>
-                  <button 
-                    type="button" 
-                    className="btn-premium btn-premium-secondary" 
-                    onClick={handleUploadDemoToCloud}
-                    style={{ width: '100%' }}
-                  >
-                    <span>Импортировать демо в Firestore</span>
-                    <span className="btn-icon-wrapper">
-                      <Download size={12} strokeWidth={1.5} />
-                    </span>
-                  </button>
-                  <button 
-                    type="button" 
-                    className="btn-premium" 
-                    onClick={handleDisconnectFirebase}
-                    style={{ width: '100%', background: 'var(--color-danger)', borderColor: 'rgba(239, 68, 68, 0.2)', boxShadow: 'none' }}
-                  >
-                    <span>Отключить облако</span>
-                    <span className="btn-icon-wrapper" style={{ background: 'rgba(255,255,255,0.2)' }}>
-                      <X size={12} strokeWidth={1.5} />
-                    </span>
-                  </button>
-                </div>
-              ) : (
-                <button type="submit" className="btn-premium" style={{ width: '100%' }}>
-                  <span>Подключить Firebase</span>
-                  <span className="btn-icon-wrapper">
-                    <Check size={12} strokeWidth={1.5} />
-                  </span>
-                </button>
-              )}
-            </form>
-          )}
-        </div>
-
-        <div style={{ borderTop: '1px solid var(--border-hairline-normal)', paddingTop: '16px', fontSize: '11px', color: 'var(--text-muted)', lineHeight: 1.4, marginTop: '20px' }}>
-          {selectedBackend === 'cloudflare' && (
-            <span>
-              <strong>Настройка Cloudflare Workers KV:</strong>
-              <ol style={{ paddingLeft: '14px', marginTop: '4px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <li>Создайте KV Namespace <code>COACH_TRACKER_KV</code> в Cloudflare Dashboard.</li>
-                <li>Создайте Worker и вставьте в него код из папки <code>worker/index.js</code>.</li>
-                <li>Свяжите KV Namespace с Worker в настройках воркера под именем <code>COACH_TRACKER_KV</code>.</li>
-              </ol>
-            </span>
-          )}
-          {selectedBackend === 'firebase' && (
-            <span>
-              <strong>Настройка Firebase:</strong>
-              <ol style={{ paddingLeft: '14px', marginTop: '4px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <li>Создайте проект на <a href="https://console.firebase.google.com" target="_blank" rel="noreferrer" style={{ color: 'var(--color-neuro)', textDecoration: 'underline' }}>console.firebase.google.com</a>.</li>
-                <li>Добавьте Web App, скопируйте его конфигурацию.</li>
-                <li>Включите <strong>Firestore Database</strong> в тестовом режиме.</li>
-              </ol>
-            </span>
-          )}
-          {selectedBackend === 'local' && (
-            <span>
-              Данные хранятся локально в вашем браузере (LocalStorage). Очистка истории браузера сотрет данные, если они не были экспортированы.
-            </span>
-          )}
-        </div>
-      </div>
     </div>
   );
 }
