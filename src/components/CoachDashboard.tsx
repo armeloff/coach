@@ -119,7 +119,7 @@ export default function CoachDashboard() {
     const activeType = dbService.getBackendType() as 'cloudflare' | 'firebase' | 'local';
     setSelectedBackend(activeType);
 
-    const savedCfApi = localStorage.getItem('coach_tracker_cloudflare_api') || import.meta.env.VITE_CLOUDFLARE_API || '';
+    const savedCfApi = localStorage.getItem('coach_tracker_cloudflare_api') || import.meta.env.VITE_CLOUDFLARE_API || 'https://api.nnutrition.ru';
     setCfApiUrl(savedCfApi);
 
     if (activeType === 'firebase') {
