@@ -1140,19 +1140,6 @@ export default function CoachDashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
           <label className="form-label" style={{ fontWeight: 700, fontSize: '13px' }}>Тип базы данных:</label>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer', padding: '10px', border: '1px solid var(--border-hairline-normal)', borderRadius: '10px', background: selectedBackend === 'local' ? 'rgba(99, 102, 241, 0.08)' : 'transparent', borderColor: selectedBackend === 'local' ? 'var(--color-neuro)' : 'var(--border-hairline-normal)' }}>
-              <input 
-                type="radio" 
-                name="backend-type" 
-                checked={selectedBackend === 'local'} 
-                onChange={() => handleSwitchBackend('local')}
-              />
-              <div>
-                <strong style={{ display: 'block' }}>Локальное хранилище (LocalStorage)</strong>
-                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Без интернета, на этом устройстве</span>
-              </div>
-            </label>
-
             <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', cursor: 'pointer', padding: '10px', border: '1px solid var(--border-hairline-normal)', borderRadius: '10px', background: selectedBackend === 'cloudflare' ? 'rgba(99, 102, 241, 0.08)' : 'transparent', borderColor: selectedBackend === 'cloudflare' ? 'var(--color-neuro)' : 'var(--border-hairline-normal)' }}>
               <input 
                 type="radio" 
@@ -1182,25 +1169,6 @@ export default function CoachDashboard() {
         </div>
 
         <div style={{ flex: 1, overflowY: 'auto', paddingRight: '4px' }}>
-          {selectedBackend === 'local' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div className="alert-banner alert-banner-success" style={{ margin: 0 }}>
-                <Check size={16} strokeWidth={1.5} />
-                <span>Локальный режим активен! Данные в безопасности.</span>
-              </div>
-              <button 
-                type="button" 
-                className="btn-premium btn-premium-secondary" 
-                onClick={handleUploadDemoToCloud}
-                style={{ width: '100%' }}
-              >
-                <span>Импортировать демо-данные</span>
-                <span className="btn-icon-wrapper">
-                  <Download size={12} strokeWidth={1.5} />
-                </span>
-              </button>
-            </div>
-          )}
 
           {selectedBackend === 'cloudflare' && (
             <form onSubmit={handleSaveCloudflareConfig} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
