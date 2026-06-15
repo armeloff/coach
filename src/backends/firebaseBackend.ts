@@ -11,11 +11,12 @@ import { getDb } from '../firebase';
 import { DbBackend } from '../dbBackend';
 import { Client, WeeklyReport, MonthlyReport } from '../types';
 
-const runWithTimeout = <T>(promise: Promise<T>, timeoutMs: number = 3000): Promise<T> => {
+const runWithTimeout = <T>(promise: Promise<T>, timeoutMs: number = 10000): Promise<T> => {
+  const actualTimeout = Math.max(timeoutMs, 10000);
   return Promise.race([
     promise,
     new Promise<never>((_, reject) => 
-      setTimeout(() => reject(new Error('Firebase connection timeout')), timeoutMs)
+      setTimeout(() => reject(new Error('Firebase connection timeout')), actualTimeout)
     )
   ]);
 };

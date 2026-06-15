@@ -11,7 +11,7 @@ export class CloudflareBackend implements DbBackend {
 
   private async request<T>(path: string, options?: RequestInit): Promise<T> {
     const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), 3000);
+    const id = setTimeout(() => controller.abort(), 10000);
 
     try {
       const response = await fetch(`${this.apiUrl}${path}`, {
