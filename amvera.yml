@@ -1,0 +1,9 @@
+meta:
+  environment: node
+  toolchain: npm
+build:
+  requirements:
+    - node: 18
+  run: npm install
+run:
+  command: node server.cjs
