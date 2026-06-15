@@ -10,20 +10,28 @@ export class CloudflareBackend implements DbBackend {
   }
 
   private async request<T>(path: string, options?: RequestInit): Promise<T> {
-    const response = await fetch(`${this.apiUrl}${path}`, {
-      ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...(options?.headers || {})
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), 3000);
+
+    try {
+      const response = await fetch(`${this.apiUrl}${path}`, {
+        ...options,
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          ...(options?.headers || {})
+        }
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Cloudflare API request failed: ${response.status} ${errText}`);
       }
-    });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Cloudflare API request failed: ${response.status} ${errText}`);
+      return response.json() as Promise<T>;
+    } finally {
+      clearTimeout(id);
     }
-
-    return response.json() as Promise<T>;
   }
 
   async getClients(): Promise<Client[]> {
