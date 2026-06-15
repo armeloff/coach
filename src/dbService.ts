@@ -40,10 +40,57 @@ export const initBackend = (): string => {
 // Запуск инициализации при загрузке
 initBackend();
 
+let isSynced = false;
+
+// Функция фоновой синхронизации локальных данных с облаком при восстановлении сети
+export const syncLocalDataWithCloud = async () => {
+  if (activeBackend === localBackendInstance) return;
+
+  try {
+    console.log('[Database Sync] Запуск фоновой синхронизации локальных данных с облаком...');
+    
+    // 1. Синхронизируем клиентов
+    const localClients = await localBackendInstance.getClients();
+    if (localClients.length > 0) {
+      for (const client of localClients) {
+        await activeBackend.saveClient(client);
+      }
+    }
+
+    // 2. Синхронизируем еженедельные отчеты
+    const localWeekly = await localBackendInstance.getWeeklyReports();
+    if (localWeekly.length > 0) {
+      for (const report of localWeekly) {
+        await activeBackend.saveWeeklyReport(report);
+      }
+    }
+
+    // 3. Синхронизируем ежемесячные отчеты
+    const localMonthly = await localBackendInstance.getMonthlyReports();
+    if (localMonthly.length > 0) {
+      for (const report of localMonthly) {
+        await activeBackend.saveMonthlyReport(report);
+      }
+    }
+
+    console.log('[Database Sync] Синхронизация успешно завершена.');
+  } catch (error) {
+    console.warn('[Database Sync] Не удалось выполнить автосинхронизацию (сеть еще нестабильна):', error);
+  }
+};
+
 // Вспомогательная обертка для безопасных вызовов с автопереключением на локальный кэш
 const callBackend = async <T>(fn: (backend: DbBackend) => Promise<T>): Promise<T> => {
   try {
-    return await fn(activeBackend);
+    const result = await fn(activeBackend);
+    
+    // Если запрос прошел успешно и мы используем облако, запускаем фоновую синхронизацию
+    if (!isSynced && activeBackend !== localBackendInstance) {
+      isSynced = true;
+      syncLocalDataWithCloud().catch(err => console.warn('[Database Sync] Ошибка автосинхронизации:', err));
+    }
+    
+    return result;
   } catch (error) {
     console.error('[Database] Критическая ошибка бэкенда, прозрачный откат на LocalStorage:', error);
     return await fn(localBackendInstance);
