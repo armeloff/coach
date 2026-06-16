@@ -236,7 +236,10 @@ exports.handler = async (event) => {
 
     // 1. ДЕЙСТВИЯ С КЛИЕНТАМИ (clients)
     if (action === "getClients") {
-      const rows = await sql`SELECT id, name, age, focus, startDate, habits, coachKudos FROM clients`;
+      let rows = await sql`SELECT id, name, age, focus, startDate, habits, coachKudos FROM clients`;
+      if (rows && Array.isArray(rows[0])) {
+        rows = rows[0];
+      }
       const clients = rows.map(r => {
         let habits = [];
         try {
@@ -284,6 +287,9 @@ exports.handler = async (event) => {
         rows = await sql`SELECT id, clientId, date, sleepQuality, energyMorning, energyEvening, stressLevel, nutritionQuality, waterIntake, habitsCompleted, wins, obstacles, focusNextWeek FROM weekly_reports WHERE clientId = ${clientId}`;
       } else {
         rows = await sql`SELECT id, clientId, date, sleepQuality, energyMorning, energyEvening, stressLevel, nutritionQuality, waterIntake, habitsCompleted, wins, obstacles, focusNextWeek FROM weekly_reports`;
+      }
+      if (rows && Array.isArray(rows[0])) {
+        rows = rows[0];
       }
       const reports = rows.map(r => {
         let habitsCompleted = {};
@@ -335,6 +341,9 @@ exports.handler = async (event) => {
         rows = await sql`SELECT id, clientId, date, weight, waist, hips, chest, skinHairCondition, cognitiveShifts, coachingInsights FROM monthly_reports WHERE clientId = ${clientId}`;
       } else {
         rows = await sql`SELECT id, clientId, date, weight, waist, hips, chest, skinHairCondition, cognitiveShifts, coachingInsights FROM monthly_reports`;
+      }
+      if (rows && Array.isArray(rows[0])) {
+        rows = rows[0];
       }
       const reports = rows.map(r => {
         return {
