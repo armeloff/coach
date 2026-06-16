@@ -58,7 +58,19 @@ exports.handler = async (event) => {
     console.error("Failed to initialize ServiceAccountCredentialsProvider:", e);
   }
 
-  const driver = new Driver(connectionString, { credentialsProvider });
+  let endpoint = connectionString;
+  let database = undefined;
+  try {
+    const url = new URL(connectionString);
+    endpoint = `${url.protocol}//${url.host}`;
+    database = url.searchParams.get('database') || url.pathname;
+  } catch (e) {
+    console.warn("Failed to parse YDB_CONNECTION_STRING as URL, using raw string:", e);
+  }
+
+  const driver = database 
+    ? new Driver({ endpoint, database, credentialsProvider })
+    : new Driver(connectionString, { credentialsProvider });
 
   try {
     await driver.ready();
