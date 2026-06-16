@@ -11,14 +11,13 @@ const localBackendInstance = new LocalBackend();
 
 // Функция инициализации бэкенда
 export const initBackend = (): string => {
-  // Проверяем тип бэкенда из LocalStorage или env
-  const savedType = localStorage.getItem('coach_tracker_backend_type');
-  const backendType = savedType || import.meta.env.VITE_DB_BACKEND || 'cloudflare';
+  // Для надежности берем настройки напрямую из переменных окружения, игнорируя старый кэш в LocalStorage
+  const backendType = import.meta.env.VITE_DB_BACKEND || 'cloudflare';
   
   console.log(`[Database] Инициализация бэкенда: ${backendType}`);
 
   if (backendType === 'cloudflare') {
-    const apiUrl = localStorage.getItem('coach_tracker_cloudflare_api') || import.meta.env.VITE_CLOUDFLARE_API || 'https://api.nnutrition.ru';
+    const apiUrl = import.meta.env.VITE_CLOUDFLARE_API || 'https://functions.yandexcloud.net/d4e7hvo9tfo113n1v6cc';
     if (apiUrl) {
       activeBackend = new CloudflareBackend(apiUrl);
       return 'cloudflare';

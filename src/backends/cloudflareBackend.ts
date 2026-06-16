@@ -47,54 +47,58 @@ export class CloudflareBackend implements DbBackend {
   }
 
   async getClients(): Promise<Client[]> {
-    return this.request<Client[]>('/api/clients');
+    return this.request<Client[]>('?action=getClients');
   }
 
   async saveClient(client: Client): Promise<void> {
-    await this.request<void>('/api/clients', {
+    await this.request<void>('?action=saveClient', {
       method: 'POST',
       body: JSON.stringify(client)
     });
   }
 
   async deleteClient(clientId: string): Promise<void> {
-    await this.request<void>(`/api/clients/${clientId}`, {
+    await this.request<void>(`?action=deleteClient&id=${encodeURIComponent(clientId)}`, {
       method: 'DELETE'
     });
   }
 
   async getWeeklyReports(clientId?: string): Promise<WeeklyReport[]> {
-    const path = clientId ? `/api/weeklyReports?clientId=${encodeURIComponent(clientId)}` : '/api/weeklyReports';
+    const path = clientId 
+      ? `?action=getWeeklyReports&clientId=${encodeURIComponent(clientId)}` 
+      : '?action=getWeeklyReports';
     return this.request<WeeklyReport[]>(path);
   }
 
   async saveWeeklyReport(report: WeeklyReport): Promise<void> {
-    await this.request<void>('/api/weeklyReports', {
+    await this.request<void>('?action=saveWeeklyReport', {
       method: 'POST',
       body: JSON.stringify(report)
     });
   }
 
   async deleteWeeklyReport(reportId: string): Promise<void> {
-    await this.request<void>(`/api/weeklyReports/${reportId}`, {
+    await this.request<void>(`?action=deleteWeeklyReport&id=${encodeURIComponent(reportId)}`, {
       method: 'DELETE'
     });
   }
 
   async getMonthlyReports(clientId?: string): Promise<MonthlyReport[]> {
-    const path = clientId ? `/api/monthlyReports?clientId=${encodeURIComponent(clientId)}` : '/api/monthlyReports';
+    const path = clientId 
+      ? `?action=getMonthlyReports&clientId=${encodeURIComponent(clientId)}` 
+      : '?action=getMonthlyReports';
     return this.request<MonthlyReport[]>(path);
   }
 
   async saveMonthlyReport(report: MonthlyReport): Promise<void> {
-    await this.request<void>('/api/monthlyReports', {
+    await this.request<void>('?action=saveMonthlyReport', {
       method: 'POST',
       body: JSON.stringify(report)
     });
   }
 
   async deleteMonthlyReport(reportId: string): Promise<void> {
-    await this.request<void>(`/api/monthlyReports/${reportId}`, {
+    await this.request<void>(`?action=deleteMonthlyReport&id=${encodeURIComponent(reportId)}`, {
       method: 'DELETE'
     });
   }
