@@ -64,6 +64,20 @@ exports.handler = async (event) => {
     await driver.ready();
     const sql = query(driver);
 
+    if (action === "debug") {
+      const fs = require('fs');
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({
+          ydbConnectionString: process.env.YDB_CONNECTION_STRING,
+          envKeys: Object.keys(process.env),
+          dirname: __dirname,
+          files: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : []
+        })
+      };
+    }
+
     // 1. ДЕЙСТВИЯ С КЛИЕНТАМИ (clients)
     if (action === "getClients") {
       const rows = await sql`SELECT id, name, age, focus, startDate, habits, coachKudos FROM clients`;
