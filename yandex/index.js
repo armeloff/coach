@@ -79,6 +79,12 @@ exports.handler = async (event) => {
 
     if (action === "debug") {
       const fs = require('fs');
+      let rawClients = [];
+      try {
+        rawClients = await sql`SELECT * FROM clients LIMIT 5`;
+      } catch (e) {
+        rawClients = { error: e.message };
+      }
       return {
         statusCode: 200,
         headers: corsHeaders,
@@ -86,7 +92,8 @@ exports.handler = async (event) => {
           ydbConnectionString: process.env.YDB_CONNECTION_STRING,
           envKeys: Object.keys(process.env),
           dirname: __dirname,
-          files: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : []
+          files: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : [],
+          rawClients
         })
       };
     }
