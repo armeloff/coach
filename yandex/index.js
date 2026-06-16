@@ -188,35 +188,35 @@ exports.handler = async (event) => {
         results.push(`Table 'monthly_reports' creation note: ${e.message}`);
       }
 
-      // Populate clients
+      // Populate clients in parallel
       if (clients && clients.length > 0) {
         results.push(`Migrating ${clients.length} clients...`);
-        for (const c of clients) {
-          if (!c.id) continue;
+        await Promise.all(clients.map(async (c) => {
+          if (!c.id) return;
           const habitsStr = JSON.stringify(c.habits || []);
           await sql`REPLACE INTO clients (id, name, age, focus, startDate, habits, coachKudos) VALUES (${c.id}, ${c.name}, ${c.age}, ${c.focus}, ${c.startDate}, ${habitsStr}, ${c.coachKudos || ""})`;
-        }
+        }));
         results.push("Clients migrated successfully.");
       }
 
-      // Populate weekly reports
+      // Populate weekly reports in parallel
       if (weeklyReports && weeklyReports.length > 0) {
         results.push(`Migrating ${weeklyReports.length} weekly reports...`);
-        for (const r of weeklyReports) {
-          if (!r.id) continue;
+        await Promise.all(weeklyReports.map(async (r) => {
+          if (!r.id) return;
           const habitsCompletedStr = JSON.stringify(r.habitsCompleted || {});
           await sql`REPLACE INTO weekly_reports (id, clientId, date, sleepQuality, energyMorning, energyEvening, stressLevel, nutritionQuality, waterIntake, habitsCompleted, wins, obstacles, focusNextWeek) VALUES (${r.id}, ${r.clientId}, ${r.date}, ${r.sleepQuality}, ${r.energyMorning}, ${r.energyEvening}, ${r.stressLevel}, ${r.nutritionQuality}, ${r.waterIntake}, ${habitsCompletedStr}, ${r.wins || ""}, ${r.obstacles || ""}, ${r.focusNextWeek || ""})`;
-        }
+        }));
         results.push("Weekly reports migrated successfully.");
       }
 
-      // Populate monthly reports
+      // Populate monthly reports in parallel
       if (monthlyReports && monthlyReports.length > 0) {
         results.push(`Migrating ${monthlyReports.length} monthly reports...`);
-        for (const r of monthlyReports) {
-          if (!r.id) continue;
+        await Promise.all(monthlyReports.map(async (r) => {
+          if (!r.id) return;
           await sql`REPLACE INTO monthly_reports (id, clientId, date, weight, waist, hips, chest, skinHairCondition, cognitiveShifts, coachingInsights) VALUES (${r.id}, ${r.clientId}, ${r.date}, ${r.weight}, ${r.waist}, ${r.hips}, ${r.chest}, ${r.skinHairCondition || ""}, ${r.cognitiveShifts || ""}, ${r.coachingInsights || ""})`;
-        }
+        }));
         results.push("Monthly reports migrated successfully.");
       }
 
