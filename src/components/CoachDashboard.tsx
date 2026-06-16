@@ -192,18 +192,62 @@ export default function CoachDashboard() {
       coachKudos: ''
     };
 
-    // Save client async without blocking UI
-    dbService.saveClient(client).catch(err => console.error('Error saving client:', err));
+    // Создаем стартовые отчеты для нового клиента
+    const startWeekly: WeeklyReport = {
+      id: `weekly-start-${Date.now()}`,
+      clientId: client.id,
+      date: client.startDate,
+      sleepQuality: 7,
+      energyMorning: 7,
+      energyEvening: 6,
+      stressLevel: 5,
+      nutritionQuality: 7,
+      waterIntake: 1.5,
+      habitsCompleted: habitsToSave.reduce((acc, habit) => {
+        acc[habit] = false;
+        return acc;
+      }, {} as { [key: string]: boolean }),
+      wins: 'Стартовая точка (начало программы)',
+      obstacles: 'Нет',
+      focusNextWeek: 'Адаптация и внедрение базовых привычек'
+    };
+
+    const startMonthly: MonthlyReport = {
+      id: `monthly-start-${Date.now()}`,
+      clientId: client.id,
+      date: client.startDate,
+      weight: 0,
+      waist: 0,
+      hips: 0,
+      chest: 0,
+      skinHairCondition: 'Стартовая точка',
+      cognitiveShifts: 'Стартовая точка',
+      coachingInsights: 'Начало программы'
+    };
+
+    // Асинхронно сохраняем клиента и его стартовые отчеты в базу данных
+    const saveClientAndReports = async () => {
+      try {
+        await dbService.saveClient(client);
+        await dbService.saveWeeklyReport(startWeekly);
+        await dbService.saveMonthlyReport(startMonthly);
+      } catch (err) {
+        console.error('Error saving new client or starting reports:', err);
+      }
+    };
+    saveClientAndReports();
+
     setNewClientName('');
     setNewClientAge(30);
     setNewClientFocus('комплексный');
     setNewSelectedHabits([]);
     setIsNewClientOpen(false);
 
-    // Optimistically update client list
+    // Оптимистично обновляем UI, включая стартовые отчеты
     setClients(prev => [...prev, client]);
     setSelectedClient(client);
-    loadReports(client.id);
+    setWeeklyReports([startWeekly]);
+    setMonthlyReports([startMonthly]);
   };
 
   const handleOpenEditModal = () => {
