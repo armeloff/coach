@@ -19,7 +19,7 @@ export default {
     if (!db) {
       return new Response(JSON.stringify({ error: "KV binding COACH_TRACKER_KV is missing in Cloudflare settings" }), {
         status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
+        headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
       });
     }
 
@@ -34,7 +34,7 @@ export default {
             if (val) clients.push(JSON.parse(val));
           }
           return new Response(JSON.stringify(clients), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
         
@@ -48,7 +48,7 @@ export default {
           }
           await db.put(`client:${client.id}`, JSON.stringify(client));
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
@@ -84,7 +84,7 @@ export default {
           }
 
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
@@ -106,7 +106,7 @@ export default {
           }
           reports.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           return new Response(JSON.stringify(reports), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
 
@@ -120,7 +120,7 @@ export default {
           }
           await db.put(`weekly:${report.id}`, JSON.stringify(report));
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
@@ -130,7 +130,7 @@ export default {
         if (request.method === "DELETE") {
           await db.delete(`weekly:${id}`);
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
@@ -152,7 +152,7 @@ export default {
           }
           reports.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           return new Response(JSON.stringify(reports), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
 
@@ -166,7 +166,7 @@ export default {
           }
           await db.put(`monthly:${report.id}`, JSON.stringify(report));
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
@@ -176,20 +176,20 @@ export default {
         if (request.method === "DELETE") {
           await db.delete(`monthly:${id}`);
           return new Response(JSON.stringify({ success: true }), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
+            headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
         }
       }
 
       return new Response(JSON.stringify({ error: "Endpoint Not Found" }), {
         status: 404,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
+        headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
       });
 
     } catch (e) {
       return new Response(JSON.stringify({ error: e.message }), {
         status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
+        headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
       });
     }
   }
