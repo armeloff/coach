@@ -94,7 +94,7 @@ exports.handler = async (event) => {
           dirname: __dirname,
           files: fs.existsSync(__dirname) ? fs.readdirSync(__dirname) : [],
           rawClients
-        })
+        }, (key, value) => typeof value === 'bigint' ? value.toString() : value)
       };
     }
 
