@@ -5,8 +5,6 @@ import {
   Send, 
   Lock, 
   Unlock, 
-  Eye, 
-  EyeOff, 
   CheckCircle, 
   Circle, 
   Calendar, 
@@ -47,7 +45,6 @@ export default function ClientPortal() {
   const [typedClientId, setTypedClientId] = useState<string>('');
   const [isIdLocked, setIsIdLocked] = useState<boolean>(false);
   const [idError, setIdError] = useState<string>('');
-  const [showDemoIds, setShowDemoIds] = useState<boolean>(false);
 
   // Client Reports History
   const [clientWeeklyReports, setClientWeeklyReports] = useState<WeeklyReport[]>([]);
@@ -549,36 +546,7 @@ export default function ClientPortal() {
                 )}
               </div>
 
-              <div style={{ maxWidth: '480px', margin: '40px auto 0 auto', borderTop: '1px dashed var(--border-hairline-normal)', paddingTop: '20px' }}>
-                <button 
-                  type="button" 
-                  onClick={() => setShowDemoIds(!showDemoIds)} 
-                  className="btn-premium btn-premium-secondary" 
-                  style={{ width: '100%', fontSize: '12px', padding: '8px 16px' }}
-                >
-                  <span>{showDemoIds ? 'Скрыть демонстрационные коды' : 'Показать демо-коды для тестирования'}</span>
-                  <span className="btn-icon-wrapper">
-                    {showDemoIds ? <EyeOff size={12} strokeWidth={1.5} /> : <Eye size={12} strokeWidth={1.5} />}
-                  </span>
-                </button>
-                
-                {showDemoIds && (
-                  <div style={{ marginTop: '12px', background: 'var(--bg-input)', padding: '12px', borderRadius: '10px', fontSize: '12px', border: '1px solid var(--border-hairline-normal)' }}>
-                    <p style={{ fontWeight: 600, marginBottom: '6px' }}>Доступные демо-коды:</p>
-                    <ul style={{ paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                      <li>
-                        <span onClick={() => setTypedClientId('maria-34')} style={{ textDecoration: 'underline', color: 'var(--color-neuro)', cursor: 'pointer', fontWeight: 600 }}>maria-34</span> — Мария Семенова (нутрициология)
-                      </li>
-                      <li>
-                        <span onClick={() => setTypedClientId('alex-41')} style={{ textDecoration: 'underline', color: 'var(--color-neuro)', cursor: 'pointer', fontWeight: 600 }}>alex-41</span> — Алексей Петров (нейрокоучинг)
-                      </li>
-                      <li>
-                        <span onClick={() => setTypedClientId('elena-28')} style={{ textDecoration: 'underline', color: 'var(--color-neuro)', cursor: 'pointer', fontWeight: 600 }}>elena-28</span> — Елена Кузнецова (комплексный)
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
+              {/* Demo codes section removed for production */}
             </div>
           ) : (
             

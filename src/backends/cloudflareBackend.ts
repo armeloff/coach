@@ -9,29 +9,41 @@ export class CloudflareBackend implements DbBackend {
     this.apiUrl = apiUrl.replace(/\/$/, '');
   }
 
-  private async request<T>(path: string, options?: RequestInit): Promise<T> {
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), 10000);
+  private async request<T>(path: string, options?: RequestInit, retries: number = 3, delayMs: number = 300): Promise<T> {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000); // 6 seconds timeout per attempt
 
-    try {
-      const response = await fetch(`${this.apiUrl}${path}`, {
-        ...options,
-        signal: controller.signal,
-        headers: {
-          'Content-Type': 'application/json',
-          ...(options?.headers || {})
+      try {
+        const response = await fetch(`${this.apiUrl}${path}`, {
+          ...options,
+          signal: controller.signal,
+          headers: {
+            'Content-Type': 'application/json',
+            ...(options?.headers || {})
+          }
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(`Cloudflare API request failed: ${response.status} ${errText}`);
         }
-      });
 
-      if (!response.ok) {
-        const errText = await response.text();
-        throw new Error(`Cloudflare API request failed: ${response.status} ${errText}`);
+        clearTimeout(timeoutId);
+        return await response.json() as T;
+      } catch (error) {
+        clearTimeout(timeoutId);
+        console.warn(`[Database attempt ${attempt}/${retries} failed]:`, error);
+        
+        if (attempt === retries) {
+          throw error;
+        }
+        
+        // Wait before retrying
+        await new Promise(resolve => setTimeout(resolve, delayMs));
       }
-
-      return response.json() as Promise<T>;
-    } finally {
-      clearTimeout(id);
     }
+    throw new Error('Request failed after retries');
   }
 
   async getClients(): Promise<Client[]> {
