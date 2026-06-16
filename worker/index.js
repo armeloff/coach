@@ -28,11 +28,12 @@ export default {
       if (path === "/api/clients") {
         if (request.method === "GET") {
           const list = await db.list({ prefix: "client:" });
-          const clients = [];
-          for (const key of list.keys) {
-            const val = await db.get(key.name);
-            if (val) clients.push(JSON.parse(val));
-          }
+          const clients = (await Promise.all(
+            list.keys.map(async (key) => {
+              const val = await db.get(key.name);
+              return val ? JSON.parse(val) : null;
+            })
+          )).filter(Boolean);
           return new Response(JSON.stringify(clients), {
             headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
           });
@@ -94,16 +95,18 @@ export default {
         if (request.method === "GET") {
           const clientId = url.searchParams.get("clientId");
           const list = await db.list({ prefix: "weekly:" });
-          const reports = [];
-          for (const key of list.keys) {
-            const val = await db.get(key.name);
-            if (val) {
-              const r = JSON.parse(val);
-              if (!clientId || r.clientId === clientId) {
-                reports.push(r);
+          const reports = (await Promise.all(
+            list.keys.map(async (key) => {
+              const val = await db.get(key.name);
+              if (val) {
+                const r = JSON.parse(val);
+                if (!clientId || r.clientId === clientId) {
+                  return r;
+                }
               }
-            }
-          }
+              return null;
+            })
+          )).filter(Boolean);
           reports.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           return new Response(JSON.stringify(reports), {
             headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
@@ -140,16 +143,18 @@ export default {
         if (request.method === "GET") {
           const clientId = url.searchParams.get("clientId");
           const list = await db.list({ prefix: "monthly:" });
-          const reports = [];
-          for (const key of list.keys) {
-            const val = await db.get(key.name);
-            if (val) {
-              const r = JSON.parse(val);
-              if (!clientId || r.clientId === clientId) {
-                reports.push(r);
+          const reports = (await Promise.all(
+            list.keys.map(async (key) => {
+              const val = await db.get(key.name);
+              if (val) {
+                const r = JSON.parse(val);
+                if (!clientId || r.clientId === clientId) {
+                  return r;
+                }
               }
-            }
-          }
+              return null;
+            })
+          )).filter(Boolean);
           reports.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
           return new Response(JSON.stringify(reports), {
             headers: { ...corsHeaders, "Content-Type": "application/json; charset=utf-8" }
