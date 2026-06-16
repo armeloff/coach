@@ -130,7 +130,8 @@ export const dbService = {
 
   // Получение списка клиентов
   async getClients(): Promise<Client[]> {
-    return callBackend(backend => backend.getClients());
+    const list = await callBackend(backend => backend.getClients());
+    return (list || []).filter(c => c && typeof c === 'object' && typeof c.id === 'string');
   },
 
   // Сохранение/обновление клиента
@@ -145,7 +146,8 @@ export const dbService = {
 
   // Получение еженедельных отчетов
   async getWeeklyReports(clientId?: string): Promise<WeeklyReport[]> {
-    return callBackend(backend => backend.getWeeklyReports(clientId));
+    const list = await callBackend(backend => backend.getWeeklyReports(clientId));
+    return (list || []).filter(r => r && typeof r === 'object' && typeof r.id === 'string' && typeof r.clientId === 'string');
   },
 
   // Сохранение еженедельного отчета
@@ -160,7 +162,8 @@ export const dbService = {
 
   // Получение ежемесячных отчетов
   async getMonthlyReports(clientId?: string): Promise<MonthlyReport[]> {
-    return callBackend(backend => backend.getMonthlyReports(clientId));
+    const list = await callBackend(backend => backend.getMonthlyReports(clientId));
+    return (list || []).filter(r => r && typeof r === 'object' && typeof r.id === 'string' && typeof r.clientId === 'string');
   },
 
   // Сохранение ежемесячного отчета

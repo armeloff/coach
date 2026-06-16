@@ -111,7 +111,7 @@ export default function ClientPortal() {
     }
     
     if (preselectedId) {
-      const found = list.find(c => c.id.toLowerCase() === preselectedId.trim().toLowerCase());
+      const found = list.find(c => c && c.id && c.id.toLowerCase() === preselectedId.trim().toLowerCase());
       if (found) {
         setSelectedClientId(found.id);
         initializeHabits(found);
@@ -134,7 +134,7 @@ export default function ClientPortal() {
     setIdError('');
     if (!typedClientId.trim()) return;
 
-    const found = clients.find(c => c.id.toLowerCase() === typedClientId.trim().toLowerCase());
+    const found = clients.find(c => c && c.id && c.id.toLowerCase() === typedClientId.trim().toLowerCase());
     if (found) {
       setSelectedClientId(found.id);
       initializeHabits(found);
