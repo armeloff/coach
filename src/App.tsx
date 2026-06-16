@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ClientPortal from './components/ClientPortal';
 import CoachDashboard from './components/CoachDashboard';
-import { Sun, Moon, Sparkles, User, Brain, Lock, Unlock, Eye, EyeOff } from 'lucide-react';
+import { Sun, Moon, Brain, Lock, Unlock, Eye, EyeOff } from 'lucide-react';
 
 export default function App() {
   const [role, setRole] = useState<'coach' | 'client'>('coach');
@@ -70,52 +70,6 @@ export default function App() {
         </div>
 
         <div className="nav-actions">
-          {/* Переключатель ролей */}
-          <div style={{ display: 'flex', gap: '4px', background: 'var(--bg-input)', padding: '4px', borderRadius: '10px', border: '1px solid var(--border-hairline-normal)' }}>
-            <button
-              onClick={() => setRole('coach')}
-              className="btn"
-              style={{
-                padding: '6px 14px',
-                fontSize: '13px',
-                fontWeight: 600,
-                background: role === 'coach' ? 'var(--color-neuro)' : 'transparent',
-                color: role === 'coach' ? '#ffffff' : 'var(--text-secondary)',
-                borderRadius: '8px',
-                boxShadow: role === 'coach' ? 'var(--shadow-ambient)' : 'none',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <Sparkles size={14} strokeWidth={1.5} /> Панель коуча
-            </button>
-            <button
-              onClick={() => setRole('client')}
-              className="btn"
-              style={{
-                padding: '6px 14px',
-                fontSize: '13px',
-                fontWeight: 600,
-                background: role === 'client' ? 'var(--color-neuro)' : 'transparent',
-                color: role === 'client' ? '#ffffff' : 'var(--text-secondary)',
-                borderRadius: '8px',
-                boxShadow: role === 'client' ? 'var(--shadow-ambient)' : 'none',
-                border: 'none',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              <User size={14} strokeWidth={1.5} /> Кабинет клиента
-            </button>
-          </div>
-
           {/* Переключатель темной/светлой тем */}
           <button
             onClick={toggleTheme}
