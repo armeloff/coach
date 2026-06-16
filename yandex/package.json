@@ -1,0 +1,11 @@
+{
+  "name": "coach-tracker-yandex-api",
+  "version": "1.0.0",
+  "description": "Yandex Cloud Function API for Coach Tracker, connecting to YDB",
+  "main": "index.js",
+  "dependencies": {
+    "@ydbjs/core": "latest",
+    "@ydbjs/query": "latest",
+    "@ydbjs/auth-yandex-cloud": "latest"
+  }
+}
