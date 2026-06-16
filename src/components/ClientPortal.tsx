@@ -498,7 +498,7 @@ export default function ClientPortal() {
                   textAlign: 'left'
                 }}>
                   <strong style={{ color: 'var(--color-danger)', display: 'block', marginBottom: '4px' }}>
-                    ⚠️ Ошибка загрузки базы данных (api.nnutrition.ru)
+                    ⚠️ Ошибка загрузки базы данных (Yandex Cloud)
                   </strong>
                   Попытка получить список клиентов не удалась. Возможно, домен еще не обновился в вашем браузере, или соединение заблокировано.
                   <div style={{ marginTop: '8px', fontSize: '11px', color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '8px', borderRadius: '6px', overflowX: 'auto', fontFamily: 'monospace' }}>

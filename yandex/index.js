@@ -41,7 +41,24 @@ exports.handler = async (event) => {
     };
   }
 
-  const driver = new Driver(connectionString);
+  let credentialsProvider = undefined;
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const keyPath = path.join(__dirname, 'authorized-key.json');
+    if (fs.existsSync(keyPath)) {
+      const { ServiceAccountCredentialsProvider } = require('@ydbjs/auth-yandex-cloud');
+      const keyData = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+      credentialsProvider = new ServiceAccountCredentialsProvider(keyData);
+      console.log("Using ServiceAccountCredentialsProvider from authorized-key.json");
+    } else {
+      console.log("authorized-key.json not found, falling back to default authentication");
+    }
+  } catch (e) {
+    console.error("Failed to initialize ServiceAccountCredentialsProvider:", e);
+  }
+
+  const driver = new Driver(connectionString, { credentialsProvider });
 
   try {
     await driver.ready();

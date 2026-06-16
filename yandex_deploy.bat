@@ -36,7 +36,7 @@ echo.
 :: Шаг 3. Упаковка Cloud Function в ZIP-архив
 echo 3. Создание архива function.zip для загрузки в Yandex Cloud...
 powershell -Command "if (Test-Path yandex\function.zip) { Remove-Item yandex\function.zip -Force }"
-powershell -Command "Compress-Archive -Path yandex\index.js, yandex\package.json -DestinationPath yandex\function.zip -Force"
+powershell -Command "Compress-Archive -Path yandex\index.js, yandex\package.json, yandex\authorized-key.json -DestinationPath yandex\function.zip -Force"
 
 if not exist yandex\function.zip (
     echo [ОШИБКА] Не удалось создать файл yandex\function.zip.
