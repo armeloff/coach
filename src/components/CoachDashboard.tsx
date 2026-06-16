@@ -192,47 +192,12 @@ export default function CoachDashboard() {
       coachKudos: ''
     };
 
-    // Создаем стартовые отчеты для нового клиента
-    const startWeekly: WeeklyReport = {
-      id: `weekly-start-${Date.now()}`,
-      clientId: client.id,
-      date: client.startDate,
-      sleepQuality: 7,
-      energyMorning: 7,
-      energyEvening: 6,
-      stressLevel: 5,
-      nutritionQuality: 7,
-      waterIntake: 1.5,
-      habitsCompleted: habitsToSave.reduce((acc, habit) => {
-        acc[habit] = false;
-        return acc;
-      }, {} as { [key: string]: boolean }),
-      wins: 'Стартовая точка (начало программы)',
-      obstacles: 'Нет',
-      focusNextWeek: 'Адаптация и внедрение базовых привычек'
-    };
-
-    const startMonthly: MonthlyReport = {
-      id: `monthly-start-${Date.now()}`,
-      clientId: client.id,
-      date: client.startDate,
-      weight: 0,
-      waist: 0,
-      hips: 0,
-      chest: 0,
-      skinHairCondition: 'Стартовая точка',
-      cognitiveShifts: 'Стартовая точка',
-      coachingInsights: 'Начало программы'
-    };
-
-    // Асинхронно сохраняем клиента и его стартовые отчеты в базу данных
+    // Асинхронно сохраняем клиента в базу данных
     const saveClientAndReports = async () => {
       try {
         await dbService.saveClient(client);
-        await dbService.saveWeeklyReport(startWeekly);
-        await dbService.saveMonthlyReport(startMonthly);
       } catch (err) {
-        console.error('Error saving new client or starting reports:', err);
+        console.error('Error saving new client:', err);
       }
     };
     saveClientAndReports();
@@ -243,11 +208,11 @@ export default function CoachDashboard() {
     setNewSelectedHabits([]);
     setIsNewClientOpen(false);
 
-    // Оптимистично обновляем UI, включая стартовые отчеты
+    // Оптимистично обновляем UI
     setClients(prev => [...prev, client]);
     setSelectedClient(client);
-    setWeeklyReports([startWeekly]);
-    setMonthlyReports([startMonthly]);
+    setWeeklyReports([]);
+    setMonthlyReports([]);
   };
 
   const handleOpenEditModal = () => {
@@ -866,12 +831,18 @@ export default function CoachDashboard() {
                     <div className="double-bezel-core">
                       <h3 style={{ fontSize: '16px', fontWeight: 800, marginBottom: '20px' }}>Еженедельные анкеты клиента</h3>
                       <div className="reports-list">
-                        {[...weeklyReports].reverse().map((report, idx) => (
-                          <div key={report.id} className="report-history-item">
-                            <div className="report-item-header">
-                              <span>Отчет за {new Date(report.date).toLocaleDateString('ru-RU')}</span>
-                              <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>Отчет #{weeklyReports.length - idx}</span>
-                            </div>
+                        {(() => {
+                          const sortedWeekly = [...weeklyReports].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+                          const starterId = sortedWeekly.length > 0 ? sortedWeekly[0].id : null;
+                          
+                          return [...weeklyReports].reverse().map((report, idx) => (
+                            <div key={report.id} className="report-history-item">
+                              <div className="report-item-header">
+                                <span>Отчет за {new Date(report.date).toLocaleDateString('ru-RU')}</span>
+                                <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>
+                                  Отчет #{weeklyReports.length - idx} {report.id === starterId ? '(Стартовый)' : ''}
+                                </span>
+                              </div>
                             
                             <div className="report-item-ratings">
                               <span className="rating-badge">Сон: <span className="num">{report.sleepQuality}</span></span>
@@ -896,7 +867,8 @@ export default function CoachDashboard() {
                               </div>
                             </div>
                           </div>
-                        ))}
+                        ));
+                      })()}
                       </div>
                     </div>
                   </div>
@@ -907,34 +879,42 @@ export default function CoachDashboard() {
                       <div className="double-bezel-core">
                         <h3 style={{ fontSize: '16px', fontWeight: 800, color: 'var(--color-neuro)', marginBottom: '20px' }}>Ежемесячные сдвиги и замеры</h3>
                         <div className="reports-list">
-                          {[...monthlyReports].reverse().map(report => (
-                            <div key={report.id} className="report-history-item" style={{ borderColor: 'rgba(99, 102, 241, 0.15)' }}>
-                              <div className="report-item-header">
-                                <span>Месячный срез за {new Date(report.date).toLocaleDateString('ru-RU')}</span>
-                              </div>
-                              <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid var(--border-hairline-normal)' }}>
-                                <span>Вес: <strong>{report.weight} кг</strong></span>
-                                <span>Талия: <strong>{report.waist} см</strong></span>
-                                <span>Бедра: <strong>{report.hips} см</strong></span>
-                                <span>Грудь: <strong>{report.chest} см</strong></span>
-                              </div>
-                              
-                              <div className="report-text-section">
-                                <div className="text-block-box">
-                                  <div className="text-block-label">💆‍♀️ Кожа / Волосы:</div>
-                                  <p style={{ whiteSpace: 'pre-wrap' }}>{report.skinHairCondition || '—'}</p>
+                          {(() => {
+                            const sortedMonthly = [...monthlyReports].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+                            const starterId = sortedMonthly.length > 0 ? sortedMonthly[0].id : null;
+                            
+                            return [...monthlyReports].reverse().map(report => (
+                              <div key={report.id} className="report-history-item" style={{ borderColor: 'rgba(99, 102, 241, 0.15)' }}>
+                                <div className="report-item-header">
+                                  <span>Месячный срез за {new Date(report.date).toLocaleDateString('ru-RU')}</span>
+                                  {report.id === starterId && (
+                                    <span style={{ color: 'var(--color-nutri)', fontSize: '12px', fontWeight: 600 }}>Стартовый</span>
+                                  )}
                                 </div>
-                                <div className="text-block-box">
-                                  <div className="text-block-label">🧠 Когнитивные сдвиги:</div>
-                                  <p style={{ whiteSpace: 'pre-wrap' }}>{report.cognitiveShifts || '—'}</p>
+                                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '16px', paddingBottom: '12px', borderBottom: '1px solid var(--border-hairline-normal)' }}>
+                                  <span>Вес: <strong>{report.weight} кг</strong></span>
+                                  <span>Талия: <strong>{report.waist} см</strong></span>
+                                  <span>Бедра: <strong>{report.hips} см</strong></span>
+                                  <span>Грудь: <strong>{report.chest} см</strong></span>
                                 </div>
-                                <div className="text-block-box" style={{ background: 'var(--color-neuro-light)' }}>
-                                  <div className="text-block-label" style={{ color: 'var(--color-neuro)' }}>💡 Инсайт:</div>
-                                  <p style={{ whiteSpace: 'pre-wrap', fontWeight: 600 }}>{report.coachingInsights || '—'}</p>
+                                
+                                <div className="report-text-section">
+                                  <div className="text-block-box">
+                                    <div className="text-block-label">💆‍♀️ Кожа / Волосы:</div>
+                                    <p style={{ whiteSpace: 'pre-wrap' }}>{report.skinHairCondition || '—'}</p>
+                                  </div>
+                                  <div className="text-block-box">
+                                    <div className="text-block-label">🧠 Когнитивные сдвиги:</div>
+                                    <p style={{ whiteSpace: 'pre-wrap' }}>{report.cognitiveShifts || '—'}</p>
+                                  </div>
+                                  <div className="text-block-box" style={{ background: 'var(--color-neuro-light)' }}>
+                                    <div className="text-block-label" style={{ color: 'var(--color-neuro)' }}>💡 Инсайт:</div>
+                                    <p style={{ whiteSpace: 'pre-wrap', fontWeight: 600 }}>{report.coachingInsights || '—'}</p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            ));
+                          })()}
                         </div>
                       </div>
                     </div>

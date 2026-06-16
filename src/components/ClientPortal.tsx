@@ -249,18 +249,30 @@ export default function ClientPortal() {
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
 
-    const isWeeklyDone = clientWeeklyReports.some(report => {
-      return report.date >= week.start && report.date <= week.end;
+    const sortedWeekly = [...clientWeeklyReports].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const sortedMonthly = [...clientMonthlyReports].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    const hasWeeklyStart = sortedWeekly.length > 0;
+    const hasMonthlyStart = sortedMonthly.length > 0;
+
+    const weeklyStartId = hasWeeklyStart ? sortedWeekly[0].id : null;
+    const monthlyStartId = hasMonthlyStart ? sortedMonthly[0].id : null;
+
+    const isWeeklyNextDone = sortedWeekly.some(report => {
+      return report.id !== weeklyStartId && report.date >= week.start && report.date <= week.end;
     });
 
-    const isMonthlyDone = clientMonthlyReports.some(report => {
+    const isMonthlyNextDone = sortedMonthly.some(report => {
+      if (report.id === monthlyStartId) return false;
       const repDate = new Date(report.date);
       return repDate.getMonth() === currentMonth && repDate.getFullYear() === currentYear;
     });
 
     return {
-      isWeeklyDone,
-      isMonthlyDone,
+      hasWeeklyStart,
+      hasMonthlyStart,
+      isWeeklyNextDone,
+      isMonthlyNextDone,
       week,
       monthName: getCurrentMonthName()
     };
@@ -625,24 +637,25 @@ export default function ClientPortal() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.isWeeklyDone ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
+                    {/* 1. СТАРТОВЫЙ ЕЖЕНЕДЕЛЬНЫЙ */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.hasWeeklyStart ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        {checklist.isWeeklyDone ? (
+                        {checklist.hasWeeklyStart ? (
                           <CheckCircle size={24} strokeWidth={1.5} style={{ color: 'var(--color-nutri)' }} />
                         ) : (
                           <Circle size={24} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
                         )}
                         <div>
                           <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                            Еженедельный отчет за текущую неделю
+                            Стартовый еженедельный отчет (Точка А)
                           </h4>
                           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                            Период: {checklist.week.mondayStr} — {checklist.week.sundayStr}
+                            Заполняется один раз при начале программы
                           </p>
                         </div>
                       </div>
                       <div>
-                        {checklist.isWeeklyDone ? (
+                        {checklist.hasWeeklyStart ? (
                           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-nutri)' }}>Заполнено</span>
                         ) : (
                           <button 
@@ -657,24 +670,25 @@ export default function ClientPortal() {
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.isMonthlyDone ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
+                    {/* 2. СТАРТОВЫЙ ЕЖЕМЕСЯЧНЫЙ */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.hasMonthlyStart ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                        {checklist.isMonthlyDone ? (
+                        {checklist.hasMonthlyStart ? (
                           <CheckCircle size={24} strokeWidth={1.5} style={{ color: 'var(--color-nutri)' }} />
                         ) : (
                           <Circle size={24} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
                         )}
                         <div>
                           <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                            Ежемесячные замеры и сдвиги
+                            Стартовый ежемесячный отчет (Замеры Точки А)
                           </h4>
                           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
-                            Период: {checklist.monthName}
+                            Вес, объемы и фото-фиксация при старте
                           </p>
                         </div>
                       </div>
                       <div>
-                        {checklist.isMonthlyDone ? (
+                        {checklist.hasMonthlyStart ? (
                           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-nutri)' }}>Заполнено</span>
                         ) : (
                           <button 
@@ -688,6 +702,76 @@ export default function ClientPortal() {
                         )}
                       </div>
                     </div>
+
+                    {/* 3. СЛЕДУЮЩИЙ ЕЖЕНЕДЕЛЬНЫЙ */}
+                    {checklist.hasWeeklyStart && (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.isWeeklyNextDone ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                          {checklist.isWeeklyNextDone ? (
+                            <CheckCircle size={24} strokeWidth={1.5} style={{ color: 'var(--color-nutri)' }} />
+                          ) : (
+                            <Circle size={24} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
+                          )}
+                          <div>
+                            <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                              Еженедельный отчет за текущую неделю
+                            </h4>
+                            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                              Период: {checklist.week.mondayStr} — {checklist.week.sundayStr}
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          {checklist.isWeeklyNextDone ? (
+                            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-nutri)' }}>Заполнено</span>
+                          ) : (
+                            <button 
+                              type="button"
+                              onClick={() => setActiveTab('weekly')} 
+                              className="btn-premium" 
+                              style={{ padding: '6px 16px', fontSize: '12px' }}
+                            >
+                              Заполнить
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 4. СЛЕДУЮЩИЙ ЕЖЕМЕСЯЧНЫЙ */}
+                    {checklist.hasMonthlyStart && (
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', borderRadius: '12px', border: '1px solid var(--border-hairline-normal)', background: checklist.isMonthlyNextDone ? 'var(--color-nutri-light)' : 'var(--bg-core)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                          {checklist.isMonthlyNextDone ? (
+                            <CheckCircle size={24} strokeWidth={1.5} style={{ color: 'var(--color-nutri)' }} />
+                          ) : (
+                            <Circle size={24} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
+                          )}
+                          <div>
+                            <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'var(--text-primary)' }}>
+                              Ежемесячные замеры и сдвиги (следующие)
+                            </h4>
+                            <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                              Период: {checklist.monthName}
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          {checklist.isMonthlyNextDone ? (
+                            <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-nutri)' }}>Заполнено</span>
+                          ) : (
+                            <button 
+                              type="button"
+                              onClick={() => setActiveTab('monthly')} 
+                              className="btn-premium btn-premium-secondary" 
+                              style={{ padding: '6px 16px', fontSize: '12px' }}
+                            >
+                              Заполнить
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {clientWeeklyReports.length > 0 && (
@@ -789,6 +873,20 @@ export default function ClientPortal() {
 
               {activeTab === 'weekly' && (
                 <form onSubmit={handleSaveAndSend} className="animate-entry delay-1">
+                  <div style={{ marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-hairline-normal)' }}>
+                    <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-neuro)', margin: 0 }}>
+                      {editingWeeklyId 
+                        ? 'Редактирование еженедельного отчета' 
+                        : !checklist.hasWeeklyStart 
+                          ? 'Стартовый еженедельный отчет (Точка А)' 
+                          : 'Еженедельный отчет за текущую неделю'}
+                    </h2>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px', margin: 0 }}>
+                      {!checklist.hasWeeklyStart 
+                        ? 'Заполняется один раз при начале программы сопровождения' 
+                        : `Период отчета: ${checklist.week.mondayStr} — ${checklist.week.sundayStr}`}
+                    </p>
+                  </div>
                   {editingWeeklyId && (
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(99, 102, 241, 0.1)', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
                       <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-neuro)' }}>
@@ -988,6 +1086,20 @@ export default function ClientPortal() {
 
               {activeTab === 'monthly' && (
                 <form onSubmit={handleSaveAndSend} className="animate-entry delay-1">
+                  <div style={{ marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid var(--border-hairline-normal)' }}>
+                    <h2 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--color-nutri)', margin: 0 }}>
+                      {editingMonthlyId 
+                        ? 'Редактирование ежемесячного отчета' 
+                        : !checklist.hasMonthlyStart 
+                          ? 'Стартовый ежемесячный отчет (Замеры Точки А)' 
+                          : 'Ежемесячный отчет за текущий месяц'}
+                    </h2>
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px', margin: 0 }}>
+                      {!checklist.hasMonthlyStart 
+                        ? 'Вес, объемы и фото-фиксация при старте' 
+                        : `Период отчета: ${checklist.monthName}`}
+                    </p>
+                  </div>
                   {editingMonthlyId && (
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(16, 185, 129, 0.1)', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
                       <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-nutri)' }}>
