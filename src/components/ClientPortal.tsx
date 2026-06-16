@@ -77,6 +77,7 @@ export default function ClientPortal() {
   // UI state
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isCloud, setIsCloud] = useState<boolean>(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   // Editing state
   const [editingWeeklyId, setEditingWeeklyId] = useState<string | null>(null);
@@ -100,8 +101,14 @@ export default function ClientPortal() {
   }, []);
 
   const loadClients = async (preselectedId: string | null) => {
+    setApiError(null);
     const list = await dbService.getClients();
     setClients(list);
+    
+    const dbErr = dbService.getLastError();
+    if (dbErr) {
+      setApiError(dbErr);
+    }
     
     if (preselectedId) {
       const found = list.find(c => c.id.toLowerCase() === preselectedId.trim().toLowerCase());
@@ -138,7 +145,14 @@ export default function ClientPortal() {
       url.searchParams.set('id', found.id);
       window.history.pushState({}, '', url.toString());
     } else {
-      setIdError('Неверный код клиента (ID). Уточните его у вашего коуча.');
+      const dbErr = dbService.getLastError();
+      if (dbErr) {
+        setIdError(`Ошибка подключения к базе данных: ${dbErr}. Пожалуйста, проверьте интернет или включите VPN.`);
+      } else if (clients.length === 0) {
+        setIdError('База данных пуста или не загружена. Обратитесь к вашему коучу.');
+      } else {
+        setIdError('Неверный код клиента (ID). Уточните его у вашего коуча.');
+      }
     }
   };
 
@@ -473,6 +487,44 @@ export default function ClientPortal() {
                   Для входа в личный кабинет, пожалуйста, введите ваш персональный код клиента (ID), выданный вашим коучем.
                 </p>
               </div>
+
+              {apiError && (
+                <div style={{
+                  maxWidth: '480px',
+                  margin: '0 auto 20px auto',
+                  background: 'rgba(239, 68, 68, 0.1)',
+                  border: '1px solid var(--color-danger)',
+                  borderRadius: '12px',
+                  padding: '16px',
+                  color: 'var(--text-primary)',
+                  fontSize: '13px',
+                  textAlign: 'left'
+                }}>
+                  <strong style={{ color: 'var(--color-danger)', display: 'block', marginBottom: '4px' }}>
+                    ⚠️ Ошибка загрузки базы данных (api.nnutrition.ru)
+                  </strong>
+                  Попытка получить список клиентов не удалась. Возможно, домен еще не обновился в вашем браузере, или соединение заблокировано.
+                  <div style={{ marginTop: '8px', fontSize: '11px', color: 'var(--text-muted)', background: 'var(--bg-card)', padding: '8px', borderRadius: '6px', overflowX: 'auto', fontFamily: 'monospace' }}>
+                    {apiError}
+                  </div>
+                  <button 
+                    onClick={() => loadClients(typedClientId || null)}
+                    className="btn" 
+                    style={{ 
+                      marginTop: '12px', 
+                      padding: '6px 12px', 
+                      fontSize: '11px', 
+                      background: 'var(--color-neuro)', 
+                      color: 'white', 
+                      border: 'none', 
+                      borderRadius: '6px', 
+                      cursor: 'pointer' 
+                    }}
+                  >
+                    Повторить подключение
+                  </button>
+                </div>
+              )}
 
               <div className="form-group" style={{ maxWidth: '480px', margin: '0 auto 20px auto' }}>
                 <label className="form-label" htmlFor="client-id-input">Код клиента (ID):</label>

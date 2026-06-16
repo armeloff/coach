@@ -41,6 +41,7 @@ export const initBackend = (): string => {
 initBackend();
 
 let isSynced = false;
+let lastError: string | null = null;
 
 // Функция фоновой синхронизации локальных данных с облаком при восстановлении сети
 export const syncLocalDataWithCloud = async () => {
@@ -83,6 +84,7 @@ export const syncLocalDataWithCloud = async () => {
 const callBackend = async <T>(fn: (backend: DbBackend) => Promise<T>): Promise<T> => {
   try {
     const result = await fn(activeBackend);
+    lastError = null;
     
     // Если запрос прошел успешно и мы используем облако, запускаем фоновую синхронизацию
     if (!isSynced && activeBackend !== localBackendInstance) {
@@ -93,11 +95,22 @@ const callBackend = async <T>(fn: (backend: DbBackend) => Promise<T>): Promise<T
     return result;
   } catch (error) {
     console.error('[Database] Критическая ошибка бэкенда, прозрачный откат на LocalStorage:', error);
+    lastError = error instanceof Error ? error.message : String(error);
     return await fn(localBackendInstance);
   }
 };
 
 export const dbService = {
+  // Получение последней ошибки бэкенда
+  getLastError(): string | null {
+    return lastError;
+  },
+
+  // Очистка ошибки
+  clearLastError(): void {
+    lastError = null;
+  },
+
   // Возвращает текущий тип активного бэкенда
   getBackendType(): string {
     const savedType = localStorage.getItem('coach_tracker_backend_type');
