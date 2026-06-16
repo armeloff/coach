@@ -91,6 +91,142 @@ exports.handler = async (event) => {
       };
     }
 
+    if (action === "migrate") {
+      const results = [];
+      results.push("Starting migration inside Cloud Function...");
+
+      let clients = [];
+      let weeklyReports = [];
+      let monthlyReports = [];
+
+      try {
+        const clientsRes = await fetch("https://api.nnutrition.ru/api/clients");
+        clients = await clientsRes.json();
+        results.push(`Fetched ${clients.length} clients from Cloudflare`);
+      } catch (e) {
+        results.push(`Failed to fetch clients from Cloudflare: ${e.message}`);
+      }
+
+      try {
+        const weeklyRes = await fetch("https://api.nnutrition.ru/api/weeklyReports");
+        weeklyReports = await weeklyRes.json();
+        results.push(`Fetched ${weeklyReports.length} weekly reports from Cloudflare`);
+      } catch (e) {
+        results.push(`Failed to fetch weekly reports from Cloudflare: ${e.message}`);
+      }
+
+      try {
+        const monthlyRes = await fetch("https://api.nnutrition.ru/api/monthlyReports");
+        monthlyReports = await monthlyRes.json();
+        results.push(`Fetched ${monthlyReports.length} monthly reports from Cloudflare`);
+      } catch (e) {
+        results.push(`Failed to fetch monthly reports from Cloudflare: ${e.message}`);
+      }
+
+      // Create tables
+      results.push("Creating tables in YDB if they don't exist...");
+      try {
+        await sql`
+          CREATE TABLE clients (
+            id Utf8,
+            name Utf8,
+            age Int64,
+            focus Utf8,
+            startDate Utf8,
+            habits Utf8,
+            coachKudos Utf8,
+            PRIMARY KEY (id)
+          )
+        `;
+        results.push("Table 'clients' created/verified.");
+      } catch (e) {
+        results.push(`Table 'clients' creation note: ${e.message}`);
+      }
+
+      try {
+        await sql`
+          CREATE TABLE weekly_reports (
+            id Utf8,
+            clientId Utf8,
+            date Utf8,
+            sleepQuality Int64,
+            energyMorning Int64,
+            energyEvening Int64,
+            stressLevel Int64,
+            nutritionQuality Int64,
+            waterIntake Double,
+            habitsCompleted Utf8,
+            wins Utf8,
+            obstacles Utf8,
+            focusNextWeek Utf8,
+            PRIMARY KEY (id)
+          )
+        `;
+        results.push("Table 'weekly_reports' created/verified.");
+      } catch (e) {
+        results.push(`Table 'weekly_reports' creation note: ${e.message}`);
+      }
+
+      try {
+        await sql`
+          CREATE TABLE monthly_reports (
+            id Utf8,
+            clientId Utf8,
+            date Utf8,
+            weight Double,
+            waist Double,
+            hips Double,
+            chest Double,
+            skinHairCondition Utf8,
+            cognitiveShifts Utf8,
+            coachingInsights Utf8,
+            PRIMARY KEY (id)
+          )
+        `;
+        results.push("Table 'monthly_reports' created/verified.");
+      } catch (e) {
+        results.push(`Table 'monthly_reports' creation note: ${e.message}`);
+      }
+
+      // Populate clients
+      if (clients && clients.length > 0) {
+        results.push(`Migrating ${clients.length} clients...`);
+        for (const c of clients) {
+          if (!c.id) continue;
+          const habitsStr = JSON.stringify(c.habits || []);
+          await sql`REPLACE INTO clients (id, name, age, focus, startDate, habits, coachKudos) VALUES (${c.id}, ${c.name}, ${c.age}, ${c.focus}, ${c.startDate}, ${habitsStr}, ${c.coachKudos || ""})`;
+        }
+        results.push("Clients migrated successfully.");
+      }
+
+      // Populate weekly reports
+      if (weeklyReports && weeklyReports.length > 0) {
+        results.push(`Migrating ${weeklyReports.length} weekly reports...`);
+        for (const r of weeklyReports) {
+          if (!r.id) continue;
+          const habitsCompletedStr = JSON.stringify(r.habitsCompleted || {});
+          await sql`REPLACE INTO weekly_reports (id, clientId, date, sleepQuality, energyMorning, energyEvening, stressLevel, nutritionQuality, waterIntake, habitsCompleted, wins, obstacles, focusNextWeek) VALUES (${r.id}, ${r.clientId}, ${r.date}, ${r.sleepQuality}, ${r.energyMorning}, ${r.energyEvening}, ${r.stressLevel}, ${r.nutritionQuality}, ${r.waterIntake}, ${habitsCompletedStr}, ${r.wins || ""}, ${r.obstacles || ""}, ${r.focusNextWeek || ""})`;
+        }
+        results.push("Weekly reports migrated successfully.");
+      }
+
+      // Populate monthly reports
+      if (monthlyReports && monthlyReports.length > 0) {
+        results.push(`Migrating ${monthlyReports.length} monthly reports...`);
+        for (const r of monthlyReports) {
+          if (!r.id) continue;
+          await sql`REPLACE INTO monthly_reports (id, clientId, date, weight, waist, hips, chest, skinHairCondition, cognitiveShifts, coachingInsights) VALUES (${r.id}, ${r.clientId}, ${r.date}, ${r.weight}, ${r.waist}, ${r.hips}, ${r.chest}, ${r.skinHairCondition || ""}, ${r.cognitiveShifts || ""}, ${r.coachingInsights || ""})`;
+        }
+        results.push("Monthly reports migrated successfully.");
+      }
+
+      return {
+        statusCode: 200,
+        headers: corsHeaders,
+        body: JSON.stringify({ success: true, logs: results })
+      };
+    }
+
     // 1. ДЕЙСТВИЯ С КЛИЕНТАМИ (clients)
     if (action === "getClients") {
       const rows = await sql`SELECT id, name, age, focus, startDate, habits, coachKudos FROM clients`;
