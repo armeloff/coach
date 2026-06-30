@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Мельникова — Нутрициолог, Health & Neuro Coach</title>
+    <meta name="description" content="Индивидуальные программы оздоровления, коррекции веса и пищевого поведения через научно обоснованные, немедикаментозные методы.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+    <!-- Subtle luxury film grain -->
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation Island -->
+    <nav class="nav-island">
+        <a href="#" class="nav-logo">Melnikova<span>.nutrition</span></a>
+        <div class="nav-links">
+            <a href="#about" class="nav-link">Обо мне</a>
+            <a href="#cases" class="nav-link">Кейсы</a>
+            <a href="#process" class="nav-link">Процесс</a>
+            <a href="#services" class="nav-link">Форматы</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://t.me/nasti_nutri" target="_blank" class="btn-premium">
+                Telegram @nasti_nutri
+                <span class="btn-icon-circle">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-links">
+            <a href="#about" class="mobile-link">Обо мне</a>
+            <a href="#cases" class="mobile-link">Кейсы клиентов</a>
+            <a href="#process" class="mobile-link">Как мы работаем</a>
+            <a href="#services" class="mobile-link">Форматы работы</a>
+            <a href="#faq" class="mobile-link">Вопросы</a>
+            <a href="https://t.me/nasti_nutri" target="_blank" class="mobile-link" style="font-size: 28px; margin-top: 24px; color: var(--accent-sage-text);">Telegram @nasti_nutri</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-sec">
+        <div class="hero-layout">
+            <div class="hero-content reveal">
+                <div class="hero-rating">
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-text">2000+ довольных клиентов</span>
+                </div>
+                <span class="eyebrow">Анастасия Мельникова</span>
+                <h1 class="hero-title">Управление здоровьем<br>через <span>научный подход</span></h1>
+                <p class="hero-subtitle">
+                    Практикующий нутрициолог, health-коуч ECA, нейрокоуч (МГУ/YOM) и создатель суперфудов BioNutri. Корректирую состояние организма и вес научно обоснованными, немедикаментозными методами — через питание, работу с образом жизни, сном, стрессом и мышлением.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#services" class="btn-secondary">Форматы работы</a>
+                    <a href="https://t.me/nasti_nutri" target="_blank" class="btn-premium">
+                        Написать в Telegram
+                        <span class="btn-icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-area reveal reveal-delay-2">
+                <div class="image-outer">
+                    <div class="image-inner">
+                        <img src="hero.png" alt="Анастасия Мельникова — Здоровый образ жизни" class="hero-photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Bento Credentials Section -->
+    <section id="about">
+        <div class="section-title-wrapper reveal">
+            <span class="eyebrow">Интегративный подход</span>
+            <h2 class="section-title">Почему мне доверяют <span>свое здоровье</span></h2>
+        </div>
+        
+        <div class="bento-grid">
+            <!-- Experience and bio card -->
+            <div class="col-8 bezel-outer reveal">
+                <div class="bezel-inner">
+                    <div class="about-card-text">
+                        <p>Я убеждена, что дефицит энергии, лишний вес или проблемы с ЖКТ — это не норма, а сигналы организма о дисбалансе. Моя задача — разгадать эти сигналы и предложить физиологичные, бережные решения.</p>
+                        <p>В своей практике я совмещаю глубокие знания клинической нутрициологии с передовыми коучинговыми технологиями. Являюсь сертифицированным специалистом международной ассоциации коучей ECA, а также экспертом крупных ЗОЖ-брендов 4fresh, iTAB и сервиса «Ешь Деревенское».</p>
+                    </div>
+                    <div class="metric-group">
+                        <div class="metric-item">
+                            <span class="metric-num">6+<span>лет</span></span>
+                            <span class="metric-label">Практического опыта</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-num">2000+</span>
+                            <span class="metric-label">Довольных клиентов</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Focus list card -->
+            <div class="col-4 bezel-outer reveal reveal-delay-2">
+                <div class="bezel-inner">
+                    <div class="service-header">
+                        <span class="eyebrow" style="color: var(--accent-sage-text);">Сферы экспертизы</span>
+                        <h3 style="font-size: 28px; margin-top: 8px;">Направления работы</h3>
+                    </div>
+                    <ul class="list-clean" style="margin-top: 24px;">
+                        <li>Работа с микробиомом ЖКТ и детоксикацией</li>
+                        <li>Коррекция пищевого поведения и похудение</li>
+                        <li>Профилактика аутоиммунных нарушений</li>
+                        <li>Восполнение дефицитов и подбор нутрицевтиков</li>
+                        <li>Внедрение здоровых привычек через нейрокоучинг</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Credentials tags card -->
+            <div class="col-12 bezel-outer reveal">
+                <div class="bezel-inner" style="flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+                    <div style="max-width: 450px;">
+                        <h3 style="font-size: 28px; margin-bottom: 8px;">Квалификация и регалии</h3>
+                        <p style="font-size: 14px;">Постоянно развиваюсь, чтобы давать клиентам только проверенные и безопасные методики оздоровления.</p>
+                    </div>
+                    <div class="tag-container" style="flex: 1; max-width: 600px; justify-content: flex-end;">
+                        <span class="tag sage">Health-коуч ECA</span>
+                        <span class="tag sand">Нейрокоуч (МГУ / YOM)</span>
+                        <span class="tag rose">Коуч ECF</span>
+                        <span class="tag blue">Эксперт «Ешь Деревенское»</span>
+                        <span class="tag sage">Разработчик курса «Маршрут»</span>
+                        <span class="tag sand">Создатель суперфудов BioNutri</span>
+                        <span class="tag rose">Диплом нутрициолога гособразца</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="cases">
+        <div class="section-title-wrapper reveal">
+            <span class="eyebrow">Результаты клиентов</span>
+            <h2 class="section-title">Истории реальных <span>трансформаций</span></h2>
+        </div>
+        
+        <div class="bento-grid">
+            <!-- Case 1 -->
+            <div class="col-4 bezel-outer reveal">
+                <div class="bezel-inner">
+                    <div class="case-header">
+                        <span class="tag rose">Пищевое поведение & Вес</span>
+                        <h3 class="case-title">Свобода от срывов и -9 кг</h3>
+                        <p class="case-client">Елена, 34 года</p>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-state-comparison">
+                            <div class="state-before">
+                                <strong>Было:</strong>
+                                <p>Постоянные срывы на сладкое к вечеру, чувство вины за еду, лишний вес (+12 кг), который возвращался после жестких диет. Тревога из-за каждого приема пищи.</p>
+                            </div>
+                            <div class="state-after">
+                                <strong>Стало:</strong>
+                                <p>Снижение веса на 9 кг за 3 месяца. Полное отсутствие тяги к сладкому, спокойный выбор продуктов, еда без чувства вины и ровный уровень энергии.</p>
+                            </div>
+                        </div>
+                        <div class="case-method">
+                            <strong>Метод:</strong>
+                            <p>Нейрокоучинг для проработки триггеров стресса + сбалансированная тарелка без жестких запретов и ограничений.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 2 -->
+            <div class="col-4 bezel-outer reveal reveal-delay-1">
+                <div class="bezel-inner">
+                    <div class="case-header">
+                        <span class="tag sage">ЖКТ & Микробиом</span>
+                        <h3 class="case-title">Победа над вздутием и болями</h3>
+                        <p class="case-client">Михаил, 29 лет</p>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-state-comparison">
+                            <div class="state-before">
+                                <strong>Было:</strong>
+                                <p>Хроническое вздутие и тяжесть после любого приема пищи, дискомфорт в кишечнике, туман в голове, непреодолимая тяга к сладкому и выпечке.</p>
+                            </div>
+                            <div class="state-after">
+                                <strong>Стало:</strong>
+                                <p>Полное исчезновение вздутий и дискомфорта. Очистилась кожа, ушел «туман в голове», восстановилась легкая и регулярная работа кишечника.</p>
+                            </div>
+                        </div>
+                        <div class="case-method">
+                            <strong>Метод:</strong>
+                            <p>Внедрение протокола 5R по восстановлению слизистой ЖКТ, поддержка желчеоттока, точечные нутрицевтики и детокс-поддержка.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Case 3 -->
+            <div class="col-4 bezel-outer reveal reveal-delay-2">
+                <div class="bezel-inner">
+                    <div class="case-header">
+                        <span class="tag sand">Энергия & Выгорание</span>
+                        <h3 class="case-title">Энергия без кофе и допингов</h3>
+                        <p class="case-client">Анна, 41 год</p>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-state-comparison">
+                            <div class="state-before">
+                                <strong>Было:</strong>
+                                <p>Утреннее чувство разбитости, 4+ чашки кофе в день, апатия, плохой сон (пробуждения в 3 ночи без возможности уснуть), глубокие дефициты.</p>
+                            </div>
+                            <div class="state-after">
+                                <strong>Стало:</strong>
+                                <p>Просыпается бодрой без будильника, сон крепкий и глубокий всю ночь. Отказ от кофе, вернулся фокус на задачах и жизненный тонус.</p>
+                            </div>
+                        </div>
+                        <div class="case-method">
+                            <strong>Метод:</strong>
+                            <p>Синхронизация циркадных ритмов, нутритивная поддержка надпочечников, устранение дефицитов (железо, D3, магний, витамины B).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostic Details Section -->
+    <section id="process">
+        <div class="section-title-wrapper reveal">
+            <span class="eyebrow">Процесс работы</span>
+            <h2 class="section-title">Как мы придем к <span>вашему результату</span></h2>
+        </div>
+        
+        <div class="bento-grid">
+            <!-- Step 1 -->
+            <div class="col-3 bezel-outer reveal">
+                <div class="bezel-inner">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h3>Диагностика и анкета</h3>
+                        <p>Вы заполняете подробную анкету о питании, образе жизни, уровне стресса и симптомах. Это помогает мне увидеть целостную картину состояния вашего организма.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="col-3 bezel-outer reveal reveal-delay-1">
+                <div class="bezel-inner">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h3>Точечные анализы</h3>
+                        <p>На основе анкеты я составляю персональный список анализов. Вы не сдаете лишнего — только те показатели, которые необходимы для решения вашего запроса.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="col-3 bezel-outer reveal reveal-delay-2">
+                <div class="bezel-inner">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h3>Созвон и стратегия</h3>
+                        <p>Мы созваниваемся (до 60 минут), детально разбираем ваше состояние, симптомы и дефициты. Составляем пошаговый план питания и образа жизни.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="col-3 bezel-outer reveal reveal-delay-3">
+                <div class="bezel-inner">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h3>Сопровождение</h3>
+                        <p>Внедряем привычки постепенно и без срывов. Вы ведете дневник питания, а я ежедневно анализирую ваш рацион и корректирую программу в чате.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing Section -->
+    <section id="services">
+        <div class="section-title-wrapper reveal">
+            <span class="eyebrow">Форматы взаимодействия</span>
+            <h2 class="section-title">Выберите подходящий формат <span>совместной работы</span></h2>
+        </div>
+        
+        <div class="bento-grid">
+            <!-- Package 1: Consultation -->
+            <div class="col-4 bezel-outer reveal">
+                <div class="bezel-inner">
+                    <div class="service-header">
+                        <span class="eyebrow">Базовый формат</span>
+                        <h3 style="font-size: 32px; margin-top: 8px;">Консультация</h3>
+                        <p class="service-price">10 000<span>₽</span></p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>
+                                <strong>Сбор жалоб и анкетирование</strong>
+                                Персонализированный список необходимых анализов на основе симптомов (можно без анализов).
+                            </li>
+                            <li>
+                                <strong>Индивидуальный план оздоровления</strong>
+                                Стратегия по питанию, режиму сна и физической активности по результатам беседы.
+                            </li>
+                            <li>
+                                <strong>Схема приёма нутрицевтиков</strong>
+                                Индивидуальный подбор качественных БАДов и добавок с понятной дозировкой.
+                            </li>
+                            <li>
+                                <strong>Видео-звонок до 60 минут</strong>
+                                Объяснение стратегии работы, разбор состояния и ответы на ваши вопросы.
+                            </li>
+                            <li>
+                                <strong>Поддержка 7 дней</strong>
+                                Возможность задать все уточняющие вопросы в чате в течение недели после звонка.
+                            </li>
+                        </ul>
+                        <p class="service-meta-proof">★ Идеально для быстрого старта и выявления точечных дефицитов</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://t.me/nasti_nutri?text=Анастасия,%20хочу%20записаться%20на%20консультацию" target="_blank" class="btn-premium">
+                            Записаться на консультацию
+                            <span class="btn-icon-circle">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Package 2: 30 days Mentorship -->
+            <div class="col-4 bezel-outer reveal reveal-delay-1" style="background: rgba(42, 75, 45, 0.03); border-color: rgba(42, 75, 45, 0.15);">
+                <div class="bezel-inner" style="border-color: rgba(42, 75, 45, 0.08);">
+                    <div class="service-header">
+                        <span class="eyebrow" style="color: var(--accent-sage-text); background: var(--accent-sage); padding: 4px 10px; border-radius: 99px;">Максимум пользы</span>
+                        <h3 style="font-size: 32px; margin-top: 8px;">Сопровождение 30 дней</h3>
+                        <p class="service-price">30 000<span>₽</span></p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>
+                                <strong>Вводный созвон 30 минут</strong>
+                                Видео-встреча, знакомство, подробный сбор анамнеза и постановка целей.
+                            </li>
+                            <li>
+                                <strong>Индивидуальный план в файле</strong>
+                                Развернутый PDF-документ с подробными рекомендациями по питанию и образу жизни.
+                            </li>
+                            <li>
+                                <strong>Углубленная сессия до 60 минут</strong>
+                                Разбор анализов (при наличии), обсуждение пошаговой стратегии восстановления.
+                            </li>
+                            <li>
+                                <strong>Ежедневное ведение и разбор дневника</strong>
+                                Анализ вашего рациона питания, коррекция стратегии в реальном времени.
+                            </li>
+                            <li>
+                                <strong>Поддержка 30 дней в чате</strong>
+                                Ответы на все возникающие вопросы на протяжении всего месяца в любое время.
+                            </li>
+                            <li>
+                                <strong>Коучинговые сессии мышления</strong>
+                                Поддерживающие сессии (ECF/ECA) для комфортной интеграции привычек без срывов.
+                            </li>
+                        </ul>
+                        <p class="service-meta-proof">★ Рекомендуемый формат для глубокой коррекции питания и ЖКТ</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://t.me/nasti_nutri?text=Анастасия,%20хочу%20на%20сопровождение%2030%20дней" target="_blank" class="btn-premium" style="background: var(--accent-sage-text);">
+                            Начать сопровождение
+                            <span class="btn-icon-circle" style="background: rgba(255, 255, 255, 0.2);">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Package 3: Perfect Body -->
+            <div class="col-4 bezel-outer reveal reveal-delay-2">
+                <div class="bezel-inner">
+                    <div class="service-header">
+                        <span class="eyebrow" style="color: var(--accent-sand-text); background: var(--accent-sand); padding: 4px 10px; border-radius: 99px;">Спец-формат</span>
+                        <h3 style="font-size: 32px; margin-top: 8px;">Я и мое идеальное тело</h3>
+                        <p class="service-price" style="font-size: 26px;">Индивидуально<span>/ 30 дней</span></p>
+                    </div>
+                    <div class="service-body">
+                        <ul class="service-features">
+                            <li>
+                                <strong>Вводный созвон 30 минут</strong>
+                                Знакомство, сбор жалоб, разбор текущих паттернов пищевого поведения.
+                            </li>
+                            <li>
+                                <strong>Сопровождение по питанию в чате</strong>
+                                Ежедневный разбор тарелок, рекомендации по коррекции привычек, поддержка.
+                            </li>
+                            <li>
+                                <strong>Стратегический созвон до 60 минут</strong>
+                                Детальный разбор состояния и жалоб, составление индивидуального вектора действий.
+                            </li>
+                            <li>
+                                <strong>Сессии с нейро-коучем</strong>
+                                Глубокая психологическая работа с блоками мышления, которые мешают прийти к желаемому телу.
+                            </li>
+                            <li>
+                                <strong>Мягкая коррекция образа жизни</strong>
+                                Выстраивание здорового рациона без запретов, насилия над собой и жестких ограничений.
+                            </li>
+                        </ul>
+                        <p class="service-meta-proof">★ Нейрокоучинг + Питание: для стабильных привычек без срывов</p>
+                    </div>
+                    <div class="service-footer">
+                        <a href="https://t.me/nasti_nutri?text=Анастасия,%20хочу%20узнать%20подробнее%20про%20формат%20Идеальное%20Тело" target="_blank" class="btn-premium">
+                            Обсудить формат в Telegram
+                            <span class="btn-icon-circle">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suitability & Assurances Section -->
+    <section id="suitability">
+        <div class="bento-grid">
+            <!-- Who this is for -->
+            <div class="col-6 bezel-outer reveal">
+                <div class="bezel-inner" style="background: rgba(237, 243, 236, 0.3); border-color: rgba(52, 101, 56, 0.15); justify-content: flex-start;">
+                    <div>
+                        <span class="tag sage" style="margin-bottom: 16px;">Кому подойдет моя методика</span>
+                        <h3 style="font-size: 36px; margin-top: 12px; margin-bottom: 24px;">Вам точно стоит обратиться, если:</h3>
+                        <ul class="list-clean">
+                            <li>Вы хотите <strong>навсегда разобраться с питанием</strong>, а не сидеть на временных диетах.</li>
+                            <li>Вам надоели вздутия, тяжесть после еды и <strong>проблемы с пищеварением</strong>.</li>
+                            <li>Вы устали просыпаться разбитыми и хотите <strong>вернуть высокий уровень энергии</strong>.</li>
+                            <li>Вы готовы к постепенной, <strong>бережной работе над привычками</strong> без насилия над организмом.</li>
+                            <li>Вам нужен системный взгляд специалиста на анализы, образ жизни и ментальное отношение к телу.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Who this is NOT for -->
+            <div class="col-6 bezel-outer reveal reveal-delay-1">
+                <div class="bezel-inner" style="background: rgba(253, 235, 236, 0.2); border-color: rgba(159, 47, 45, 0.15); justify-content: flex-start;">
+                    <div>
+                        <span class="tag rose" style="margin-bottom: 16px;">Кому НЕ подойдет моя методика</span>
+                        <h3 style="font-size: 36px; margin-top: 12px; margin-bottom: 24px;">Я не смогу вам помочь, если:</h3>
+                        <ul class="list-clean suitability-not">
+                            <li>Вы ищете «волшебную таблетку» или <strong>экспресс-похудение за 5 дней</strong> к празднику.</li>
+                            <li>Вы хотите получить жесткие указания по питанию и <strong>не готовы брать ответственность</strong> за изменения.</li>
+                            <li>Вы ждете готовых схем лечения заболеваний (нутрициология — это немедикаментозное оздоровление, а не замена врачу).</li>
+                            <li>Вам не важна работа с мышлением (коучинговая составляющая — ключ к отсутствию срывов).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Assurances and Guarantee -->
+            <div class="col-12 bezel-outer reveal">
+                <div class="bezel-inner assurance-card">
+                    <div class="assurance-content">
+                        <div class="assurance-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <div class="assurance-text">
+                            <h3>Гарантии, юридическая чистота и оплата</h3>
+                            <p>Мы работаем официально. Перед началом совместной работы заключается официальный договор-оферта. Оплата производится через защищенный платежный шлюз с предоставлением чека. Для долгосрочных форматов сопровождения доступна беспроцентная внутренняя рассрочка — мы можем разбить платеж на удобные части.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq">
+        <div class="section-title-wrapper reveal" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <span class="eyebrow">Часто задаваемые вопросы</span>
+            <h2 class="section-title">Ответы на популярные <span>вопросы</span></h2>
+        </div>
+        
+        <div class="faq-list reveal">
+            <div class="faq-item">
+                <div class="faq-question-row">
+                    <span class="faq-question">Нужно ли обязательно сдавать анализы перед стартом?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Нет, это не обязательно. В самом начале работы мы проводим подробное анкетирование. На его основе я могу составить список точечных анализов, которые действительно нужны именно вам, либо мы можем выстроить стратегию оздоровления без лабораторной диагностики, опираясь исключительно на ваши жалобы и симптомы.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question-row">
+                    <span class="faq-question">В чем преимущество коучинга ECF и ECA?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>В отличие от стандартной диетологии, которая даёт сухие инструкции («ешь это, не ешь то»), коучинг помогает проработать внутреннее сопротивление и психологические барьеры. Методы нейрокоучинга (по программе YOM совместно с МГУ) позволяют перестроить привычные нейронные связи, чтобы здоровые привычки интегрировались в вашу жизнь естественно, без срывов и силы воли.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question-row">
+                    <span class="faq-question">Как мне понять, какой формат работы мне подходит?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Просто напишите мне свой запрос в Telegram. Я бесплатно проанализирую вашу ситуацию, задам уточняющие вопросы и честно подскажу, какой формат работы (разовая консультация или полноценное сопровождение) принесет максимальный результат в вашем случае.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Center Call to Action -->
+    <section>
+        <div class="cta-panel-outer reveal">
+            <div class="cta-panel-inner">
+                <span class="eyebrow">Сделайте первый шаг к легкости</span>
+                <h2>Начните путь к прекрасному самочувствию <span>уже сегодня</span></h2>
+                <p>Напишите мне свой запрос или симптомы в Telegram, и я сориентирую вас, смогу ли помочь решить вашу проблему.</p>
+                <a href="https://t.me/nasti_nutri" target="_blank" class="btn-premium" style="padding: 12px 12px 12px 32px; font-size: 15px;">
+                    Связаться со мной в Telegram
+                    <span class="btn-icon-circle" style="width: 40px; height: 40px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </span>
+                </a>
+                <p class="cta-subtext">★ Конфиденциально • Ответ в течение 2-3 часов • Бесплатная экспресс-консультация перед началом работы</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-layout">
+            <div class="footer-brand">
+                <p style="font-family: var(--font-heading); font-size: 20px; color: var(--text-primary);">Melnikova.nutrition</p>
+                <p class="footer-copy" style="margin-top: 4px;">Научный подход к питанию и образу жизни.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#about" class="footer-link">Обо мне</a>
+                <a href="#cases" class="footer-link">Кейсы</a>
+                <a href="#process" class="footer-link">Процесс</a>
+                <a href="#services" class="footer-link">Форматы</a>
+                <a href="#faq" class="footer-link">FAQ</a>
+                <a href="https://t.me/nasti_nutri" target="_blank" class="footer-link">Telegram</a>
+            </div>
+            <div class="footer-copy">
+                &copy; 2026 Анастасия Мельникова. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
