@@ -122,4 +122,56 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.style.transform = 'none';
         });
     });
+
+    // 5. Magnetic Cursor Trail & Card Glow Effect
+    const cursor = document.getElementById('customCursor');
+    let mouse = { x: 0, y: 0 };
+    let cursorPosition = { x: 0, y: 0 };
+    
+    // Only enable custom cursor on non-touch devices
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (cursor && !isTouchDevice) {
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        
+        // Custom cursor spring interpolation
+        const updateCursor = () => {
+            const dx = mouse.x - cursorPosition.x;
+            const dy = mouse.y - cursorPosition.y;
+            cursorPosition.x += dx * 0.15;
+            cursorPosition.y += dy * 0.15;
+            cursor.style.transform = `translate3d(${cursorPosition.x}px, ${cursorPosition.y}px, 0)`;
+            requestAnimationFrame(updateCursor);
+        };
+        updateCursor();
+        
+        // Hover reactions for magnetic buttons & interactive elements
+        const hoverables = document.querySelectorAll('.btn-premium, .btn-secondary, .bezel-outer, .nav-link, .faq-item');
+        hoverables.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('is-hovering');
+                if (el.classList.contains('btn-premium') || el.classList.contains('btn-secondary')) {
+                    cursor.classList.add('is-magnetic');
+                }
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('is-hovering', 'is-magnetic');
+            });
+        });
+    }
+
+    // 6. Interactive Accent Glow on Bento Cards
+    const bentoCards = document.querySelectorAll('.bezel-outer');
+    bentoCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
 });

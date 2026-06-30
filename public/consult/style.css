@@ -1037,3 +1037,113 @@ footer {
         padding: 6px !important;
     }
 }
+
+/* ==========================================================================
+   Tactile Film Grain (Paper Texture)
+   ========================================================================== */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02; /* Extremely subtle paper feel */
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ==========================================================================
+   Custom Trailing Cursor
+   ========================================================================== */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: rgba(52, 101, 56, 0.2); /* Soft sage */
+    border: 1.5px solid rgba(52, 101, 56, 0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: multiply;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+}
+
+/* Cursor Hovering State */
+.custom-cursor.is-hovering {
+    width: 44px;
+    height: 44px;
+    top: -22px;
+    left: -22px;
+    background: rgba(52, 101, 56, 0.06);
+    border-color: rgba(52, 101, 56, 0.3);
+}
+
+/* Cursor Magnetic State on Buttons */
+.custom-cursor.is-magnetic {
+    background: rgba(142, 112, 79, 0.08); /* Soft sand */
+    border-color: rgba(142, 112, 79, 0.4);
+}
+
+/* ==========================================================================
+   Bento Card Ambient Glow Effect (Nested Bezel Glow)
+   ========================================================================== */
+.bezel-inner {
+    position: relative;
+    overflow: hidden;
+}
+
+.bezel-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(52, 101, 56, 0.06),
+        transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Accent-specific glows */
+.bezel-outer:has(.tag.rose) .bezel-inner::before {
+    background: radial-gradient(
+        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(159, 47, 45, 0.06),
+        transparent 80%
+    );
+}
+
+.bezel-outer:has(.tag.sand) .bezel-inner::before {
+    background: radial-gradient(
+        350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px),
+        rgba(142, 112, 79, 0.06),
+        transparent 80%
+    );
+}
+
+.bezel-outer:hover .bezel-inner::before {
+    opacity: 1;
+}
+
+/* Push core card elements above the glow pseudo-element */
+.bezel-inner > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Make sure inner wrappers/shapes don't block layout stacking */
+.assurance-content, .case-body, .service-body, .service-header, .service-footer, .about-card-text {
+    position: relative;
+    z-index: 2;
+}
