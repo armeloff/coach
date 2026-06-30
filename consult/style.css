@@ -128,7 +128,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: 999px;
     padding: 8px 8px 8px 32px;
-    z-index: 1000;
+    z-index: 1005;
     box-shadow: 0 8px 30px rgba(30, 28, 26, 0.03);
     transition: var(--transition-smooth);
 }
