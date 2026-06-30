@@ -994,3 +994,23 @@ footer {
     opacity: 0.8;
 }
 
+/* Pricing Card target descriptions */
+.service-for, .service-suits {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+.service-for strong, .service-suits strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.service-for {
+    margin-top: 16px;
+}
+.service-suits {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
