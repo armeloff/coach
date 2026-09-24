@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Мельникова — Почему тело не меняется</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #FAF8F5;
+            --bg-card: #FFFFFF;
+            --bg-card-muted: #F5F1EB;
+            --accent-sage: #2D4336;
+            --accent-sage-dark: #1F3025;
+            --accent-sage-light: #EBF0EA;
+            --accent-sage-tint: #F2F6F3;
+            --accent-terracotta: #B95B44;
+            --accent-terracotta-light: #F9ECE8;
+            --accent-gold: #B89758;
+            --accent-gold-light: #FAF4E8;
+            --text-primary: #1C1917;
+            --text-secondary: #575249;
+            --text-muted: #8C8477;
+            --border-subtle: #E8E2D8;
+            --border-card: #EDE7DC;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 30px;
+            --shadow-sm: 0 1px 3px rgba(45, 67, 54, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 6px 20px -2px rgba(45, 67, 54, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 16px 40px -4px rgba(45, 67, 54, 0.08);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            padding: 36px 16px;
+        }
+
+        .wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background-color: var(--accent-sage-light);
+            color: var(--accent-sage);
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .doc-header {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F1EB 100%);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-xl);
+            padding: 46px 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(45, 67, 54, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .doc-category {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-terracotta);
+            margin-bottom: 10px;
+        }
+
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 5.5vw, 48px);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--accent-sage);
+            margin-bottom: 18px;
+        }
+
+        .doc-lead {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 760px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .doc-lead strong {
+            color: var(--accent-sage);
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .meta-tag {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* Table of Contents Navigator */
+        .toc-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 28px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toc-title {
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 8px 16px;
+            font-size: 13px;
+        }
+
+        .toc-item {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 0;
+            transition: color 0.2s ease;
+        }
+
+        .toc-item:hover {
+            color: var(--accent-sage);
+        }
+
+        .toc-num {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 11px;
+            color: var(--accent-terracotta);
+            background: var(--accent-terracotta-light);
+            padding: 1px 6px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Chapter Card */
+        .chapter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 36px 36px 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .chapter-badge-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .chapter-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-sage);
+            background: var(--accent-sage-light);
+            padding: 4px 12px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chapter-pill.terracotta {
+            color: var(--accent-terracotta);
+            background: var(--accent-terracotta-light);
+        }
+
+        .chapter-pill.gold {
+            color: var(--accent-gold);
+            background: var(--accent-gold-light);
+        }
+
+        .chapter-h2 {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--accent-sage);
+            margin-bottom: 16px;
+        }
+
+        /* Quotes & Callouts */
+        .callout-quote {
+            background: var(--accent-sage-tint);
+            border-left: 4px solid var(--accent-sage);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 18px 22px;
+            margin: 18px 0;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--accent-sage);
+            line-height: 1.6;
+        }
+
+        .callout-quote.terracotta {
+            background: var(--accent-terracotta-light);
+            border-left-color: var(--accent-terracotta);
+            color: var(--accent-terracotta);
+        }
+
+        .callout-quote.gold {
+            background: var(--accent-gold-light);
+            border-left-color: var(--accent-gold);
+            color: #8C6F2D;
+        }
+
+        /* Styled Lists */
+        .styled-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 14px 0;
+        }
+
+        .styled-list-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 14.5px;
+            color: var(--text-primary);
+        }
+
+        .styled-list-bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-sage);
+            flex-shrink: 0;
+            transform: translateY(-2px);
+        }
+
+        .styled-list-bullet.terracotta {
+            background-color: var(--accent-terracotta);
+        }
+
+        /* Evidence & Scientific Badges */
+        .evidence-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin: 14px 0;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pubmed-tag {
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #2563EB;
+            background: #EFF6FF;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #BFDBFE;
+            flex-shrink: 0;
+        }
+
+        /* Audit Grid */
+        .audit-card {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--accent-sage-tint) 100%);
+            border: 2px solid var(--accent-sage);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            margin: 36px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .audit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 12px;
+            margin: 22px 0;
+        }
+
+        .audit-item {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .audit-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-sage);
+            background: var(--accent-sage-light);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Final Manifest Box */
+        .manifest-box {
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 44px 38px;
+            margin: 36px 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manifest-title {
+            font-family: var(--font-serif);
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 18px;
+        }
+
+        .manifest-p {
+            font-size: 15.5px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 14px;
+        }
+
+        .manifest-highlight {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 600;
+            font-style: italic;
+            color: var(--accent-gold-light);
+            margin: 22px 0 10px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Studies Appendix */
+        .studies-box {
+            background: #FFFFFF;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 32px 36px;
+            margin: 32px 0;
+        }
+
+        .study-row {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 13.5px;
+            line-height: 1.55;
+            color: var(--text-secondary);
+        }
+
+        .study-row:last-child {
+            border-bottom: none;
+        }
+
+        .study-title {
+            font-weight: 600;
+            color: var(--accent-sage);
+            margin-bottom: 4px;
+        }
+
+        /* Footer */
+        .doc-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* Print Settings */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm 10mm 12mm 10mm;
+            }
+
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                font-size: 12px !important;
+                line-height: 1.45 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .wrapper {
+                max-width: 100% !important;
+            }
+
+            .toc-box {
+                display: none !important;
+            }
+
+            .doc-header {
+                padding: 24px !important;
+                margin-bottom: 18px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .chapter-card {
+                padding: 20px !important;
+                margin-bottom: 16px !important;
+                box-shadow: none !important;
+                border: 1px solid #D5CFC3 !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .callout-quote, .evidence-badge, .audit-card, .manifest-box, .studies-box {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+        }
+
+        @media (max-width: 680px) {
+            body { padding: 20px 12px; }
+            .doc-header { padding: 28px 20px; }
+            .chapter-card { padding: 24px 18px; }
+            .audit-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- HEADER / HERO -->
+    <header class="doc-header">
+        <div class="brand-badge">
+            АНАСТАСИЯ МЕЛЬНИКОВА // ЗОЖ-КЛУБ
+        </div>
+        <div class="doc-category">КЛИНИЧЕСКИЙ РАЗБОР & МЕТОДОЛОГИЯ</div>
+        <h1 class="doc-title"><strong>ПОЧЕМУ ТЕЛО НЕ МЕНЯЕТСЯ хотя я питаюсь правильно, давно тренируюсь </strong></h1>
+        <p class="doc-lead" style="font-weight: 500; font-size: 17px; color: var(--accent-sage);"><strong>Тело не обязано меняться от количества усилий. Оно меняется в ответ на правильно подобранный стимул + достаточные ресурсы для адаптации.</strong></p>
+        <p class="doc-lead">Можно 5 раз в неделю ходить в зал, есть «чисто», не есть после 18:00 и всё равно годами стоять на месте.</p>
+        <p class="doc-lead" style="font-style: italic; color: var(--accent-terracotta); font-weight: 600;">Потому что <strong>«я много делаю» ≠ «я делаю то, что нужно моему телу для конкретной цели».</strong></p>
+
+        <div class="meta-tags">
+            <span class="meta-tag">15 клинических глав</span>
+            <span class="meta-tag">RED-S & IOC Consensus</span>
+            <span class="meta-tag">NEAT/NEPA Адаптации</span>
+            <span class="meta-tag">Практический аудит (10 шагов)</span>
+            <span class="meta-tag">Доказательная медицина (PubMed)</span>
+        </div>
+    </header>
+
+    <!-- TOC NAVIGATOR -->
+    <nav class="toc-box">
+        <div class="toc-title">
+            <span>🧭</span>
+            <span>НАВИГАЦИЯ ПО КЛИНИЧЕСКОМУ РАЗБОРУ:</span>
+        </div>
+        <div class="toc-grid">
+            <a href="#ch1" class="toc-item"><span class="toc-num">01</span> Конфликт целей</a>
+            <a href="#ch2" class="toc-item"><span class="toc-num">02</span> Стимул и прогрессия</a>
+            <a href="#ch3" class="toc-item"><span class="toc-num">03</span> Калории и «чистая еда»</a>
+            <a href="#ch4" class="toc-item"><span class="toc-num">04</span> Хронический дефицит & RED-S</a>
+            <a href="#ch5" class="toc-item"><span class="toc-num">05</span> Белок не панацея</a>
+            <a href="#ch6" class="toc-item"><span class="toc-num">06</span> Ошибки учета и NEAT</a>
+            <a href="#ch7" class="toc-item"><span class="toc-num">07</span> Миф о компенсации</a>
+            <a href="#ch8" class="toc-item"><span class="toc-num">08</span> Весы vs Рекомпозиция</a>
+            <a href="#ch9" class="toc-item"><span class="toc-num">09</span> Качество программы</a>
+            <a href="#ch10" class="toc-item"><span class="toc-num">10</span> Дозировка кардио</a>
+            <a href="#ch11" class="toc-item"><span class="toc-num">11</span> Фундамент сна</a>
+            <a href="#ch12" class="toc-item"><span class="toc-num">12</span> Мифы о кортизоле</a>
+            <a href="#ch13" class="toc-item"><span class="toc-num">13</span> Адаптивный термогенез</a>
+            <a href="#ch14" class="toc-item"><span class="toc-num">14</span> Соматические причины</a>
+            <a href="#ch15" class="toc-item"><span class="toc-num">15</span> ПРАКТИЧЕСКИЙ АУДИТ</a>
+        </div>
+    </nav>
+
+    <!-- ГЛАВА 1 -->
+    <section class="chapter-card" id="ch1">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 01 // СТРАТЕГИЯ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>1. Сначала нужно понять: а какая у вас вообще цель?</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 14px;">Это кажется очевидным, но здесь огромное количество ошибок.</p>
+
+        <div style="background: var(--bg-card-muted); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 16px;">
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 4px;">Похудеть ≠ стать визуально более подтянутой.</p>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 4px;">Снизить вес ≠ улучшить композицию тела.</p>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 4px;">Набрать ягодицы ≠ просто больше тренироваться.</p>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">Стать рельефнее ≠ максимально снизить калории.</p>
+        </div>
+
+        <p style="font-weight: 600; color: var(--accent-terracotta); margin-bottom: 8px;"><strong>Тело нельзя одновременно отправить во все стороны.</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Если женщина хочет:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>меньше жира;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>больше мышц;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>округлые ягодицы;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>плоский живот;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>высокую работоспособность;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>и при этом есть как можно меньше,</span></li>
+        </ul>
+
+        <p style="color: var(--text-secondary); margin-top: 10px;">то проблема может быть не в отсутствии знаний, дисциплины, а в конфликте целей.</p>
+
+        <div class="callout-quote">
+            «Первый вопрос не “что мне ещё добавить?”, а “какую АДАПТАЦИЮ я вообще хочу получить от своего тела?”»
+        </div>
+    </section>
+
+    <!-- ГЛАВА 2 -->
+    <section class="chapter-card" id="ch2">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill sage">ГЛАВА 02 // СИЛОВОЙ СТИМУЛ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>2. Вы можете тренироваться много — но не давать мышцам нового стимула</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 10px;"><strong>Сам факт тренировки не является гарантией роста мышц.</strong></p>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 6px;">Если годами:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>одни и те же веса;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>одинаковое количество повторений;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>одинаковая интенсивность;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>одинаковая программа;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>тренировка «до пота» вместо прогрессии,</span></li>
+        </ul>
+
+        <p style="color: var(--text-secondary); margin: 12px 0 8px;">то организм получает знакомый стимул.</p>
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">Для гипертрофии важна <strong>прогрессия нагрузки</strong> — через вес, повторения, объем, сложность и другие параметры программы.</p>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PubMed 2023</span>
+            <span>Систематический обзор и сетевой метаанализ 2023 года включил 119 исследований по гипертрофии и 3364 участника; различные варианты силовых тренировок превосходили отсутствие тренировок, а многосетовые протоколы были среди наиболее эффективных для гипертрофии. (PubMed)</span>
+        </div>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">РКИ 2024</span>
+            <span>Отдельное РКИ 2024 года показало, что прогрессировать можно как за счёт увеличения нагрузки, так и количества повторений — оба варианта способствовали росту силы и мышц у начинающих. (PubMed)</span>
+        </div>
+
+        <div class="callout-quote gold">
+            <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;"><strong>Вопрос к вам:</strong></p>
+            <p style="font-size: 16px; font-weight: 600; margin-bottom: 6px;"><strong>«Вы можете назвать свой рабочий вес в приседе/тяге/жимах полгода назад и сейчас?»</strong></p>
+            <p style="font-size: 13.5px; font-style: normal; color: var(--text-secondary);">Если нет — возможно, вы тренируетесь, но не отслеживаете прогресс.</p>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 3 -->
+    <section class="chapter-card" id="ch3">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 03 // ЭНЕРГИЯ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>3. «Я правильно питаюсь» — ещё ничего не говорит о количестве энергии</strong></h2>
+        <p style="font-weight: 600; color: var(--accent-terracotta); margin-bottom: 8px;">Очень важный момент.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Можно есть:</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;">
+            <span class="meta-tag">гречку;</span>
+            <span class="meta-tag">яйца;</span>
+            <span class="meta-tag">курицу;</span>
+            <span class="meta-tag">овощи;</span>
+            <span class="meta-tag">творог;</span>
+            <span class="meta-tag">авокадо;</span>
+        </div>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">и при этом <strong>не получать достаточно энергии для своей цели.</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Особенно часто это встречается у женщин, которые одновременно:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>много тренируются;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>много бегают;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>боятся увеличить порции;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>хотят низкий процент жира;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>хотят мышцы.</span></li>
+        </ul>
+
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-top: 10px;">Получается парадокс:</p>
+        <div class="callout-quote terracotta">
+            «Я хочу построить тело, но постоянно экономлю строительный материал».
+        </div>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 8px;">Для набора мышечной массы недостаточная энергетическая доступность может становиться ограничением адаптации.</p>
+    </section>
+
+    <!-- ГЛАВА 4 -->
+    <section class="chapter-card" id="ch4">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 04 // КЛИНИКА RED-S</span>
+        </div>
+        <h2 class="chapter-h2"><strong>4. Особенно осторожно — с хроническим дефицитом у активных женщин</strong></h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 6px;">Здесь я бы отдельно сказала:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 14px;"><strong>«Чем меньше ешь — тем лучше тело» — научно несостоятельная логика.</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 12px;">Низкая энергетическая доступность у спортсменок связана с нарушениями физиологических функций и рисками RED-S.</p>
+
+        <div style="background: var(--accent-terracotta-light); border: 1px solid rgba(185, 91, 68, 0.2); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 14px;">
+            <p style="font-size: 13.5px; font-weight: 500; color: var(--accent-terracotta); line-height: 1.5;"><strong>*RED-S</strong> (Relative Energy Deficiency in Sport) — это синдром относительного дефицита энергии в спорте, возникающий, когда организм расходует на тренировки больше калорий, чем получает с пищей</p>
+        </div>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">IOC Consensus 2023</span>
+            <span>Консенсус IOC 2023 года рассматривает RED-S как состояние, при котором недостаточная доступность энергии может затрагивать не только репродуктивную функцию, но и костную, иммунную, метаболическую, сердечно-сосудистую и другие системы.</span>
+        </div>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin: 14px 0 8px;">И это особенно важно для:</p>
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>бегуний;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>триатлеток;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>девушек с большим объёмом кардио;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>женщин с низким весом;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>тех, кто постоянно находится на дефиците.</span></li>
+        </ul>
+
+        <p style="color: var(--text-secondary); margin: 12px 0 6px;"><strong>Если исчезает цикл, появляются частые травмы, усталость, падение работоспособности, постоянный голод — это не повод ещё сильнее урезать питание.</strong></p>
+        <p style="font-weight: 600; color: var(--accent-terracotta);">Это повод разбираться с энергетической доступностью и здоровьем.</p>
+    </section>
+
+    <!-- ГЛАВА 5 -->
+    <section class="chapter-card" id="ch5">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill sage">ГЛАВА 05 // БЕЛОК</span>
+        </div>
+        <h2 class="chapter-h2"><strong>5. Белок нужен. Но белок — не панацея</strong></h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">Очень популярная ошибка:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-sage); margin-bottom: 4px;">«Я ем 150 г белка — почему у меня нет мышц?» </p>
+        <p style="font-size: 13px; font-style: italic; color: var(--accent-terracotta); margin-bottom: 12px;">(нутрициолог спросит - а как он у тебя усваивается?)</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Потому что мышцы строятся не из одного белка.</p>
+
+        <div style="background: var(--bg-card-muted); padding: 12px 18px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; color: var(--accent-sage); margin-bottom: 14px;">
+            Нужны:<strong>стимул → энергия → белок → восстановление → повторение процесса.</strong>
+        </div>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PMID 28698222</span>
+            <span>Большой метаанализ Morton et al. показал, что дополнительный белок усиливает прирост безжировой массы и силы при силовых тренировках, но эффект не бесконечен. (PubMed)</span>
+        </div>
+
+        <p style="font-size: 14px; color: var(--text-secondary); margin: 10px 0;">Практически для большинства тренирующихся людей диапазон около <strong>1,6 г/кг/сутки</strong> уже закрывает значительную часть потребности; более высокое потребление может быть уместно в отдельных ситуациях.</p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">То есть:</p>
+        <p style="font-size: 15px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 6px;"><strong>100 г → 150 г белка — не обязательно = 50% больше мышц.</strong></p>
+        <p style="font-size: 14px; font-weight: 500; color: var(--accent-sage);">И уж точно 200 г белка не спасут программу без прогрессии, энергии и восстановления.</p>
+    </section>
+
+    <!-- ГЛАВА 6 -->
+    <section class="chapter-card" id="ch6">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill gold">ГЛАВА 06 // NEAT & РАСХОД</span>
+        </div>
+        <h2 class="chapter-h2"><strong>6. А теперь неприятная вещь: вы можете переоценивать расход и недооценивать питание</strong></h2>
+        <p style="font-size: 15px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 4px;">«Я сожгла 600 ккал на тренировке».</p>
+        <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 8px;">Не факт.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 12px;">Часы и тренажёры дают <strong>оценку</strong>, а не лабораторное измерение вашего энергетического расхода.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Плюс после тренировки человек может:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>больше есть;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>меньше двигаться;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>больше сидеть;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>меньше гулять;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>бессознательно экономить движения.</span></li>
+        </ul>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin: 12px 0 8px;">И это называется <strong>компенсаторными реакциями.</strong></p>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PMID 36933180</span>
+            <span>Обзор 2023 года показал, что в 67% рассмотренных исследований после начала тренировок наблюдалось снижение NEPA — физической активности вне тренировок. Авторы подчёркивают при этом значительную неоднородность исследований. (PubMed)</span>
+        </div>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PMID 24454704</span>
+            <span>Систематический обзор по NEAT/NEPA также обнаружил компенсаторное снижение активности в части вмешательств, но подчёркивает, что эффект неодинаков у разных людей и исследования имеют ограничения. (PubMed)</span>
+        </div>
+
+        <div style="background: var(--bg-card-muted); border-radius: var(--radius-md); padding: 18px 20px; margin: 16px 0;">
+            <p style="font-size: 14px; line-height: 1.6; color: var(--text-primary); margin-bottom: 12px;">Снижение <strong>NEAT</strong> (от англ. <em>Non-Exercise Activity Thermogenesis</em> — нетренировочная активность, часто сокращают как NEPA) вне тренировок — это естественная защитная реакция организма на дефицит калорий или чрезмерную физическую нагрузку. Тело неосознанно переходит в режим жесткой экономии энергии (адаптивный термогенез), чтобы сохранить жировые запасы. </p>
+            <p style="font-weight: 700; color: var(--accent-sage); margin-bottom: 8px;">Почему падает бытовая активность?</p>
+            <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 8px;"><strong>Биологическая экономия.</strong> На диете или после тяжелой тренировки мозг дает команду двигаться меньше. Вы незаметно для себя перестаете жестикулировать, чаще сидите вместо того чтобы стоять, реже меняете позу и дольше спите. </p>
+            <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 8px;"><strong>Синдром «диванного атлета».</strong> Выложившись на 100% на тренировке, человек считает свой «долг выполненным» и остаток дня проводит в полной неподвижности. </p>
+            <p style="font-size: 13.5px; color: var(--text-secondary);"><strong>Падение уровня орексина.</strong> Этот нейропептид отвечает за бодрствование и спонтанные движения (<em>fidgeting</em>). При нехватке энергии его выработка снижается. </p>
+        </div>
+
+        <div class="callout-quote gold">
+            <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;"><strong>Очень простая формула:</strong></p>
+            <p style="font-size: 16px; font-weight: 600;"><strong>Тренировка ≠ весь ваш расход энергии за день.</strong></p>
+        </div>
+
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 6px;">Есть ещё:</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="meta-tag">базовый обмен;</span>
+            <span class="meta-tag">термический эффект пищи;</span>
+            <span class="meta-tag">NEAT;</span>
+            <span class="meta-tag">обычная ходьба;</span>
+            <span class="meta-tag">бытовая активность;</span>
+            <span class="meta-tag">работа;</span>
+            <span class="meta-tag">сон и восстановление.</span>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 7 -->
+    <section class="chapter-card" id="ch7">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill sage">ГЛАВА 07 // БАЛАНС</span>
+        </div>
+        <h2 class="chapter-h2"><strong>7. Но здесь важно не впасть в другой миф: «спорт бесполезен, потому что организм всё компенсирует»</strong></h2>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 6px;">Нет.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 12px;">Это тоже слишком простое объяснение.</p>
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 8px;">Исследования показывают <strong>индивидуальную вариабельность</strong>.</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>У кого-то после увеличения активности практически ничего не меняется в питании.</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>У кого-то увеличивается аппетит.</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>У кого-то снижается бытовая активность.</span></li>
+        </ul>
+
+        <div class="callout-quote">
+            <p style="font-size: 13px; font-style: normal; color: var(--text-muted); margin-bottom: 4px;">Поэтому вместо: <s>«У меня медленный метаболизм»</s> лучше спрашивать:</p>
+            <p style="font-size: 16px; font-weight: 600; color: var(--accent-sage);">«Что произошло с моим фактическим весом, рационом и активностью за последние 4–8 недель?»</p>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 8 -->
+    <section class="chapter-card" id="ch8">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 08 // РЕКОМПОЗИЦИЯ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>8. Весы могут говорить «ничего», пока тело говорит совсем другое</strong></h2>
+        <p style="font-weight: 600; color: var(--accent-terracotta); margin-bottom: 8px;">Особенно если цель — <strong>рекомпозиция</strong>.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Вес может практически не меняться, а:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>мышечная масса увеличивается;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>жировая масса снижается;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>меняются объёмы;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>меняется визуальная плотность тела;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>растёт сила.</span></li>
+        </ul>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin: 14px 0 6px;">Поэтому женщине, которая хочет красивое тело, <strong>одних весов недостаточно.</strong></p>
+        <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 6px;">Я бы отслеживала минимум:</p>
+
+        <div style="background: var(--bg-card-muted); padding: 12px 18px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; color: var(--accent-sage); margin-bottom: 14px;">
+            <strong>вес + талия/бёдра + фото + силовые показатели + самочувствие + питание.</strong>
+        </div>
+
+        <div class="callout-quote terracotta">
+            <p style="font-size: 13px; font-style: normal; margin-bottom: 4px;">Иногда самый красивый результат — это не «минус 5 кг», а:</p>
+            <p style="font-size: 17px; font-weight: 600;"><strong>та же цифра на весах, но совершенно другое тело.</strong></p>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 9 -->
+    <section class="chapter-card" id="ch9">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill sage">ГЛАВА 09 // ПРОГРАММА</span>
+        </div>
+        <h2 class="chapter-h2"><strong>9. «Я тренируюсь 5 раз в неделю» — тоже не показатель качества программы</strong></h2>
+        <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+            <span class="meta-tag">Можно тренироваться 5 раз.</span>
+            <span class="meta-tag">И можно тренироваться 3 раза.</span>
+        </div>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">Вопрос:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;"><strong>Что именно получает мышца за эту неделю?</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Важно смотреть на:</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-bottom: 14px;">
+            <div class="meta-tag">объём;</div>
+            <div class="meta-tag">интенсивность;</div>
+            <div class="meta-tag">частоту;</div>
+            <div class="meta-tag">упражнения;</div>
+            <div class="meta-tag">технику;</div>
+            <div class="meta-tag">близость к отказу;</div>
+            <div class="meta-tag">прогрессию;</div>
+            <div class="meta-tag">восстановление.</div>
+        </div>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PubMed Meta</span>
+            <span>Систематические данные по женщинам показывают, что силовые тренировки действительно приводят к существенным улучшениям силы и гипертрофии; частота и объём могут влиять на адаптацию, особенно в отношении силы. (PubMed)</span>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 10 -->
+    <section class="chapter-card" id="ch10">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill gold">ГЛАВА 10 // КАРДИО</span>
+        </div>
+        <h2 class="chapter-h2"><strong>10. Кардио не враг. Но цель должна определять его дозировку</strong></h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">Не нужно говорить:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 4px;"><s><strong>«Кардио убивает мышцы».</strong></s></p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 10px;">Это слишком примитивно.</p>
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">Кардио — нормальный инструмент для здоровья и выносливости.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Но если человек хочет максимизировать мышечный рост и одновременно имеет:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>большой объём бега;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>много интервальной работы;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>много силовых;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>мало еды;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>мало сна,</span></li>
+        </ul>
+
+        <div class="callout-quote gold">
+            <p style="font-size: 13px; font-style: normal; margin-bottom: 4px;">то вопрос уже не «можно ли кардио?», а:</p>
+            <p style="font-size: 16px; font-weight: 600;"><strong>«Хватает ли ресурсов на весь этот объём?»</strong></p>
+        </div>
+
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">Для ультрамарафонца и женщины, которая хочет максимально быстро увеличить ягодицы, слово «тренировки» означает совершенно разную нагрузку на систему.</p>
+    </section>
+
+    <!-- ГЛАВА 11 -->
+    <section class="chapter-card" id="ch11">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill sage">ГЛАВА 11 // ВОССТАНОВЛЕНИЕ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>11. Сон — это не «приятное дополнение к ЗОЖ»</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Мы часто пытаемся оптимизировать:</p>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+            <span class="meta-tag">БАДы;</span>
+            <span class="meta-tag">белок;</span>
+            <span class="meta-tag">омегу;</span>
+            <span class="meta-tag">магний;</span>
+            <span class="meta-tag">время еды;</span>
+        </div>
+
+        <p style="font-size: 15px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 6px;">а потом спим по 5–6 часов.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 14px;">И удивляемся, почему тело не выглядит так, как хочется.</p>
+
+        <div style="background: var(--accent-sage-light); padding: 14px 18px; border-radius: var(--radius-md); font-weight: 600; color: var(--accent-sage); margin-bottom: 14px;">
+            <strong>Тренировка создаёт стимул. Восстановление позволяет адаптироваться.</strong>
+        </div>
+
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Поэтому если человек тренируется всё больше, а:</p>
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>постоянно уставший;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>падают рабочие веса;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>ухудшается сон;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>болят мышцы;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>нет желания тренироваться;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>растёт раздражительность,</span></li>
+        </ul>
+
+        <p style="font-size: 13.5px; color: var(--text-muted); margin: 10px 0 6px;">то решение не всегда заключается в добавлении ещё одной тренировки.</p>
+        <div class="callout-quote">
+            Иногда прогресс начинается с <strong>уменьшения нагрузки и увеличения восстановления.</strong>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 12 -->
+    <section class="chapter-card" id="ch12">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 12 // СТРЕСС & КОРТИЗОЛ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>12. Стресс — не магическая кнопка «кортизол = жир»</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 6px;">Я бы здесь специально разрушила популярный миф.</p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">Не нужно говорить:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 6px;"><s>«У вас высокий кортизол, поэтому вы не худеете».</s></p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">Это слишком упрощённо.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Хронический стресс действительно может влиять на:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>сон;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>аппетит;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>пищевое поведение;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>восстановление;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet terracotta"></span><span>тренировочную работоспособность.</span></li>
+        </ul>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin: 12px 0 6px;">Но <strong>кортизол не является универсальным объяснением любого плато.</strong></p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 6px;">Сначала смотрим на базовые вещи:</p>
+
+        <div style="background: var(--bg-card-muted); padding: 12px 18px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; color: var(--accent-sage); margin-bottom: 10px;">
+            <strong>еда → тренировки → активность → сон → восстановление → динамика.</strong>
+        </div>
+
+        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 6px;">И только потом ищем более сложные причины.</p>
+        <p style="font-size: 13px; font-weight: 600; color: var(--accent-terracotta);">Есть подробный интенсив по кортизолу.</p>
+    </section>
+
+    <!-- ГЛАВА 13 -->
+    <section class="chapter-card" id="ch13">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill gold">ГЛАВА 13 // ТЕРМОГЕНЕЗ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>13. «У меня сломан метаболизм» — обычно не лучший диагноз</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">После похудения действительно происходят адаптивные изменения энергетического расхода.</p>
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 10px;">Организм не является калькулятором.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">После снижения массы тела меняются:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>масса тела;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>энергозатраты на движение;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>базовые энергетические потребности;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>гормональные и поведенческие сигналы;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>аппетит.</span></li>
+        </ul>
+
+        <p style="font-size: 13.5px; color: var(--text-muted); margin: 10px 0 6px;">Это и называют адаптивными/компенсаторными механизмами.</p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 4px;">Но из этого не следует:</p>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 12px;"><s><strong>«Метаболизм сломан навсегда».</strong></s></p>
+
+        <div class="evidence-badge">
+            <span class="pubmed-tag">PubMed Rosenbaum & Leibel</span>
+            <span>Обзор Rosenbaum &amp; Leibel описывает комплекс метаболических, поведенческих и нейроэндокринных адаптаций после снижения веса. (PubMed)</span>
+        </div>
+
+        <div class="callout-quote gold">
+            <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Поэтому корректнее говорить:</p>
+            <p style="font-size: 16px; font-weight: 600;"><strong>«Организм адаптируется к изменению энергетического баланса».</strong></p>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 14 -->
+    <section class="chapter-card" id="ch14">
+        <div class="chapter-badge-wrap">
+            <span class="chapter-pill terracotta">ГЛАВА 14 // ЗДОРОВЬЕ</span>
+        </div>
+        <h2 class="chapter-h2"><strong>14. Иногда проблема вообще не в питании и не в тренировках</strong></h2>
+        <p style="color: var(--text-secondary); margin-bottom: 8px;">Если человек действительно:</p>
+
+        <ul class="styled-list">
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>последовательно тренируется;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>получает достаточно энергии;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>нормально питается;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>восстанавливается;</span></li>
+            <li class="styled-list-item"><span class="styled-list-bullet"></span><span>прогрессирует в нагрузках;</span></li>
+        </ul>
+
+        <p style="font-size: 14.5px; font-weight: 500; color: var(--accent-terracotta); margin: 12px 0 6px;">но при этом есть выраженная усталость, нарушения цикла, повторяющиеся травмы, резкие изменения веса или другие симптомы —</p>
+        <p style="font-size: 15px; font-weight: 600; color: var(--accent-sage); margin-bottom: 6px;"><strong>не надо бесконечно менять КБЖУ.</strong></p>
+        <p style="color: var(--text-secondary); margin-bottom: 14px;">Нужно оценить состояние здоровья и при необходимости обратиться к врачу.</p>
+
+        <div style="background: var(--bg-card-muted); border-radius: var(--radius-md); padding: 18px 20px;">
+            <p style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-terracotta); margin-bottom: 10px;">МЕДИЦИНСКИЙ КРАСНЫЙ ФЛАГ // ЗОНЫ ПРОВЕРКИ:</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">?ЖКТ (микробиом кишечника)</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">?Пищевые непереносимости и аллергии?</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">?Воспалительные процессы</div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">?Дефициты </div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--accent-sage);">?Гормональная система </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГЛАВА 15: АУДИТ -->
+    <div class="audit-card" id="ch15">
+        <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-sage); margin-bottom: 8px;">
+            ПРАКТИЧЕСКИЙ ИНСТРУМЕНТ
+        </div>
+        <h2 style="font-family: var(--font-serif); font-size: 32px; font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">
+            <strong>15. И главный практический блок — АУДИТ</strong>
+        </h2>
+        <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 18px;"><strong>Если тело не меняется — задайте себе 10 вопросов:</strong></p>
+
+        <div class="audit-grid">
+            <div class="audit-item">
+                <span class="audit-num">1</span>
+                <span><strong>1. Какая моя реальная цель?</strong> Жир ↓ / мышцы ↑ / рекомпозиция / сила / здоровье?</span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">2</span>
+                <span><strong>2. Соответствует ли питание цели?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">3</span>
+                <span><strong>3. Достаточно ли энергии?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">4</span>
+                <span><strong>4. Сколько белка я реально получаю?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">5</span>
+                <span><strong>5. Есть ли прогресс в тренировках?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">6</span>
+                <span><strong>6. Записываю ли я рабочие веса и повторения?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">7</span>
+                <span><strong>7. Сколько я двигаюсь вне тренировок?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">8</span>
+                <span><strong>8. Сколько и как я сплю?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">9</span>
+                <span><strong>9. Есть ли признаки хронической перегрузки/низкой энергетической доступности?</strong></span>
+            </div>
+            <div class="audit-item">
+                <span class="audit-num">10</span>
+                <span><strong>10. Чем я измеряю результат?</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- МЕТОДОЛОГИЧЕСКИЙ МАНИФЕСТ -->
+    <div class="manifest-box">
+        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 12px;">
+            И вот здесь можно сказать мою фирменную мысль:
+        </div>
+        <h2 class="manifest-title">
+            <strong>«Нам не обязательно делать больше. Возможно, нам наконец пора делать точнее».</strong>
+        </h2>
+        <p class="manifest-p" style="font-style: italic; color: rgba(255, 255, 255, 0.7);">Я бы закончила не «вам просто нужно дисциплинированнее», а вот так:</p>
+        <p class="manifest-p" style="font-size: 18px; font-weight: 600; color: #FFFFFF;">Иногда тело не меняется не потому, что вы недостаточно стараетесь.</p>
+        <p class="manifest-p" style="font-size: 18px; font-weight: 600; color: var(--accent-gold);">А потому что система собрана неправильно.</p>
+        <p class="manifest-p">Слишком мало еды. Слишком много кардио. Нет прогрессии. Нет восстановления. Белка много, энергии мало. Тренировок много, результата не измеряем. Вес стоит — и мы решаем, что ничего не происходит.</p>
+        <p class="manifest-p">А тело в этот момент просто адаптируется к тем условиям, которые мы ему дали.</p>
+        <p class="manifest-p"><strong>Поэтому я не хочу учить вас делать больше.</strong></p>
+        <p class="manifest-p">Я хочу научить вас <strong>видеть, что именно делает ваше тело — и что ему действительно нужно.</strong></p>
+
+        <div class="manifest-highlight">
+            <span style="display: block; font-size: 16px; font-style: normal; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; margin-bottom: 6px;">Не худеть бесконечно.</span>
+            <span style="font-size: 32px; font-weight: 700; color: #FFFFFF;"><strong>Строить тело.</strong></span>
+        </div>
+    </div>
+
+    <!-- ИССЛЕДОВАНИЯ ПО ТЕМЕ -->
+    <div class="studies-box">
+        <div style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-sage); margin-bottom: 14px;">
+            <strong>Исследования по теме:</strong>
+        </div>
+        <div class="study-row">
+            <div class="study-title">01. Morton et al., 2018</div>
+            <div><strong>Morton et al., 2018 — белок + силовые тренировки</strong> Систематический обзор и метаанализ. PubMed — PMID 28698222⁠</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">02. Schoenfeld et al., 2023</div>
+            <div><strong>Schoenfeld et al., 2023 — программа силовых тренировок и гипертрофия</strong> Систематический обзор и Bayesian network meta-analysis, 119 исследований по гипертрофии. PubMed — PMID 37414459⁠</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">03. McMaster/IOC Consensus 2023</div>
+            <div><strong>McMaster/IOC-related literature on energy availability / RED-S</strong> Для блока про активных женщин и хронический дефицит энергии особенно важно опираться на консенсус IOC 2023, а не на популярные посты о «замедленном метаболизме».</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">04. Mansfeldt & Magkos, 2023</div>
+            <div><strong>Mansfeldt &amp; Magkos, 2023 — компенсация активности после начала тренировок</strong> Обзор NEPA/NEAT; авторы нашли снижение активности вне тренировок примерно в 67% рассмотренных исследований, но подчёркивают неоднородность данных. PubMed — PMID 36933180⁠</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">05. Donnelly et al., 2014</div>
+            <div><strong>Donnelly et al., 2014 — exercise, energy intake и компенсация</strong> Систематический обзор 99 публикаций/103 исследований; результаты по изменению потребления энергии неоднородны. PubMed — PMID 24454704⁠</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">06. Nunes et al., 2022</div>
+            <div><strong>Nunes et al., 2022 — белок и мышечная масса/функция</strong> Систематический обзор и метаанализ: дополнительный белок даёт небольшие дополнительные приросты безжировой массы и силы нижней части тела у людей, занимающихся силовыми тренировками. </div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">07. Rosenbaum & Leibel</div>
+            <div><strong>Rosenbaum &amp; Leibel — adaptive thermogenesis</strong> Обзор механизмов адаптации организма после снижения веса. PubMed — Adaptive thermogenesis in humans⁠</div>
+        </div>
+        <div class="study-row">
+            <div class="study-title">08. Female Resistance Training Meta-Analysis</div>
+            <div><strong>Effect of resistance training specifically in women</strong> Систематический обзор и метаанализ 24 исследований: силовые тренировки дают выраженные улучшения силы и гипертрофии у здоровых взрослых женщин. PubMed — Female resistance training meta-analysis⁠</div>
+        </div>
+    </div>
+
+    <!-- FOOTER SIGNATURE -->
+    <footer class="doc-footer">
+        <span>АНАСТАСИЯ МЕЛЬНИКОВА</span>
+        <span>ЗОЖ-КЛУБ • СТАРТ 2026</span>
+    </footer>
+
+</div>
+
+</body>
+</html>

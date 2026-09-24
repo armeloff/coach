@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Мельникова — Питание для красивого тела</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #FAF8F5;
+            --bg-card: #FFFFFF;
+            --bg-card-muted: #F5F1EB;
+            --accent-sage: #2D4336;
+            --accent-sage-dark: #1F3025;
+            --accent-sage-light: #EBF0EA;
+            --accent-sage-tint: #F2F6F3;
+            --accent-terracotta: #B95B44;
+            --accent-terracotta-light: #F9ECE8;
+            --accent-pistachio: #6F8B77;
+            --accent-gold: #B89758;
+            --accent-gold-light: #FAF4E8;
+            --text-primary: #1C1917;
+            --text-secondary: #575249;
+            --text-muted: #8C8477;
+            --border-subtle: #E8E2D8;
+            --border-card: #EDE7DC;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 1px 3px rgba(45, 67, 54, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 6px 20px -2px rgba(45, 67, 54, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 16px 40px -4px rgba(45, 67, 54, 0.08);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            padding: 32px 16px;
+        }
+
+        .wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* Header & Hero Brand */
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background-color: var(--accent-sage-light);
+            color: var(--accent-sage);
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .brand-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .doc-header {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F1EB 100%);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            margin-bottom: 36px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(45, 67, 54, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .doc-category {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-terracotta);
+            margin-bottom: 8px;
+        }
+
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: clamp(34px, 5.5vw, 52px);
+            font-weight: 600;
+            line-height: 1.12;
+            color: var(--accent-sage);
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+        }
+
+        .doc-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-terracotta);
+            margin-bottom: 24px;
+            display: inline-block;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--accent-terracotta-light);
+        }
+
+        .intro-lead {
+            background: rgba(255, 255, 255, 0.7);
+            border-left: 3px solid var(--accent-sage);
+            padding: 20px 24px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-top: 12px;
+        }
+
+        .intro-lead p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .intro-lead p:last-child {
+            margin-bottom: 0;
+        }
+
+        .intro-lead .highlight {
+            color: var(--accent-sage);
+            font-weight: 600;
+        }
+
+        /* Section Container */
+        .section-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 36px 36px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-subtle);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--accent-sage);
+            line-height: 1.25;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+        }
+
+        /* Content Blocks & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 18px 0;
+        }
+
+        .pill-card {
+            background-color: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            font-size: 14px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            line-height: 1.5;
+        }
+
+        .pill-card.accent-card {
+            background-color: var(--accent-sage-tint);
+            border-color: rgba(45, 67, 54, 0.18);
+        }
+
+        .pill-card .pill-icon {
+            font-size: 18px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Goals target list */
+        .goals-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .goal-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            padding: 14px 18px;
+            background-color: var(--bg-canvas);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--accent-sage);
+            font-size: 14.5px;
+        }
+
+        .goal-item.simple {
+            border-left-color: var(--accent-pistachio);
+        }
+
+        .goal-arrow {
+            color: var(--accent-terracotta);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* Quote / Callout Box */
+        .callout-box {
+            background: linear-gradient(135deg, var(--accent-sage-tint) 0%, #FFFFFF 100%);
+            border: 1px solid rgba(45, 67, 54, 0.15);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .callout-box.terracotta {
+            background: linear-gradient(135deg, var(--accent-terracotta-light) 0%, #FFFFFF 100%);
+            border-color: rgba(185, 91, 68, 0.2);
+        }
+
+        .callout-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-sage);
+            margin-bottom: 6px;
+        }
+
+        .callout-box.terracotta .callout-title {
+            color: var(--accent-terracotta);
+        }
+
+        .callout-text {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-style: italic;
+            font-family: var(--font-serif);
+            font-size: 18px;
+            line-height: 1.4;
+        }
+
+        /* Brick Cards (Section 2) */
+        .brick-card {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .brick-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .brick-icon {
+            font-size: 24px;
+        }
+
+        .brick-title {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-sage);
+        }
+
+        .brick-badge {
+            margin-left: auto;
+            background: var(--accent-sage-light);
+            color: var(--accent-sage);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .brick-body p {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .brick-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .sources-tag {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            margin-top: 12px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+
+        .sources-tag strong {
+            color: var(--accent-sage);
+        }
+
+        /* Plate formula (Section 3) */
+        .plate-formula {
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            padding: 20px 24px;
+            border-radius: var(--radius-md);
+            font-size: 17px;
+            font-weight: 500;
+            text-align: center;
+            margin: 18px 0;
+            letter-spacing: 0.02em;
+        }
+
+        .plate-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .plate-item {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            font-size: 14.5px;
+            color: var(--text-primary);
+        }
+
+        /* Checklist Items */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .checklist-row {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 12px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14.5px;
+        }
+
+        .check-bullet {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: var(--accent-sage-light);
+            color: var(--accent-sage);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Bullets list clean */
+        .clean-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 14px 0;
+        }
+
+        .clean-bullets li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 14.5px;
+            color: var(--text-secondary);
+        }
+
+        .clean-bullets li::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-sage);
+            border-radius: 50%;
+        }
+
+        /* Metric badge list (Section 6) */
+        .metric-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 14px 0;
+        }
+
+        .metric-badge {
+            background: var(--accent-sage-light);
+            color: var(--accent-sage);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Footer quote card */
+        .doc-footer-card {
+            background: linear-gradient(135deg, var(--accent-sage) 0%, var(--accent-sage-dark) 100%);
+            color: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 48px 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .doc-footer-card::before {
+            content: '“';
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            font-family: var(--font-serif);
+            font-size: 180px;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.07);
+            pointer-events: none;
+        }
+
+        .footer-tag {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 12px;
+        }
+
+        .footer-main-text {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            line-height: 1.35;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .footer-flow {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .footer-closing {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .author-signature {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Print Optimization (@media print) */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 14mm 12mm 14mm 12mm;
+            }
+
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                font-size: 13px !important;
+                line-height: 1.45 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .wrapper {
+                max-width: 100% !important;
+            }
+
+            .doc-header {
+                padding: 24px !important;
+                margin-bottom: 20px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                border-color: #D5CFC3 !important;
+            }
+
+            .section-card {
+                padding: 20px !important;
+                margin-bottom: 18px !important;
+                box-shadow: none !important;
+                border: 1px solid #D5CFC3 !important;
+            }
+
+            .brick-card, .callout-box, .doc-footer-card, .pill-card, .goal-item, .checklist-row {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .doc-footer-card {
+                padding: 24px !important;
+                background: #2D4336 !important;
+                color: #FFFFFF !important;
+            }
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 8px;
+            }
+            .doc-header {
+                padding: 28px 20px;
+            }
+            .section-card {
+                padding: 24px 18px;
+            }
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .doc-footer-card {
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- Document Header -->
+    <header class="doc-header">
+        <div class="brand-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            АНАСТАСИЯ МЕЛЬНИКОВА • ЗОЖ-МЕТОДОЛОГИЯ
+        </div>
+        <div class="doc-category">Гайд</div>
+        <h1 class="doc-title">ПИТАНИЕ ДЛЯ КРАСИВОГО ТЕЛА</h1>
+        <div class="doc-subtitle">Не худеем. Строим!</div>
+        
+        <div class="intro-lead">
+            <p>Красивое тело — это не обязательно меньше килограммов.</p>
+            <p>Это когда в теле достаточно мышц, есть энергия, хорошее восстановление, а питание не превращается в проект с Excel-таблицей на 47 вкладок.</p>
+            <p><span class="highlight">Поэтому наша задача — не есть «идеально».</span></p>
+            <p class="highlight">Наша задача — регулярно давать телу то, из чего оно может себя строить.</p>
+        </div>
+    </header>
+
+    <!-- 01. Сначала определяем задачу -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">01. Сначала определяем задачу</h2>
+        </div>
+        <p class="section-desc">Одна и та же тарелка может работать на совершенно разные цели.</p>
+        
+        <div class="goals-list">
+            <div class="goal-item">
+                <span class="goal-arrow">→</span>
+                <span>Хочешь снижать жировую массу → нужен умеренный дефицит и контроль потребления жиров.</span>
+            </div>
+            <div class="goal-item">
+                <span class="goal-arrow">→</span>
+                <span>Хочешь набирать мышцы → достаточно энергии + белка + силовая нагрузка + восстановление.</span>
+            </div>
+            <div class="goal-item">
+                <span class="goal-arrow">→</span>
+                <span>Хочешь рекомпозицию → питание около поддержки, достаточно белка и грамотные силовые.</span>
+            </div>
+            <div class="goal-item simple">
+                <span class="goal-arrow">→</span>
+                <span>Хочешь просто хорошо выглядеть и себя чувствовать → не обязательно считать каждую крошку. Сначала выстраиваем базу.</span>
+            </div>
+        </div>
+
+        <div class="callout-box terracotta">
+            <div class="callout-title">Не начинай с вопроса:</div>
+            <div class="callout-text" style="color: var(--accent-terracotta); text-decoration: line-through; opacity: 0.85;">«Сколько мне можно есть?»</div>
+            <div class="callout-title" style="margin-top: 10px; color: var(--accent-sage);">Начни с:</div>
+            <div class="callout-text" style="color: var(--accent-sage); font-weight: 600;">«Что я хочу изменить в теле и что для этого ему нужно?»</div>
+        </div>
+    </section>
+
+    <!-- 02. ТРИ КИРПИЧИКА КРАСИВОГО ТЕЛА -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">02. ТРИ КИРПИЧИКА КРАСИВОГО ТЕЛА</h2>
+        </div>
+
+        <!-- Кирпичик 1: Белок -->
+        <div class="brick-card">
+            <div class="brick-head">
+                <h3 class="brick-title">🥩 БЕЛОК</h3>
+                <span class="brick-badge">1,6–2,2 г/кг</span>
+            </div>
+            <div class="brick-body">
+                <p><strong>Материал для мышц и тканей.</strong></p>
+                <p>Ориентир для большинства тренирующихся — примерно 1,6–2,2 г/кг массы тела в сутки.</p>
+                <p>Не нужно пытаться съесть весь белок за ужином.</p>
+                <p>Распредели его по дню.</p>
+                <div class="pill-card accent-card" style="margin: 10px 0;">
+                    <span class="pill-icon">⚡</span>
+                    <div>Простой ориентир:3–4 приёма пищи → в каждом есть нормальная порция белка.</div>
+                </div>
+                <div class="sources-tag">
+                    Источники:рыба, мясо, птица, яйца, творог, йогурт, сыр, бобовые, тофу и другие продукты по твоему рациону.
+                </div>
+            </div>
+        </div>
+
+        <!-- Кирпичик 2: Углеводы -->
+        <div class="brick-card">
+            <div class="brick-head">
+                <h3 class="brick-title">🍚 УГЛЕВОДЫ</h3>
+                <span class="brick-badge">Энергия для работы</span>
+            </div>
+            <div class="brick-body">
+                <p><strong>Не враг фигуры. Для тренирующегося тела это один из основных источников энергии для работы.</strong></p>
+                <p>Особенно если ты:</p>
+                <ul class="clean-bullets">
+                    <li>тренируешься;</li>
+                    <li>много двигаешься;</li>
+                    <li>бегаешь;</li>
+                    <li>делаешь длительные тренировки.</li>
+                </ul>
+                <p>Крупы, батат, картофель, хлеб, макароны, фрукты — это не «еда, которую надо заслужить».</p>
+                <div class="pill-card accent-card" style="margin: 10px 0;">
+                    <span class="pill-icon">🔥</span>
+                    <div>Углеводы помогают тренироваться. Тренировки помогают строить тело.</div>
+                </div>
+                <p style="font-style: italic; color: var(--accent-terracotta); margin-top: 10px;">Поэтому я не люблю рацион, в котором женщина пытается одновременно нарастить ягодицы и боится есть кашу.</p>
+            </div>
+        </div>
+
+        <!-- Кирпичик 3: Жиры -->
+        <div class="brick-card">
+            <div class="brick-head">
+                <h3 class="brick-title">🥑 ЖИРЫ</h3>
+                <span class="brick-badge">Баланс гормонов</span>
+            </div>
+            <div class="brick-body">
+                <p><strong>Нужны не только для вкуса.</strong></p>
+                <p>Это важная часть рациона, источник энергии и жирных кислот.</p>
+                <div class="sources-tag" style="margin: 10px 0;">
+                    Источники:орехи, семена, авокадо, оливковое масло, жирная рыба, яйца, молочные продукты и др.
+                </div>
+                <p>Не нужно делать рацион обезжиренным ради красивого тела.</p>
+                <p>Красивое тело не строится на вечном «мне нельзя жирное».</p>
+                <div class="callout-box terracotta" style="margin-top: 12px; padding: 12px 16px;">
+                    <strong style="color: var(--accent-terracotta);">НО И БЕЗ ПЕРЕКОСА ЗОЖника - упор на жири стратегия, которая мало кому подходит!</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03. ТАРЕЛКА, КОТОРАЯ СОБИРАЕТСЯ ЗА 3 МИНУТЫ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">03. ТАРЕЛКА, КОТОРАЯ СОБИРАЕТСЯ ЗА 3 МИНУТЫ</h2>
+        </div>
+        <p class="section-desc">Если не хочется считать КБЖУ — начинай отсюда.</p>
+        
+        <p style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-muted);">Формула:</p>
+        <div class="plate-formula">Белок + углеводы + овощи/фрукты + жиры</div>
+        
+        <p style="margin-top: 16px; font-weight: 600; color: var(--accent-sage);">Например:</p>
+        <div class="plate-examples">
+            <div class="plate-item">🍗 индейка курица 🍚 киноа 🥦 овощи 🥑 авокадо</div>
+            <div style="font-size: 13px; color: var(--text-muted); padding-left: 8px;">или</div>
+            <div class="plate-item">🐟 лосось 🥔 батат 🥗 салат 🫒 масло</div>
+            <div style="font-size: 13px; color: var(--text-muted); padding-left: 8px;">или</div>
+            <div class="plate-item">🥣 греческий йогурт 🍌 банан 🥜 орехи 🍓 ягоды</div>
+        </div>
+        <p style="margin-top: 16px; font-style: italic; color: var(--text-muted); text-align: center;">Не существует обязательной «идеальной тарелки».</p>
+    </section>
+
+    <!-- 04. ЕСЛИ ТЫ ТРЕНИРУЕШЬСЯ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">04. ЕСЛИ ТЫ ТРЕНИРУЕШЬСЯ</h2>
+        </div>
+        <p class="section-desc">Тебе не нужно искать единственное правильное окно в 27 минут.</p>
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 16px;">Гораздо важнее общий рацион за день.</p>
+
+        <div class="grid-2">
+            <!-- До тренировки -->
+            <div class="pill-card accent-card" style="flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--accent-sage);">До тренировки</div>
+                <div style="font-size: 13.5px; color: var(--text-secondary);">Если прошло много времени после еды — добавь что-то легко перевариваемое:</div>
+                <div style="background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; font-size: 13px; color: var(--text-primary); line-height: 1.5;">
+                    банан + йогурттост + ветчина из индейкиовсянка + ягодырис + курица
+                </div>
+                <div style="font-size: 12.5px; color: var(--accent-sage); font-weight: 500; margin-top: 4px;">Цель — прийти на тренировку с энергией, а не с чувством духовного очищения от голода.</div>
+            </div>
+
+            <!-- После тренировки -->
+            <div class="pill-card" style="flex-direction: column; gap: 8px;">
+                <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--accent-terracotta);">После</div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-primary);">Белок + углеводы.</div>
+                <div style="font-size: 13px; color: var(--text-muted);">Например:</div>
+                <div style="background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px; font-size: 13px; color: var(--text-primary); line-height: 1.5;">
+                    рис + рыба картофель + мясо паста + морепродукты йогурт + фрукт + хлопья
+                </div>
+                <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">И нет, если ты поела через 1,5 часа после тренировки, мышцы не объявят забастовку. Но падение энергии может быть</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. СКОЛЬКО ЕСТЬ? -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">05. СКОЛЬКО ЕСТЬ?</h2>
+        </div>
+        <p class="section-desc">Вот здесь начинается самое интересное.</p>
+        <p style="font-weight: 600; color: var(--text-primary);">Для набора мышц нельзя одновременно:</p>
+        
+        <div class="callout-box terracotta">
+            <div class="callout-text" style="color: var(--accent-terracotta);">«Хочу ягодицы больше» и «Хочу есть как можно меньше».</div>
+        </div>
+
+        <p>Для роста тканей организму нужны энергия и строительный материал.</p>
+        <p style="margin-top: 10px; color: var(--text-secondary);">Если ты постоянно недоедаешь, тело в первую очередь будет решать задачу выживания и текущих расходов, а не строительство новой мышечной ткани.</p>
+
+        <div class="pill-card accent-card" style="margin: 18px 0; padding: 16px 20px;">
+            <div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--accent-sage); margin-bottom: 4px;">Поэтому:</div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--text-primary);">сначала определяем калорийность → затем белок → затем распределяем жиры и углеводы.</div>
+            </div>
+        </div>
+
+        <p style="color: var(--text-muted);">А не наоборот:</p>
+        <div style="padding: 10px 14px; background: #FFF1EE; border-radius: var(--radius-sm); color: var(--accent-terracotta); font-size: 14px; margin: 8px 0; text-decoration: line-through;">
+            «Сегодня съела 1200. Отлично, я молодец».
+        </div>
+        <p style="margin-top: 12px; font-weight: 600; color: var(--text-primary);">Нет. Вопрос другой:</p>
+        <div style="padding: 12px 18px; background: var(--accent-sage-light); border-left: 3px solid var(--accent-sage); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 15px; font-weight: 600; color: var(--accent-sage); margin-top: 6px;">
+            «Хватает ли мне еды для той задачи, которую я поставила телу?»
+        </div>
+    </section>
+
+    <!-- 06. КАК ПОНЯТЬ, ЧТО ТЫ ЕШЬ ДОСТАТОЧНО? -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">06. КАК ПОНЯТЬ, ЧТО ТЫ ЕШЬ ДОСТАТОЧНО?</h2>
+        </div>
+        <p class="section-desc"><strong>Смотрим не только на вес.</strong></p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 8px;">Отслеживаем:</p>
+        
+        <div class="metric-badges">
+            <span class="metric-badge">💪 силу на тренировках</span>
+            <span class="metric-badge">🔋 восстановление</span>
+            <span class="metric-badge">🌙 сон</span>
+            <span class="metric-badge">⚡ уровень энергии</span>
+            <span class="metric-badge">🍽️ голод и насыщение</span>
+            <span class="metric-badge">⚖️ динамику веса</span>
+            <span class="metric-badge">📐 объёмы</span>
+            <span class="metric-badge">📸 фото</span>
+            <span class="metric-badge">📈 прогресс в тренировках</span>
+            <span class="metric-badge">✨ самочувствие.</span>
+        </div>
+
+        <div class="callout-box" style="margin-top: 20px;">
+            <div class="callout-text" style="color: var(--accent-sage); font-weight: 600;">Вес — всего один показатель. Не председатель совета директоров твоего тела.</div>
+            <p style="font-size: 13.5px; color: var(--text-secondary); margin-top: 6px;">Особенно если ты тренируешься и набираешь мышечную массу.</p>
+        </div>
+    </section>
+
+    <!-- 07. НЕ БОЙСЯ ПЛЮСА НА ВЕСАХ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">07. НЕ БОЙСЯ ПЛЮСА НА ВЕСАХ</h2>
+        </div>
+        <p class="section-desc">Если ты начинаешь есть больше и тренироваться, вес может меняться.</p>
+        <p style="font-weight: 600; color: var(--text-primary);">На весах отражаются не только жир и мышцы.</p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 8px;">Это ещё:</p>
+        
+        <div class="grid-3" style="margin: 12px 0;">
+            <div class="pill-card">💧 вода;</div>
+            <div class="pill-card">🔋 гликоген;</div>
+            <div class="pill-card">🥣 содержимое ЖКТ;</div>
+            <div class="pill-card">🧬 гормональные колебания;</div>
+            <div class="pill-card">🧂 соль;</div>
+            <div class="pill-card">📅 цикл.</div>
+        </div>
+
+        <div class="callout-box terracotta" style="margin-top: 16px;">
+            <p style="font-weight: 600; color: var(--accent-terracotta);">Поэтому +500 г за утро — это не «я набрала жир за ночь».</p>
+            <p style="font-size: 14.5px; color: var(--text-primary); margin-top: 6px;">Не принимай решения о питании по одному взвешиванию.</p>
+            <p style="font-size: 15px; font-weight: 700; color: var(--accent-sage); margin-top: 6px;">Смотри на тенденцию.</p>
+        </div>
+    </section>
+
+    <!-- 08. ЧТО ДЕЛАТЬ СО СЛАДКИМ? -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">08. ЧТО ДЕЛАТЬ СО СЛАДКИМ?</h2>
+        </div>
+        <p class="section-desc" style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta);">Не устраивать из шоколада уголовное дело.</p>
+        <p>Если хочется сладкого — его можно встроить в рацион.</p>
+        
+        <div class="pill-card accent-card" style="margin: 14px 0;">
+            <div>
+                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-sage);">Рабочий вариант:</div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--accent-sage); margin-top: 2px;">нормальный приём пищи → десерт → обычная жизнь дальше.</div>
+            </div>
+        </div>
+
+        <div style="background: var(--accent-terracotta-light); border: 1px dashed rgba(185, 91, 68, 0.4); border-radius: var(--radius-md); padding: 14px 18px; margin: 12px 0;">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--accent-terracotta);">А не:</div>
+            <div style="font-size: 14px; color: var(--text-primary); margin-top: 2px;">«Я сегодня идеальная» → держалась весь день → вечером съела всё сладкое дома → «с понедельника начинаю заново».</div>
+        </div>
+
+        <p style="margin-top: 14px; font-weight: 600; color: var(--accent-sage);">Чем меньше запретительной драматургии вокруг еды, тем проще с ней жить.</p>
+    </section>
+
+    <!-- 09. ОВОЩИ И ФРУКТЫ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">09. ОВОЩИ И ФРУКТЫ</h2>
+        </div>
+        <p class="section-desc" style="color: var(--text-muted);">Не потому что «надо есть что-нибудь зелёное».</p>
+        <p>А потому что разнообразный рацион помогает закрывать потребности в клетчатке, витаминах, минералах и других биоактивных компонентах.</p>
+
+        <div style="background: var(--bg-canvas); border-radius: var(--radius-md); padding: 18px; margin: 16px 0; border: 1px solid var(--border-card);">
+            <p style="font-weight: 600; color: var(--accent-sage);">Не любишь брокколи?</p>
+            <p style="font-size: 13.5px; color: var(--text-muted); font-style: italic;">(ты просто не умеешь его интегрировать в свой рацион:)</p>
+            <p style="font-weight: 600; color: var(--accent-terracotta); margin-top: 6px;">Не надо страдать брокколи.</p>
+            <p style="margin-top: 8px;">Ешь то, что тебе вкусно:</p>
+            <div style="background: #FFFFFF; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 14px; color: var(--text-secondary); margin-top: 8px; line-height: 1.6;">
+                помидоры, огурцы, морковь, ягоды, яблоки, цитрусовые, перец, кабачки, капусту, зелень — что угодно из того, что реально появляется на твоей кухне.
+            </div>
+            <p style="font-weight: 700; color: var(--accent-sage); margin-top: 12px; text-align: center;">Цель — разнообразие, а не героизм.</p>
+        </div>
+    </section>
+
+    <!-- 10. ПИТАНИЕ, КОТОРОЕ МОЖНО СОБЛЮДАТЬ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">10. ПИТАНИЕ, КОТОРОЕ МОЖНО СОБЛЮДАТЬ</h2>
+        </div>
+        <p class="section-desc" style="font-style: italic;">Вот мой любимый критерий.</p>
+        
+        <div class="grid-2" style="margin: 14px 0;">
+            <div style="padding: 14px; background: #FDEEED; border-radius: var(--radius-md); text-decoration: line-through; color: var(--accent-terracotta); font-size: 14px;">
+                Не: «Насколько чисто я питаюсь?»
+            </div>
+            <div style="padding: 14px; background: var(--accent-sage-light); border-radius: var(--radius-md); font-weight: 600; color: var(--accent-sage); font-size: 14px;">
+                А: «Смогу ли я питаться так через три месяца?»
+            </div>
+        </div>
+
+        <p style="font-weight: 600; color: var(--text-primary); margin-top: 14px;">Если твой рацион требует:</p>
+        <ul class="clean-bullets">
+            <li>готовить 6 контейнеров ежедневно;</li>
+            <li>никогда не есть в ресторане;</li>
+            <li>отказываться от путешествий;</li>
+            <li>взвешивать огурец;</li>
+            <li>бояться хлеба;</li>
+        </ul>
+
+        <div class="callout-box" style="margin-top: 16px;">
+            <p style="color: var(--text-muted);">скорее всего, проблема не в твоей силе воли.</p>
+            <div class="callout-text" style="color: var(--accent-sage); font-weight: 700; margin-top: 4px;">Проблема в системе. И отношениях с едой!</div>
+        </div>
+    </section>
+
+    <!-- 11. РЕСТОРАНЫ, ПРАЗДНИКИ И ЖИЗНЬ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">11. РЕСТОРАНЫ, ПРАЗДНИКИ И ЖИЗНЬ</h2>
+        </div>
+        <p class="section-desc" style="font-weight: 600; color: var(--accent-sage);">Красивое тело не требует жить в вакууме.</p>
+        <p>В ресторане просто собираем привычную конструкцию:</p>
+        
+        <div class="plate-formula" style="background: var(--accent-sage-light); color: var(--accent-sage); border: 1px solid var(--border-subtle); margin: 12px 0;">
+            белок + гарнир + овощи
+        </div>
+        <p>и выбираем то, что действительно хочется.</p>
+
+        <div class="grid-2" style="margin: 18px 0;">
+            <div class="pill-card">
+                <span class="pill-icon">🍕</span>
+                <div>Пицца не отменяет твой прогресс.</div>
+            </div>
+            <div class="pill-card">
+                <span class="pill-icon">🥗</span>
+                <div>Как и один салат не создаёт красивое тело.</div>
+            </div>
+        </div>
+        
+        <p style="font-weight: 700; color: var(--accent-sage); text-align: center; margin-top: 10px;">Результат делает то, что происходит большую часть времени.</p>
+    </section>
+
+    <!-- 12. ЕСЛИ ТЫ НЕ ХОЧЕШЬ СЧИТАТЬ КАЛОРИИ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">12. ЕСЛИ ТЫ НЕ ХОЧЕШЬ СЧИТАТЬ КАЛОРИИ</h2>
+        </div>
+        <p class="section-desc" style="font-weight: 600; color: var(--accent-sage);">Используй «ручной режим».</p>
+        <p style="font-size: 13.5px; color: var(--text-muted);">На основные приёмы пищи:</p>
+
+        <div style="background: var(--bg-canvas); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 18px; margin: 14px 0; font-size: 15px; font-weight: 500; color: var(--accent-sage); line-height: 1.8;">
+            1 ладонь белка<br>1–2 кулака овощей/фруктов<br>1 порция углеводов<br>1 порция жиров
+        </div>
+
+        <p>И дальше смотри на обратную связь тела. Следующий уровень - на лабораторные анализы показатели: общий белок, ГГТ, липидный профиль, инсулин, глюкоза.</p>
+        <p style="margin-top: 10px; color: var(--text-secondary);">Если тренировки тяжёлые, энергии мало, прогресса нет, а голод постоянно высокий — возможно, еды недостаточно.</p>
+        <p style="margin-top: 10px; color: var(--text-secondary);">Если цель — точный набор мышц или снижение жировой массы, расчет калорий и макронутриентов может дать больше контроля.</p>
+        <div class="callout-box" style="margin-top: 14px; padding: 12px 18px;">
+            <p style="font-weight: 600; color: var(--accent-sage);">Инструмент выбираем под задачу, а не рекомендации из соц сетей.</p>
+        </div>
+    </section>
+
+    <!-- 13. А ЧТО С БАДАМИ? -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">13. А ЧТО С БАДАМИ?</h2>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 8px; margin: 16px 0;">
+            <div class="goal-item" style="border-left-color: var(--accent-sage); font-weight: 600;">1. Сначала еда.</div>
+            <div class="goal-item" style="border-left-color: var(--accent-pistachio);">2. Потом сон.</div>
+            <div class="goal-item" style="border-left-color: var(--accent-gold);">3. Потом тренировки.</div>
+            <div class="goal-item" style="border-left-color: var(--accent-terracotta);">4. Потом восстановление.</div>
+            <div class="goal-item accent-card" style="border-left-color: var(--accent-sage-dark); font-weight: 700; background: var(--accent-sage-light); color: var(--accent-sage);">5. И только потом мы достаем баночки.</div>
+        </div>
+
+        <p style="color: var(--text-secondary); margin-top: 14px;">БАД не компенсирует хроническое недоедание, отсутствие белка или четыре часа сна.</p>
+        <p style="color: var(--accent-sage); font-weight: 600; margin-top: 8px;">Если есть подтверждённый дефицит или конкретные показания — тогда добавки могут быть частью стратегии. Важной частью.</p>
+    </section>
+
+    <!-- 14. МОЙ (А ТЕПЕРЬ И ТВОЙ) МИНИМАЛЬНЫЙ ЧЕК-ЛИСТ -->
+    <section class="section-card">
+        <div class="section-header">
+            <h2 class="section-title">14. МОЙ (А ТЕПЕРЬ И ТВОЙ) МИНИМАЛЬНЫЙ ЧЕК-ЛИСТ</h2>
+        </div>
+        <p class="section-desc">Если хочется не усложнять — начни с этих пунктов:</p>
+
+        <div class="checklist-grid">
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я ем достаточно для своей цели</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>В каждом основном приёме пищи есть источник белка.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я не боюсь углеводов.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>В рационе есть жиры.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я ем овощи и фрукты в разных вариантах.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я не живу на постоянных перекусах «на бегу».</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я пью достаточно жидкости.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я не пытаюсь компенсировать еду голодом или тренировкой.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я учитываю восстановление.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я тщательно пережевываю еду.</span>
+            </div>
+            <div class="checklist-row">
+                <span class="check-bullet">✓</span>
+                <span>Я смотрю на динамику, а не на один день.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- И ГЛАВНОЕ -->
+    <div class="doc-footer-card">
+        <div class="footer-tag">И ГЛАВНОЕ</div>
+        <div class="footer-main-text">Тебе не нужен ещё один список продуктов, которые «можно».</div>
+        
+        <p style="color: rgba(255,255,255,0.85); margin-bottom: 8px;">Тебе нужна система, в которой:</p>
+        <div class="footer-flow">
+            ты ешь → двигаешься → восстанавливаешься → становишься сильнее → видишь изменения → продолжаешь.
+        </div>
+        
+        <p style="font-weight: 600; font-size: 16px; margin-bottom: 12px; color: #FFFFFF;">Не идеально. Достаточно хорошо. Но регулярно.</p>
+        <p class="footer-closing">Потому что красивое тело — это не результат одного идеального понедельника.</p>
+        <p class="footer-closing" style="font-weight: 600; margin-top: 8px; color: #FFFFFF;">Это результат сотен обычных дней, в которых ты наконец перестала воевать со своим телом и начала его строить.</p>
+
+        <div class="author-signature">
+            <span>АНАСТАСИЯ МЕЛЬНИКОВА</span>
+            <span>ЗОЖ-КЛУБ • СТАРТ 2026</span>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
