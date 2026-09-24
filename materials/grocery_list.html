@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анастасия Мельникова — Список продуктов по КБЖУ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #FAF8F5;
+            --bg-card: #FFFFFF;
+            --bg-card-muted: #F5F1EB;
+            --accent-sage: #2D4336;
+            --accent-sage-dark: #1F3025;
+            --accent-sage-light: #EBF0EA;
+            --accent-sage-tint: #F2F6F3;
+            --accent-terracotta: #B95B44;
+            --accent-terracotta-light: #F9ECE8;
+            --accent-pistachio: #6F8B77;
+            --accent-gold: #B89758;
+            --accent-gold-light: #FAF4E8;
+            --accent-blue: #4A6B82;
+            --accent-blue-light: #EBF2F7;
+            --text-primary: #1C1917;
+            --text-secondary: #575249;
+            --text-muted: #8C8477;
+            --border-subtle: #E8E2D8;
+            --border-card: #EDE7DC;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 1px 3px rgba(45, 67, 54, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 6px 20px -2px rgba(45, 67, 54, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 16px 40px -4px rgba(45, 67, 54, 0.08);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            padding: 32px 16px;
+        }
+
+        .wrapper {
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background-color: var(--accent-sage-light);
+            color: var(--accent-sage);
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .brand-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .doc-header {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F1EB 100%);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-xl);
+            padding: 44px 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(185, 91, 68, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .doc-tagline {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--accent-terracotta);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .doc-title {
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 4.8vw, 44px);
+            font-weight: 600;
+            line-height: 1.18;
+            color: var(--accent-sage);
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+        }
+
+        .doc-target {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .calorie-badge {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-family: var(--font-sans);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 12px rgba(45, 67, 54, 0.2);
+        }
+
+        /* 4 Weeks Roadmap */
+        .roadmap-container {
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .roadmap-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-sage);
+            margin-bottom: 16px;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .stage-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 16px 14px;
+            position: relative;
+            border-top: 3px solid var(--accent-sage);
+        }
+
+        .stage-card:nth-child(2) {
+            border-top-color: var(--accent-terracotta);
+        }
+        .stage-card:nth-child(3) {
+            border-top-color: var(--accent-gold);
+        }
+        .stage-card:nth-child(4) {
+            border-top-color: var(--accent-pistachio);
+        }
+
+        .stage-number {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .stage-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        /* Category Card */
+        .category-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 36px 36px;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 30px;
+            font-weight: 600;
+            color: var(--accent-sage);
+            letter-spacing: 0.02em;
+        }
+
+        .category-target {
+            background: var(--accent-sage-light);
+            color: var(--accent-sage);
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Subcategory block */
+        .subcat-block {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 20px 22px;
+            margin-bottom: 18px;
+        }
+
+        .subcat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .subcat-title {
+            font-family: var(--font-serif);
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .portion-badge {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            color: var(--accent-terracotta);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Product items list */
+        .product-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px 16px;
+            margin: 12px 0;
+        }
+
+        .product-list.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        .product-list.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .product-item::before {
+            content: '•';
+            color: var(--accent-sage);
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .item-note {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-top: 10px;
+            line-height: 1.5;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius-sm);
+            border-left: 2px solid var(--accent-gold);
+        }
+
+        /* Callout Box */
+        .callout-box {
+            background: linear-gradient(135deg, var(--accent-sage-tint) 0%, #FFFFFF 100%);
+            border: 1px solid rgba(45, 67, 54, 0.15);
+            border-radius: var(--radius-md);
+            padding: 18px 22px;
+            margin: 18px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .callout-box.terracotta {
+            background: linear-gradient(135deg, var(--accent-terracotta-light) 0%, #FFFFFF 100%);
+            border-color: rgba(185, 91, 68, 0.2);
+        }
+
+        .callout-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-sage);
+            margin-bottom: 6px;
+        }
+
+        .callout-box.terracotta .callout-title {
+            color: var(--accent-terracotta);
+        }
+
+        /* Meal Plate Section */
+        .meal-card {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            margin-bottom: 16px;
+        }
+
+        .meal-title {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-sage);
+            margin-bottom: 6px;
+        }
+
+        .meal-formula {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--accent-terracotta);
+            margin-bottom: 12px;
+        }
+
+        .meal-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meal-example-item {
+            background: #FFFFFF;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-size: 13.5px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer & Extra Materials */
+        .materials-box {
+            background: linear-gradient(135deg, var(--accent-sage) 0%, var(--accent-sage-dark) 100%);
+            color: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 40px 36px;
+            margin-top: 36px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .materials-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 18px;
+        }
+
+        .materials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .material-item {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            font-size: 14.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-signature {
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 14mm 12mm 14mm 12mm;
+            }
+
+            body {
+                background-color: #FFFFFF !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                font-size: 12.5px !important;
+                line-height: 1.4 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .wrapper {
+                max-width: 100% !important;
+            }
+
+            .doc-header {
+                padding: 22px !important;
+                margin-bottom: 16px !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .category-card {
+                padding: 20px !important;
+                margin-bottom: 16px !important;
+                box-shadow: none !important;
+                border: 1px solid #D5CFC3 !important;
+            }
+
+            .subcat-block, .meal-card, .callout-box, .materials-box, .warning-box, .avoid-break {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .materials-box {
+                background: #2D4336 !important;
+                color: #FFFFFF !important;
+                padding: 24px !important;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            body {
+                padding: 16px 8px;
+            }
+            .doc-header {
+                padding: 28px 20px;
+            }
+            .category-card {
+                padding: 22px 16px;
+            }
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-list, .product-list.three-col {
+                grid-template-columns: 1fr;
+            }
+            .materials-box {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- Document Header -->
+    <header class="doc-header">
+        <div class="brand-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            АНАСТАСИЯ МЕЛЬНИКОВА • ЗОЖ-МЕТОДОЛОГИЯ
+        </div>
+        <div class="doc-tagline">ЕСТЬ, ЧТОБЫ ЖИТЬ, А НЕ НАОБОРОТ</div>
+        <h1 class="doc-title">Список продуктов по КБЖУ на примере среднестатистического запроса  женщины 25-45 рекомпозиция тела</h1>
+        <div class="calorie-badge">⚡ 1800 ккал/сутки</div>
+
+        <!-- 4-Week Plan -->
+        <div class="roadmap-container">
+            <div class="roadmap-title">Можно разбить на этапы:</div>
+            <div class="roadmap-grid">
+                <div class="stage-card">
+                    <div class="stage-number">ЭТАП 1</div>
+                    <div class="stage-text">1 неделя -фокус на белок</div>
+                </div>
+                <div class="stage-card">
+                    <div class="stage-number">ЭТАП 2</div>
+                    <div class="stage-text">2 неделя - жиры до 60г в сутки</div>
+                </div>
+                <div class="stage-card">
+                    <div class="stage-number">ЭТАП 3</div>
+                    <div class="stage-text">3 неделя - добавляем гарниры - углеводы до 300 гр в сутки</div>
+                </div>
+                <div class="stage-card">
+                    <div class="stage-number">ЭТАП 4</div>
+                    <div class="stage-text">4 неделя - 1800 калорий в комфортном режиме</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 01. БЕЛКИ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">БЕЛКИ</h2>
+            <div class="category-target">Около 90–110 г/сутки. 25–35 г белка в прием пищи</div>
+        </div>
+
+        <!-- Яйца -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🥚 Яйца куриные или перепелиные</h3>
+            </div>
+            <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 6px;">1-2 яйца — хороший вариант завтрака</p>
+            <div class="item-note">можно добавлять 100–150 г яичных белков, если нужно увеличить белок без сильного увеличения жиров.</div>
+        </div>
+
+        <!-- Рыба -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🐟 Рыба</h3>
+                <span class="portion-badge">3–4 раза в неделю:</span>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">форель</li>
+                <li class="product-item">семга</li>
+                <li class="product-item">скумбрия</li>
+                <li class="product-item">сельдь</li>
+                <li class="product-item">дорадо</li>
+                <li class="product-item">сибас</li>
+                <li class="product-item">треска</li>
+                <li class="product-item">хек</li>
+                <li class="product-item">нерка</li>
+                <li class="product-item">горбуша</li>
+                <li class="product-item">кижуч</li>
+            </ul>
+            <div style="margin-top: 10px; font-weight: 600; color: var(--accent-sage);">Порция: 120–160 г  рыбы.</div>
+            <div class="item-note">Жирную рыбу не нужно исключать из-за холестерина — она является источником ненасыщенных жиров. НО важно тогда подбивать объем под свой процент жира са сутки. А вот соленую/копченую рыбу лучше ограничить.</div>
+        </div>
+
+        <!-- Птица -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍗 Птица</h3>
+                <span class="portion-badge">Порция: 120–200 г.</span>
+            </div>
+            <ul class="product-list single-col">
+                <li class="product-item">куриное бедро (без кожи, если есть перебор по жирам за сутки)</li>
+                <li class="product-item">куриная грудка</li>
+                <li class="product-item">индейка</li>
+                <li class="product-item">перепелка</li>
+                <li class="product-item">утка (жирная сама по себе)</li>
+            </ul>
+        </div>
+
+        <!-- Мясо -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🥩 Мясо</h3>
+                <span class="portion-badge">Порция: 120–200 г .</span>
+            </div>
+            <ul class="product-list single-col">
+                <li class="product-item">говядина</li>
+                <li class="product-item">телятина</li>
+                <li class="product-item">кролик</li>
+                <li class="product-item">баранина (жирная сама по себе)</li>
+                <li class="product-item">печень куриная, говяжья, кролика, индейки</li>
+                <li class="product-item">язык говяжий (жирный, но классный источник гемового железа!)</li>
+            </ul>
+            <div class="item-note">Красное мясо — примерно 2–3 раза в неделю, остальное можно закрывать птицей и рыбой.</div>
+        </div>
+
+        <!-- Морепродукты -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🦐 Морепродукты</h3>
+                <span class="portion-badge">Порция 120–200г.</span>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">осьминог</li>
+                <li class="product-item">кальмар</li>
+                <li class="product-item">мидии</li>
+                <li class="product-item">устрицы</li>
+                <li class="product-item">морской гребешок</li>
+                <li class="product-item">лобстер, краб, рак</li>
+                <li class="product-item">креветки</li>
+            </ul>
+        </div>
+
+        <!-- Молочные -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🥛 Молочные</h3>
+                <span class="portion-badge">При переносимости:</span>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">греческий йогурт</li>
+                <li class="product-item">безлактозный йогурт</li>
+                <li class="product-item">пробиотические варианты: ацидофилин, бифилайф (во вкусвилл есть без сахара и химии)</li>
+                <li class="product-item">творог</li>
+                <li class="product-item">натуральный йогурт без сахара</li>
+                <li class="product-item">кефир</li>
+                <li class="product-item">сыр (контролируйте жирность)</li>
+                <li class="product-item">козья молочка</li>
+                <li class="product-item">овечья молочка</li>
+            </ul>
+            <div style="margin-top: 10px; font-weight: 600; color: var(--accent-sage);">Ориентир:</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;">
+                <span class="portion-badge">йогурт 150–200 г</span>
+                <span class="portion-badge">творог 150–200 г</span>
+                <span class="portion-badge">сыр 20–30 г</span>
+            </div>
+            <div class="item-note">При реакции на обычную молочку — не заставлять себя «восстанавливать лактозу», а использовать безлактозные варианты.</div>
+        </div>
+
+        <!-- Растительный белок -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🌱 Растительный белок:</h3>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">тофу</li>
+                <li class="product-item">темпе</li>
+                <li class="product-item">натто</li>
+                <li class="product-item">эдамаме</li>
+                <li class="product-item">маш</li>
+                <li class="product-item">зеленый горошек замороженный или в банке без сахара</li>
+                <li class="product-item">кукуруза</li>
+                <li class="product-item">фасоль</li>
+                <li class="product-item">нут</li>
+                <li class="product-item">белковые макароны из нута, чечевицы</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 02. ЖИРЫ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">ЖИРЫ</h2>
+            <div class="category-target" style="background: var(--accent-terracotta-light); color: var(--accent-terracotta);">Ориентир — 55–65 г в сутки.</div>
+        </div>
+
+        <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">Хорошие источники:</p>
+        <ul class="product-list single-col">
+            <li class="product-item">оливковое масло — 5–15 г за прием пищи</li>
+            <li class="product-item">авокадо — 50–70 г</li>
+            <li class="product-item">орехи, кроме арахиса — 15–20 г</li>
+            <li class="product-item">семена — 10–15 г</li>
+            <li class="product-item">жирная рыба</li>
+            <li class="product-item">яйца (желток)</li>
+            <li class="product-item">сыр</li>
+            <li class="product-item">кокос</li>
+            <li class="product-item">конопляное масло</li>
+            <li class="product-item">кокосовое масло</li>
+            <li class="product-item">кокосовый урбеч</li>
+            <li class="product-item">кунжутное масло</li>
+            <li class="product-item">масло Авокадо</li>
+            <li class="product-item">масло Гхи</li>
+            <li class="product-item">сливочное масло от 82,5%</li>
+            <li class="product-item">Тхина</li>
+            <li class="product-item">Тыквенное масло</li>
+        </ul>
+
+        <div class="callout-box terracotta" style="margin-top: 18px;">
+            <div class="callout-title">⚠️ ВАЖНОЕ ПРАВИЛО</div>
+            <p>Важно: масло, авокадо, орехи и сыр — очень полезные продукты, но калорийные. Поэтому не «поливать салат маслом на глаз», а первое время взвешивать масло.</p>
+        </div>
+
+        <div class="warning-box avoid-break" style="background: #FFF5F3; border: 1px solid rgba(185, 91, 68, 0.2); border-radius: var(--radius-md); padding: 18px 22px; margin-top: 14px;">
+            <div style="font-weight: 700; color: var(--accent-terracotta); margin-bottom: 10px;">Что уменьшить, сделать редкими:</div>
+            <ul class="product-list single-col">
+                <li class="product-item" style="color: var(--accent-terracotta);">колбасы</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">сосиски</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">бекон</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">большое количество сливочного масла</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">фритюр</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">трансжиры</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">частые жирные соусы</li>
+                <li class="product-item" style="color: var(--accent-terracotta);">большое количество выпечки.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 03. УГЛЕВОДЫ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">УГЛЕВОДЫ</h2>
+        </div>
+
+        <div class="grid-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px;">
+            <div class="subcat-block" style="margin: 0;">
+                <div style="font-weight: 600; color: var(--accent-sage);">Картофель запеченный или на пару — 150–400 г</div>
+            </div>
+            <div class="subcat-block" style="margin: 0;">
+                <div style="font-weight: 600; color: var(--accent-sage);">Батат запеченный или на пару  — 150–400 г</div>
+            </div>
+        </div>
+
+        <!-- Крупы -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍚 Крупы</h3>
+                <span class="portion-badge">Порция: примерно 40–100 г сухой крупы.</span>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">овсянка цельная долгой варки с пометкой без глютена</li>
+                <li class="product-item">гречка зеленая, коричневая</li>
+                <li class="product-item">рис цельнозерновой, басмати, жасмин</li>
+                <li class="product-item">киноа</li>
+                <li class="product-item">пшено</li>
+                <li class="product-item">амарант</li>
+                <li class="product-item">сорго</li>
+                <li class="product-item">булгур</li>
+                <li class="product-item">перловка</li>
+            </ul>
+        </div>
+
+        <!-- Макароны -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍝 Макароны</h3>
+                <span class="portion-badge">Можно 60–100 г сухих макарон на прием пищи.</span>
+            </div>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 8px;">Предпочтительно:</p>
+            <ul class="product-list single-col">
+                <li class="product-item">из твердых сортов пшеницы</li>
+                <li class="product-item">цельнозерновые, если хорошо переносятся</li>
+                <li class="product-item">без глютена</li>
+                <li class="product-item">белковые из бобовых</li>
+            </ul>
+        </div>
+
+        <!-- Хлеб -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍞 Хлеб</h3>
+                <span class="portion-badge">40–100 г за прием пищи.</span>
+            </div>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 6px;">Хлеб не является проблемой сам по себе.</p>
+            <p style="font-size: 13px; color: var(--text-muted);">Ориентир:</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 6px;">Можно:</p>
+            <ul class="product-list">
+                <li class="product-item">без глютена</li>
+                <li class="product-item">ржаной</li>
+                <li class="product-item">бородинский</li>
+                <li class="product-item">цельнозерновой</li>
+                <li class="product-item">хлеб с отрубями</li>
+                <li class="product-item">качественный хлеб на закваске</li>
+            </ul>
+            <div class="item-note">Если после хлеба усиливаются вздутие/бурление — тогда уже имеет смысл отдельно разбираться с переносимостью пшеницы/FODMAP, а не просто объявлять глютен «виновником».</div>
+        </div>
+
+        <!-- Фрукты и ягоды -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍓 Фрукты и ягоды</h3>
+            </div>
+            
+            <p style="font-size: 13.5px; font-weight: 600; color: var(--accent-sage); margin-bottom: 8px;">Фрукты:</p>
+            <ul class="product-list">
+                <li class="product-item">яблоко — 1 шт.</li>
+                <li class="product-item">груша — 1 шт.</li>
+                <li class="product-item">банан — 1 шт</li>
+                <li class="product-item">нектарин</li>
+                <li class="product-item">персик</li>
+                <li class="product-item">абрикос</li>
+                <li class="product-item">апельсин</li>
+                <li class="product-item">мандарин</li>
+                <li class="product-item">сливы</li>
+                <li class="product-item">ананас</li>
+                <li class="product-item">папайя</li>
+                <li class="product-item">гранат</li>
+                <li class="product-item">манго — ~150 г</li>
+                <li class="product-item">хурма</li>
+                <li class="product-item">виноград</li>
+                <li class="product-item">арбуз/дыня — 200–300 г</li>
+            </ul>
+
+            <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600; color: var(--accent-sage); font-size: 14px;">Ягоды:</span>
+                    <span class="portion-badge">Ягоды — 150–300 г</span>
+                </div>
+                <ul class="product-list three-col">
+                    <li class="product-item">клубника</li>
+                    <li class="product-item">малина</li>
+                    <li class="product-item">ежевика</li>
+                    <li class="product-item">голубика</li>
+                    <li class="product-item">черника</li>
+                    <li class="product-item">смородина</li>
+                    <li class="product-item">крыжовник</li>
+                    <li class="product-item">облепиха</li>
+                    <li class="product-item">вишня</li>
+                    <li class="product-item">клюква</li>
+                    <li class="product-item">брусника</li>
+                    <li class="product-item">черешня</li>
+                </ul>
+            </div>
+
+            <div class="item-note" style="margin-top: 14px;">При выраженном вздутии можно временно посмотреть индивидуальную переносимость яблок, груш, манго, арбуза — они у некоторых людей дают больше ЖКТ-симптомов.</div>
+        </div>
+    </section>
+
+    <!-- 04. ОВОЩИ, ЗЕЛЕНЬ, СПЕЦИИ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">ОВОЩИ</h2>
+        </div>
+        
+        <p style="font-size: 15px; font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">Каждый основной прием пищи — 150–300 г овощей, но не нужно резко увеличивать клетчатку.</p>
+        <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 8px;">Подойдут:</p>
+
+        <ul class="product-list three-col">
+            <li class="product-item">огурцы</li>
+            <li class="product-item">помидоры</li>
+            <li class="product-item">редис</li>
+            <li class="product-item">морковь</li>
+            <li class="product-item">кабачок</li>
+            <li class="product-item">баклажан</li>
+            <li class="product-item">болгарский перец</li>
+            <li class="product-item">брокколи</li>
+            <li class="product-item">цветная капуста</li>
+            <li class="product-item">тыква</li>
+            <li class="product-item">свекла</li>
+            <li class="product-item">листовые овощи</li>
+            <li class="product-item">зелень</li>
+            <li class="product-item">белокочанная капуста</li>
+            <li class="product-item">китайская капуста</li>
+            <li class="product-item">брюссельская капуста</li>
+            <li class="product-item">квашеная капуста</li>
+            <li class="product-item">лук</li>
+            <li class="product-item">лук порей</li>
+            <li class="product-item">морковь</li>
+            <li class="product-item">сельдерей корень</li>
+            <li class="product-item">сельдерей стебли</li>
+            <li class="product-item">спаржа зеленая</li>
+            <li class="product-item">фасоль стручковая</li>
+            <li class="product-item">чеснок</li>
+            <li class="product-item">корень цикорий (пребиотик)</li>
+            <li class="product-item">корень топинамбура (пребиотик)</li>
+        </ul>
+
+        <!-- Зелень -->
+        <div class="subcat-block" style="margin-top: 20px;">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🌿 Зелень</h3>
+            </div>
+            <ul class="product-list three-col">
+                <li class="product-item">Базилик</li>
+                <li class="product-item">Зеленый лук</li>
+                <li class="product-item">Кейл</li>
+                <li class="product-item">Кинза</li>
+                <li class="product-item">Крапива</li>
+                <li class="product-item">Листья лайма</li>
+                <li class="product-item">Лопух</li>
+                <li class="product-item">Микрозелень</li>
+                <li class="product-item">Мята</li>
+                <li class="product-item">Орегано</li>
+                <li class="product-item">Палочки лемонграсса</li>
+                <li class="product-item">Петрушка</li>
+                <li class="product-item">Руккола</li>
+                <li class="product-item">Салат Романо/Айсберг</li>
+                <li class="product-item">Сныть</li>
+                <li class="product-item">Тимьян</li>
+                <li class="product-item">Черемша</li>
+                <li class="product-item">Шпинат</li>
+                <li class="product-item">Щавель</li>
+                <li class="product-item">Укроп</li>
+            </ul>
+        </div>
+
+        <!-- Специи -->
+        <div class="subcat-block">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🧂 Специи</h3>
+            </div>
+            <ul class="product-list">
+                <li class="product-item">Анис</li>
+                <li class="product-item">Ваниль (не ванилин!)</li>
+                <li class="product-item">Гвоздика молотая</li>
+                <li class="product-item">Гвоздика целая</li>
+                <li class="product-item">Зира</li>
+                <li class="product-item">Итальянские приправы (базилик, орегано, майоран, чабрец)</li>
+                <li class="product-item">Кардамон</li>
+                <li class="product-item">Кориандр</li>
+                <li class="product-item">Корица палочки</li>
+                <li class="product-item">Корица молотая</li>
+                <li class="product-item">Кумин</li>
+                <li class="product-item">Куркума</li>
+                <li class="product-item">Лавровый лист</li>
+                <li class="product-item">Соль – гималайская или перуанская или крымская или морская неочищенная</li>
+                <li class="product-item">Мускатный орех</li>
+                <li class="product-item">Орегано</li>
+                <li class="product-item">Паприка</li>
+                <li class="product-item">Перец черный горошком</li>
+                <li class="product-item">Перец черный свеже молотый</li>
+                <li class="product-item">Хмели сунели</li>
+            </ul>
+        </div>
+
+        <div class="item-note" style="margin-top: 14px; font-size: 14px;">При вздутии часть овощей лучше есть термически обработанными, а не делать огромную миску сырого салата. И важный момент: лук, большое количество капусты, бобовые, чеснок могут усиливать газообразование. Не обязательно исключать — просто отслеживать индивидуальную переносимость.</div>
+    </section>
+
+    <!-- 05. СОУСЫ И КОНСЕРВАЦИЯ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">Соусы, консервация (изучайте составы)</h2>
+        </div>
+        <ul class="product-list single-col">
+            <li class="product-item">Бальзамический уксус</li>
+            <li class="product-item">Зернистая горчица</li>
+            <li class="product-item">Кокосовые аминокислоты</li>
+            <li class="product-item">Тхина</li>
+            <li class="product-item">Уксус натуральный с маткой на дне</li>
+            <li class="product-item">Соевый соус натурального брожения без сахара и глютена</li>
+        </ul>
+    </section>
+
+    <!-- 06. КАК СОБИРАТЬ ТАРЕЛКУ -->
+    <section class="category-card">
+        <div class="category-header">
+            <h2 class="category-title">КАК СОБИРАТЬ ТАРЕЛКУ</h2>
+        </div>
+        <p style="font-size: 15px; color: var(--text-secondary); margin-bottom: 18px;">Самая простая схема, чтобы перестать считать каждую крошку:</p>
+
+        <!-- Завтрак -->
+        <div class="meal-card">
+            <div class="meal-title">Завтрак</div>
+            <div class="meal-formula">Белок + углеводы + овощи/фрукты + немного жира</div>
+            <div class="meal-examples">
+                <div class="meal-example-item">Например: 2 яйца + 50 г хлеба + 50 г авокадо + огурец/помидор</div>
+                <div class="meal-example-item">или овсянка 50 г сухой крупы + йогурт 150 г + ягоды 150 г + 10 г орехов.</div>
+            </div>
+        </div>
+
+        <!-- Обед -->
+        <div class="meal-card">
+            <div class="meal-title">Обед</div>
+            <div class="meal-formula">Белок 120–160 г + гарнир + овощи</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Например:</p>
+            <div class="meal-examples">
+                <div class="meal-example-item">куриное бедро 150 г + картофель 200 г + салат 200 г + 10 г оливкового масла.</div>
+                <div class="meal-example-item">Или: говядина 130–150 г + макароны 70 г сухих + овощи.</div>
+            </div>
+        </div>
+
+        <!-- Ужин -->
+        <div class="meal-card">
+            <div class="meal-title">Ужин</div>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 8px;">Не обязательно делать ужин исключительно «белок + салат».</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Например:</p>
+            <div class="meal-examples">
+                <div class="meal-example-item">рыба 150 г + картофель 150 г + овощи 200 г</div>
+                <div class="meal-example-item">или индейка 130 г + рис 50–60 г сухого + овощи.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07. ДЕСЕРТЫ И РЕСТОРАНЫ -->
+    <section class="category-card">
+        <div class="subcat-block" style="background: var(--accent-sage-light); border-color: rgba(45, 67, 54, 0.15);">
+            <div class="subcat-header">
+                <h3 class="subcat-title" style="color: var(--accent-sage);">А ЧТО С ДЕСЕРТАМИ?</h3>
+            </div>
+            <p style="font-size: 14.5px; color: var(--text-primary); line-height: 1.6;">Можно оставить, внедряя в КБЖУ. Например 2–3 раза в неделю небольшая порция десерта, встроенная в рацион. Лучше съесть привычный  десерт после полноценного приема пищи, чем весь день «держаться», а вечером сорваться.</p>
+        </div>
+
+        <div class="subcat-block" style="margin-top: 18px;">
+            <div class="subcat-header">
+                <h3 class="subcat-title">🍽️ РЕСТОРАНЫ</h3>
+            </div>
+            <p style="font-size: 14px; font-weight: 600; color: var(--accent-sage); margin-bottom: 10px;">Тоже не исключаем. Хорошие варианты:</p>
+            <ul class="product-list single-col">
+                <li class="product-item">греческий салат + рыба/мясо</li>
+                <li class="product-item">том ям + рис</li>
+                <li class="product-item">суши/роллы без майонеза и большого количества сливочного сыра</li>
+                <li class="product-item">стейк + овощи + картофель</li>
+                <li class="product-item">рыба + овощи + гарнир</li>
+                <li class="product-item">паста + белок/морепродукты</li>
+            </ul>
+            <div class="item-note" style="font-weight: 600; color: var(--accent-sage); margin-top: 12px;">Соус отдельно — отличная привычка.</div>
+        </div>
+    </section>
+
+    <!-- FOOTER SIGNATURE -->
+    <footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--text-muted); text-transform: uppercase;">
+        <span>АНАСТАСИЯ МЕЛЬНИКОВА</span>
+        <span>ЗОЖ-КЛУБ • СТАРТ 2026</span>
+    </footer>
+
+</div>
+</body>
+</html>

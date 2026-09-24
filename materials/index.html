@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>База знаний & Материалы ЗОЖ-клуба // Анастасия Мельникова</title>
+    <meta name="description" content="Официальные обучающие материалы, гайды по питанию, списки продуктов и клинические аудиты для участниц ЗОЖ-клуба Анастасии Мельниковой.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #FAF8F5;
+            --bg-card: #FFFFFF;
+            --bg-card-muted: #F5F1EB;
+            --accent-sage: #2D4336;
+            --accent-sage-dark: #1F3025;
+            --accent-sage-light: #EBF0EA;
+            --accent-sage-tint: #F2F6F3;
+            --accent-terracotta: #B95B44;
+            --accent-terracotta-light: #F9ECE8;
+            --accent-gold: #B89758;
+            --accent-gold-light: #FAF4E8;
+            --text-primary: #1C1917;
+            --text-secondary: #575249;
+            --text-muted: #8C8477;
+            --border-subtle: #E8E2D8;
+            --border-card: #EDE7DC;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 22px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 1px 3px rgba(45, 67, 54, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 6px 20px -2px rgba(45, 67, 54, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 16px 40px -4px rgba(45, 67, 54, 0.08);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            padding: 24px 16px 80px;
+        }
+
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0 28px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 36px;
+        }
+
+        .nav-brand {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-sage);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-brand span {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            background: var(--accent-gold-light);
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(184, 151, 88, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-link-subtle {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link-subtle:hover {
+            color: var(--accent-sage);
+        }
+
+        .btn-tg {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            padding: 9px 18px;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-tg:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Hero Motivational Section */
+        .hero-banner {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F1EB 100%);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-xl);
+            padding: 56px 48px;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(45, 67, 54, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent-terracotta);
+            background: var(--accent-terracotta-light);
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(34px, 4.8vw, 54px);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -0.01em;
+            color: var(--accent-sage);
+            margin-bottom: 22px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent-terracotta);
+        }
+
+        .hero-text {
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 820px;
+            margin-bottom: 18px;
+        }
+
+        .hero-quote {
+            background: var(--accent-sage-tint);
+            border-left: 4px solid var(--accent-sage);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 16px 20px;
+            margin-top: 24px;
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--accent-sage);
+            line-height: 1.5;
+        }
+
+        /* Section Headings */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--accent-sage);
+        }
+
+        /* 4 Materials Showcase Grid */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+
+        .material-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-lg);
+            padding: 38px 36px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative;
+        }
+
+        .material-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(45, 67, 54, 0.4);
+        }
+
+        .card-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-sage);
+            background: var(--accent-sage-light);
+            padding: 4px 12px;
+            border-radius: 999px;
+            align-self: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-pill.terracotta {
+            color: var(--accent-terracotta);
+            background: var(--accent-terracotta-light);
+        }
+
+        .card-pill.gold {
+            color: var(--accent-gold);
+            background: var(--accent-gold-light);
+        }
+
+        .card-h3 {
+            font-family: var(--font-serif);
+            font-size: 27px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--accent-sage);
+            margin-bottom: 6px;
+        }
+
+        .card-sub {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .card-desc {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .card-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .card-meta-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: var(--bg-card-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .card-btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-card-primary {
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            padding: 11px 22px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-card-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-card-secondary {
+            background: var(--bg-card-muted);
+            border: 1px solid var(--border-card);
+            color: var(--text-primary);
+            padding: 11px 20px;
+            border-radius: 999px;
+            font-size: 13.5px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn-card-secondary:hover {
+            background: #FFFFFF;
+            border-color: var(--accent-sage);
+        }
+
+        /* 5 Rules of Transformation */
+        .rules-section {
+            background: #FFFFFF;
+            border: 1px solid var(--border-card);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .rule-card {
+            background: var(--bg-canvas);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 24px 22px;
+        }
+
+        .rule-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--accent-terracotta);
+            margin-bottom: 8px;
+        }
+
+        .rule-title {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-sage);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .rule-text {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+        }
+
+        /* Support & Telegram CTA Banner */
+        .cta-banner {
+            background: var(--accent-sage);
+            color: #FFFFFF;
+            border-radius: var(--radius-xl);
+            padding: 50px 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 28px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-content {
+            max-width: 620px;
+        }
+
+        .cta-title {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .cta-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .btn-cta-light {
+            background: #FFFFFF;
+            color: var(--accent-sage);
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn-cta-light:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer.hub-footer {
+            margin-top: 60px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-banner {
+                padding: 36px 24px;
+            }
+            .rules-section {
+                padding: 28px 20px;
+            }
+            .cta-banner {
+                padding: 36px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <a href="../consult/" class="nav-brand">
+            Melnikova<span>.materials</span>
+        </a>
+        <div class="nav-links">
+            <a href="../consult/" class="nav-link-subtle">&larr; Главный сайт</a>
+            <a href="https://t.me/nasti_nutri" target="_blank" class="btn-tg">
+                Telegram @nasti_nutri &rarr;
+            </a>
+        </div>
+    </header>
+
+    <!-- Motivational Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-eyebrow">
+            БАЗА ЗНАНИЙ &bull; МАТЕРИАЛЫ ЗОЖ-КЛУБА
+        </div>
+        <h1 class="hero-title">
+            Красивое тело — это не подвиг.<br>Это <em>система заботы</em> о себе.
+        </h1>
+        <p class="hero-text">
+            Привет! Если ты здесь — значит, ты решила перестать воевать со своим организмом, сидеть на изнурительных диетах и надеяться на случайность. Красивое, упругое тело с рельефом строится не из запретов и чувства вины. Оно рождается в тот момент, когда ты начинаешь кормить его достаточным количеством энергии, давать четкий тренировочный стимул и уважать восстановление.
+        </p>
+        <p class="hero-text">
+            Здесь собраны 4 твоих главных практических ориентира. Изучай их последовательно, сохраняй в телефон и помни главное правило клуба:
+        </p>
+        <div class="hero-quote">
+            «Нам не обязательно делать больше. Нам наконец пора делать точнее. Не худеть бесконечно — а строить тело.»
+        </div>
+    </section>
+
+    <!-- Section Heading -->
+    <div class="section-header">
+        <div>
+            <div class="section-label">РАБОЧИЕ МАТЕРИАЛЫ КУРСА</div>
+            <h2 class="section-title">4 документа твоей трансформации</h2>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-sage);">
+            100% авторская методология &bull; A4 Web & Print
+        </div>
+    </div>
+
+    <!-- 4 Materials Grid -->
+    <div class="materials-grid">
+
+        <!-- Card 1: Guide -->
+        <article class="material-card">
+            <div>
+                <span class="card-pill">01 // ТЕОРИЯ & СИСТЕМА</span>
+                <h3 class="card-h3">Питание для красивого тела</h3>
+                <div class="card-sub">Фундаментальный обучающий гайд (161 абзац)</div>
+                <p class="card-desc">
+                    Научная база композиции тела: почему дефицит калорий не должен быть экстремальным, как работают белковые окна, почему кардио без силовых тренировок не дает плотности и как настроить циркадные ритмы без срывов.
+                </p>
+            </div>
+            <div>
+                <div class="card-meta-row">
+                    <span class="card-meta-tag">161 абзац (100% Verbatim)</span>
+                    <span class="card-meta-tag">Биохимия композиции</span>
+                    <span class="card-meta-tag">PDF 2.8 МБ</span>
+                </div>
+                <div class="card-btn-group">
+                    <a href="guide.html" target="_blank" class="btn-card-primary">
+                        Читать онлайн &rarr;
+                    </a>
+                    <a href="guide.pdf" download class="btn-card-secondary">
+                        Скачать PDF
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 2: Grocery List -->
+        <article class="material-card">
+            <div>
+                <span class="card-pill terracotta">02 // ПРАКТИКА & КОРЗИНА</span>
+                <h3 class="card-h3">Список продуктов & Конструктор</h3>
+                <div class="card-sub">Продуктовая корзина на 1800 ккал и конструктор тарелки</div>
+                <p class="card-desc">
+                    Понятный гид по закупке в супермаркете: белки, жиры, углеводы, клетчатка и соусы. Пошаговые формулы сытного завтрака, обеда, ужина и правила питания в ресторанах без чувства вины.
+                </p>
+            </div>
+            <div>
+                <div class="card-meta-row">
+                    <span class="card-meta-tag">7 категорий КБЖУ</span>
+                    <span class="card-meta-tag">Конструктор тарелки</span>
+                    <span class="card-meta-tag">PDF 1.4 МБ</span>
+                </div>
+                <div class="card-btn-group">
+                    <a href="grocery_list.html" target="_blank" class="btn-card-primary">
+                        Открыть корзину &rarr;
+                    </a>
+                    <a href="grocery_list.pdf" download class="btn-card-secondary">
+                        Скачать PDF
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 3: KBZHU Calculation Memo -->
+        <article class="material-card">
+            <div>
+                <span class="card-pill gold">03 // РАСЧЕТ & ДНЕВНИК</span>
+                <h3 class="card-h3">Памятка для подсчета КБЖУ</h3>
+                <div class="card-sub">Индивидуальные формулы и работа в FatSecret</div>
+                <p class="card-desc">
+                    Пошаговый расчет базового обмена по Mifflin–St Jeor, определение коэффициента активности TDEE, стратегии (дефицит, поддержание, профицит), баланс БЖУ, чек-лист самодиагностики и наглядные скриншоты дневника питания.
+                </p>
+            </div>
+            <div>
+                <div class="card-meta-row">
+                    <span class="card-meta-tag">98 пунктов алгоритма</span>
+                    <span class="card-meta-tag">Mifflin-St Jeor & TDEE</span>
+                    <span class="card-meta-tag">PDF 1.4 МБ</span>
+                </div>
+                <div class="card-btn-group">
+                    <a href="kbzhu_memo.html" target="_blank" class="btn-card-primary">
+                        Открыть памятку &rarr;
+                    </a>
+                    <a href="kbzhu_memo.pdf" download class="btn-card-secondary">
+                        Скачать PDF
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Card 4: Why Body Not Changing -->
+        <article class="material-card">
+            <div>
+                <span class="card-pill terracotta">04 // КЛИНИЧЕСКИЙ АУДИТ</span>
+                <h3 class="card-h3">Почему тело не меняется</h3>
+                <div class="card-sub">Глубокий доказательный разбор плато (15 глав)</div>
+                <p class="card-desc">
+                    Что делать, если вес стоит на месте: синдром RED-S у активных женщин, скрытое падение бытовой активности (NEAT), перетренированность, дефицит сна, соматические причины и клинический аудит из 10 вопросов.
+                </p>
+            </div>
+            <div>
+                <div class="card-meta-row">
+                    <span class="card-meta-tag">15 глав (257 абзацев)</span>
+                    <span class="card-meta-tag">PubMed & IOC Consensus</span>
+                    <span class="card-meta-tag">PDF 1.5 МБ</span>
+                </div>
+                <div class="card-btn-group">
+                    <a href="why_body_not_changing.html" target="_blank" class="btn-card-primary">
+                        Открыть разбор &rarr;
+                    </a>
+                    <a href="why_body_not_changing.pdf" download class="btn-card-secondary">
+                        Скачать PDF
+                    </a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- 5 Rules of Transformation -->
+    <section class="rules-section">
+        <div class="section-label">ФИЛОСОФИЯ ЗОЖ-КЛУБА</div>
+        <h2 class="section-title">5 правил устойчивой трансформации</h2>
+        <p style="font-size: 15px; color: var(--text-secondary); margin-top: 8px;">
+            Держи эти ориентиры в голове, когда кажется, что прогресс замедлился:
+        </p>
+
+        <div class="rules-grid">
+            <div class="rule-card">
+                <div class="rule-num">ПРАВИЛО 01</div>
+                <div class="rule-title">Стимул важнее усталости</div>
+                <p class="rule-text">Мышцы растут от прогрессии нагрузки, а не от количества пота на футболке. Тренируйся осознанно и фиксируй веса.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-num">ПРАВИЛО 02</div>
+                <div class="rule-title">Еда — это ресурс, а не враг</div>
+                <p class="rule-text">Невозможно построить упругие ягодицы и рельеф, постоянно экономя строительный материал. Корми тело достаточно.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-num">ПРАВИЛО 03</div>
+                <div class="rule-title">Шаги сжигают больше зала</div>
+                <p class="rule-text">Бытовая активность (NEAT) сжигает до 20–30% суточных калорий. 10 000 шагов на свежем воздухе работают лучше часа на беговой дорожке.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-num">ПРАВИЛО 04</div>
+                <div class="rule-title">Сон строит результат</div>
+                <p class="rule-text">Тренировка создает микроповреждения. А строится тело именно ночью во время глубокого сна. 7–8 часов сна — святое правило.</p>
+            </div>
+            <div class="rule-card">
+                <div class="rule-num">ПРАВИЛО 05</div>
+                <div class="rule-title">Оценивай динамику, а не день</div>
+                <p class="rule-text">Колебания веса в 1–2 кг после ужина — это вода и гликоген, а не жир. Смотри на фото, замеры талии и силовые за 4–8 недель.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Banner -->
+    <section class="cta-banner">
+        <div class="cta-content">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-gold); margin-bottom: 8px;">
+                ОСТАЛИСЬ ВОПРОСЫ ПО МАТЕРИАЛАМ?
+            </div>
+            <h3 class="cta-title">Я на связи в Telegram</h3>
+            <p class="cta-desc">
+                Если возникают сложности с расчетом КБЖУ, подбором продуктов или программа дает сбой — напиши мне лично. Мы разберем твои показатели и откалибруем стратегию.
+            </p>
+        </div>
+        <div>
+            <a href="https://t.me/nasti_nutri" target="_blank" class="btn-cta-light">
+                <span>Написать @nasti_nutri</span>
+                <span>&rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="hub-footer">
+        <span>АНАСТАСИЯ МЕЛЬНИКОВА &bull; ЗОЖ-КЛУБ 2026</span>
+        <span>HEALTH & NEURO COACHING</span>
+    </footer>
+
+</div>
+
+</body>
+</html>
