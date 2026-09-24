@@ -325,16 +325,71 @@
             line-height: 1.5;
         }
 
-        .pubmed-tag {
+        .pubmed-tag, a.pubmed-tag {
             font-family: var(--font-mono);
             font-size: 10.5px;
             font-weight: 700;
-            color: #2563EB;
+            color: #1D4ED8;
             background: #EFF6FF;
-            padding: 3px 8px;
+            padding: 3px 9px;
             border-radius: 4px;
             border: 1px solid #BFDBFE;
             flex-shrink: 0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        a.pubmed-tag:hover {
+            background: #DBEAFE;
+            color: #1E40AF;
+            border-color: #93C5FD;
+            text-decoration: underline;
+        }
+
+        .inline-study-link {
+            color: #2563EB;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            transition: color 0.15s ease;
+        }
+
+        .inline-study-link::after {
+            content: " ↗";
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.15s ease;
+        }
+
+        .inline-study-link:hover {
+            color: #1D4ED8;
+            text-decoration-thickness: 2px;
+        }
+
+        .inline-study-link:hover::after {
+            transform: translate(1px, -1px);
+        }
+
+        .study-title-link {
+            color: var(--accent-sage);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 700;
+            transition: color 0.15s ease;
+        }
+
+        .study-title-link:hover {
+            color: var(--accent-terracotta);
+            text-decoration: underline;
         }
 
         /* Audit Grid */
@@ -508,6 +563,28 @@
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
+
+            a {
+                text-decoration: none !important;
+                color: inherit !important;
+            }
+
+            a.pubmed-tag {
+                border-color: #CBD5E1 !important;
+                background: #F8FAFC !important;
+                color: #334155 !important;
+            }
+
+            .inline-study-link {
+                color: #1E293B !important;
+                text-decoration: none !important;
+                font-weight: 600 !important;
+            }
+
+            .study-title-link {
+                color: #1E293B !important;
+                text-decoration: none !important;
+            }
         }
 
         @media (max-width: 680px) {
@@ -622,13 +699,13 @@
         <p style="font-weight: 600; color: var(--accent-sage); margin-bottom: 12px;">Для гипертрофии важна <strong>прогрессия нагрузки</strong> — через вес, повторения, объем, сложность и другие параметры программы.</p>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PubMed 2023</span>
-            <span>Систематический обзор и сетевой метаанализ 2023 года включил 119 исследований по гипертрофии и 3364 участника; различные варианты силовых тренировок превосходили отсутствие тренировок, а многосетовые протоколы были среди наиболее эффективных для гипертрофии. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="Currier et al. / Schoenfeld et al., 2023 — Bayesian network meta-analysis">PubMed 37414459 ↗</a>
+            <span>Систематический обзор и сетевой метаанализ 2023 года включил 119 исследований по гипертрофии и 3364 участника; различные варианты силовых тренировок превосходили отсутствие тренировок, а многосетовые протоколы были среди наиболее эффективных для гипертрофии. (<a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Currier et al., 2023 (PMID 37414459)">PubMed</a>)</span>
         </div>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">РКИ 2024</span>
-            <span>Отдельное РКИ 2024 года показало, что прогрессировать можно как за счёт увеличения нагрузки, так и количества повторений — оба варианта способствовали росту силы и мышц у начинающих. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="РКИ прогрессии нагрузки (PubMed)">РКИ 2024 ↗</a>
+            <span>Отдельное РКИ 2024 года показало, что прогрессировать можно как за счёт увеличения нагрузки, так и количества повторений — оба варианта способствовали росту силы и мышц у начинающих. (<a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Исследование прогрессии силовых (PubMed)">PubMed</a>)</span>
         </div>
 
         <div class="callout-quote gold">
@@ -689,8 +766,8 @@
         </div>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">IOC Consensus 2023</span>
-            <span>Консенсус IOC 2023 года рассматривает RED-S как состояние, при котором недостаточная доступность энергии может затрагивать не только репродуктивную функцию, но и костную, иммунную, метаболическую, сердечно-сосудистую и другие системы.</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/37752011/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="2023 International Olympic Committee consensus statement on REDs (PMID 37752011)">IOC Consensus 2023 ↗</a>
+            <span><a href="https://pubmed.ncbi.nlm.nih.gov/37752011/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="IOC consensus statement on REDs (PMID 37752011)">Консенсус IOC 2023 года</a> рассматривает RED-S как состояние, при котором недостаточная доступность энергии может затрагивать не только репродуктивную функцию, но и костную, иммунную, метаболическую, сердечно-сосудистую и другие системы.</span>
         </div>
 
         <p style="font-weight: 600; color: var(--accent-sage); margin: 14px 0 8px;">И это особенно важно для:</p>
@@ -722,8 +799,8 @@
         </div>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PMID 28698222</span>
-            <span>Большой метаанализ Morton et al. показал, что дополнительный белок усиливает прирост безжировой массы и силы при силовых тренировках, но эффект не бесконечен. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="Morton et al., 2018 (PMID 28698222)">PMID 28698222 ↗</a>
+            <span>Большой метаанализ Morton et al. показал, что дополнительный белок усиливает прирост безжировой массы и силы при силовых тренировках, но эффект не бесконечен. (<a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Morton et al., 2018 (PMID 28698222)">PubMed</a>)</span>
         </div>
 
         <p style="font-size: 14px; color: var(--text-secondary); margin: 10px 0;">Практически для большинства тренирующихся людей диапазон около <strong>1,6 г/кг/сутки</strong> уже закрывает значительную часть потребности; более высокое потребление может быть уместно в отдельных ситуациях.</p>
@@ -754,13 +831,13 @@
         <p style="font-weight: 600; color: var(--accent-sage); margin: 12px 0 8px;">И это называется <strong>компенсаторными реакциями.</strong></p>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PMID 36933180</span>
-            <span>Обзор 2023 года показал, что в 67% рассмотренных исследований после начала тренировок наблюдалось снижение NEPA — физической активности вне тренировок. Авторы подчёркивают при этом значительную неоднородность исследований. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/36933180/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="Mansfeldt &amp; Magkos, 2023 (PMID 36933180)">PMID 36933180 ↗</a>
+            <span>Обзор 2023 года показал, что в 67% рассмотренных исследований после начала тренировок наблюдалось снижение NEPA — физической активности вне тренировок. Авторы подчёркивают при этом значительную неоднородность исследований. (<a href="https://pubmed.ncbi.nlm.nih.gov/36933180/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Mansfeldt &amp; Magkos, 2023 (PMID 36933180)">PubMed</a>)</span>
         </div>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PMID 24454704</span>
-            <span>Систематический обзор по NEAT/NEPA также обнаружил компенсаторное снижение активности в части вмешательств, но подчёркивает, что эффект неодинаков у разных людей и исследования имеют ограничения. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/29845903/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="NEAT/NEPA Systematic Review (PMID 29845903)">PMID 29845903 ↗</a>
+            <span>Систематический обзор по NEAT/NEPA также обнаружил компенсаторное снижение активности в части вмешательств, но подчёркивает, что эффект неодинаков у разных людей и исследования имеют ограничения. (<a href="https://pubmed.ncbi.nlm.nih.gov/29845903/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="NEAT/NEPA Systematic Review (PMID 29845903)">PubMed</a>)</span>
         </div>
 
         <div style="background: var(--bg-card-muted); border-radius: var(--radius-md); padding: 18px 20px; margin: 16px 0;">
@@ -866,8 +943,8 @@
         </div>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PubMed Meta</span>
-            <span>Систематические данные по женщинам показывают, что силовые тренировки действительно приводят к существенным улучшениям силы и гипертрофии; частота и объём могут влиять на адаптацию, особенно в отношении силы. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/31820374/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="Female resistance training meta-analysis (PMID 31820374)">PubMed 31820374 ↗</a>
+            <span>Систематические данные по женщинам показывают, что силовые тренировки действительно приводят к существенным улучшениям силы и гипертрофии; частота и объём могут влиять на адаптацию, особенно в отношении силы. (<a href="https://pubmed.ncbi.nlm.nih.gov/31820374/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Female resistance training meta-analysis (PMID 31820374)">PubMed</a>)</span>
         </div>
     </section>
 
@@ -992,8 +1069,8 @@
         <p style="font-size: 16px; font-weight: 600; color: var(--accent-terracotta); margin-bottom: 12px;"><s><strong>«Метаболизм сломан навсегда».</strong></s></p>
 
         <div class="evidence-badge">
-            <span class="pubmed-tag">PubMed Rosenbaum & Leibel</span>
-            <span>Обзор Rosenbaum &amp; Leibel описывает комплекс метаболических, поведенческих и нейроэндокринных адаптаций после снижения веса. (PubMed)</span>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/20935667/" target="_blank" rel="noopener noreferrer" class="pubmed-tag" title="Rosenbaum &amp; Leibel, Adaptive thermogenesis in humans (PMID 20935667)">PubMed 20935667 ↗</a>
+            <span>Обзор Rosenbaum &amp; Leibel описывает комплекс метаболических, поведенческих и нейроэндокринных адаптаций после снижения веса. (<a href="https://pubmed.ncbi.nlm.nih.gov/20935667/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="Rosenbaum &amp; Leibel, Adaptive thermogenesis (PMID 20935667)">PubMed</a>)</span>
         </div>
 
         <div class="callout-quote gold">
@@ -1116,36 +1193,52 @@
             <strong>Исследования по теме:</strong>
         </div>
         <div class="study-row">
-            <div class="study-title">01. Morton et al., 2018</div>
-            <div><strong>Morton et al., 2018 — белок + силовые тренировки</strong> Систематический обзор и метаанализ. PubMed — PMID 28698222⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener noreferrer" class="study-title-link">01. Morton et al., 2018 ↗</a>
+            </div>
+            <div><strong>Morton et al., 2018 — белок + силовые тренировки</strong> Систематический обзор и метаанализ. <a href="https://pubmed.ncbi.nlm.nih.gov/28698222/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — PMID 28698222</a>⁠</div>
         </div>
         <div class="study-row">
-            <div class="study-title">02. Schoenfeld et al., 2023</div>
-            <div><strong>Schoenfeld et al., 2023 — программа силовых тренировок и гипертрофия</strong> Систематический обзор и Bayesian network meta-analysis, 119 исследований по гипертрофии. PubMed — PMID 37414459⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="study-title-link">02. Schoenfeld et al., 2023 ↗</a>
+            </div>
+            <div><strong>Schoenfeld et al., 2023 — программа силовых тренировок и гипертрофия</strong> Систематический обзор и Bayesian network meta-analysis, 119 исследований по гипертрофии. <a href="https://pubmed.ncbi.nlm.nih.gov/37414459/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — PMID 37414459</a>⁠</div>
         </div>
         <div class="study-row">
-            <div class="study-title">03. McMaster/IOC Consensus 2023</div>
-            <div><strong>McMaster/IOC-related literature on energy availability / RED-S</strong> Для блока про активных женщин и хронический дефицит энергии особенно важно опираться на консенсус IOC 2023, а не на популярные посты о «замедленном метаболизме».</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/37752011/" target="_blank" rel="noopener noreferrer" class="study-title-link">03. McMaster / IOC Consensus 2023 ↗</a>
+            </div>
+            <div><strong>McMaster/IOC-related literature on energy availability / RED-S</strong> Для блока про активных женщин и хронический дефицит энергии особенно важно опираться на <a href="https://pubmed.ncbi.nlm.nih.gov/37752011/" target="_blank" rel="noopener noreferrer" class="inline-study-link" title="IOC consensus statement on REDs (PMID 37752011)">консенсус IOC 2023</a>, а не на популярные посты о «замедленном метаболизме».</div>
         </div>
         <div class="study-row">
-            <div class="study-title">04. Mansfeldt & Magkos, 2023</div>
-            <div><strong>Mansfeldt &amp; Magkos, 2023 — компенсация активности после начала тренировок</strong> Обзор NEPA/NEAT; авторы нашли снижение активности вне тренировок примерно в 67% рассмотренных исследований, но подчёркивают неоднородность данных. PubMed — PMID 36933180⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/36933180/" target="_blank" rel="noopener noreferrer" class="study-title-link">04. Mansfeldt &amp; Magkos, 2023 ↗</a>
+            </div>
+            <div><strong>Mansfeldt &amp; Magkos, 2023 — компенсация активности после начала тренировок</strong> Обзор NEPA/NEAT; авторы нашли снижение активности вне тренировок примерно в 67% рассмотренных исследований, но подчёркивают неоднородность данных. <a href="https://pubmed.ncbi.nlm.nih.gov/36933180/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — PMID 36933180</a>⁠</div>
         </div>
         <div class="study-row">
-            <div class="study-title">05. Donnelly et al., 2014</div>
-            <div><strong>Donnelly et al., 2014 — exercise, energy intake и компенсация</strong> Систематический обзор 99 публикаций/103 исследований; результаты по изменению потребления энергии неоднородны. PubMed — PMID 24454704⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/24454704/" target="_blank" rel="noopener noreferrer" class="study-title-link">05. Donnelly et al., 2014 ↗</a>
+            </div>
+            <div><strong>Donnelly et al., 2014 — exercise, energy intake и компенсация</strong> Систематический обзор 99 публикаций/103 исследований; результаты по изменению потребления энергии неоднородны. <a href="https://pubmed.ncbi.nlm.nih.gov/24454704/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — PMID 24454704</a>⁠</div>
         </div>
         <div class="study-row">
-            <div class="study-title">06. Nunes et al., 2022</div>
-            <div><strong>Nunes et al., 2022 — белок и мышечная масса/функция</strong> Систематический обзор и метаанализ: дополнительный белок даёт небольшие дополнительные приросты безжировой массы и силы нижней части тела у людей, занимающихся силовыми тренировками. </div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/35187864/" target="_blank" rel="noopener noreferrer" class="study-title-link">06. Nunes et al., 2022 ↗</a>
+            </div>
+            <div><strong><a href="https://pubmed.ncbi.nlm.nih.gov/35187864/" target="_blank" rel="noopener noreferrer" class="inline-study-link">Nunes et al., 2022 — белок и мышечная масса/функция</a></strong> Систематический обзор и метаанализ: дополнительный белок даёт небольшие дополнительные приросты безжировой массы и силы нижней части тела у людей, занимающихся силовыми тренировками. </div>
         </div>
         <div class="study-row">
-            <div class="study-title">07. Rosenbaum & Leibel</div>
-            <div><strong>Rosenbaum &amp; Leibel — adaptive thermogenesis</strong> Обзор механизмов адаптации организма после снижения веса. PubMed — Adaptive thermogenesis in humans⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/20935667/" target="_blank" rel="noopener noreferrer" class="study-title-link">07. Rosenbaum &amp; Leibel ↗</a>
+            </div>
+            <div><strong>Rosenbaum &amp; Leibel — adaptive thermogenesis</strong> Обзор механизмов адаптации организма после снижения веса. <a href="https://pubmed.ncbi.nlm.nih.gov/20935667/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — Adaptive thermogenesis in humans</a>⁠</div>
         </div>
         <div class="study-row">
-            <div class="study-title">08. Female Resistance Training Meta-Analysis</div>
-            <div><strong>Effect of resistance training specifically in women</strong> Систематический обзор и метаанализ 24 исследований: силовые тренировки дают выраженные улучшения силы и гипертрофии у здоровых взрослых женщин. PubMed — Female resistance training meta-analysis⁠</div>
+            <div class="study-title">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/31820374/" target="_blank" rel="noopener noreferrer" class="study-title-link">08. Female Resistance Training Meta-Analysis ↗</a>
+            </div>
+            <div><strong>Effect of resistance training specifically in women</strong> Систематический обзор и метаанализ 24 исследований: силовые тренировки дают выраженные улучшения силы и гипертрофии у здоровых взрослых женщин. <a href="https://pubmed.ncbi.nlm.nih.gov/31820374/" target="_blank" rel="noopener noreferrer" class="inline-study-link">PubMed — Female resistance training meta-analysis</a>⁠</div>
         </div>
     </div>
 
